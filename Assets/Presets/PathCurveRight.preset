@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PathCurveRight
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 6b5893daf3ea8ad4593062e189f2fe4d, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.size
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[0].x
+    value: 0.06416354
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[0].y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[0].z
+    value: 0.97894645
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[1].x
+    value: 0.2555563
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[1].y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[1].z
+    value: 1.9411428
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[2].x
+    value: 0.5709035
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[2].y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[2].z
+    value: 2.8701258
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[3].x
+    value: 1.004809
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[3].y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[3].z
+    value: 3.75
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[4].x
+    value: 1.54985
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[4].y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[4].z
+    value: 4.5657105
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[5].x
+    value: 2.196699
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[5].y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _localPathPoints.Array.data[5].z
+    value: 5.303301
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []
