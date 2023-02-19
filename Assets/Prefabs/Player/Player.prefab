@@ -363,12 +363,8 @@ GameObject:
   - component: {fileID: -7046232403555028186}
   - component: {fileID: 712593025}
   - component: {fileID: 7919280349479710711}
-<<<<<<< Updated upstream
-  - component: {fileID: -4095348564077429222}
-=======
   - component: {fileID: 8109144416770190254}
   - component: {fileID: 1385950549418447771}
->>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -448,51 +444,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d455ecd6cc5e9144c842928151da1a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-  _speed: 0.5
-  _minimalDistanseToPathNode: 0.2
---- !u!114 &-4095348564077429222
-MonoBehaviour:
-=======
   _speed: 0.7
   _alignmentSpeed: 5
 --- !u!54 &8109144416770190254
 Rigidbody:
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4556066087326416394}
-<<<<<<< Updated upstream
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 676e6db37bcdb3d45b504c0b2d852fc3, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a45c4c24-319f-4080-901b-443f67939a7c
-    m_ActionName: Player/Move
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
-=======
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -516,4 +476,3 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
->>>>>>> Stashed changes

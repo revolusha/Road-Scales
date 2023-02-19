@@ -215,53 +215,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260187838}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream:Assets/Scenes/SampleScene.unity
---- !u!1 &374803170
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 374803171}
-  - component: {fileID: 374803172}
-  m_Layer: 0
-  m_Name: Game
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &374803171
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 374803170}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &374803172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 374803170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de6f8cf792aaf684c9044fb103ff4a8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-=======
->>>>>>> Stashed changes:Assets/Scenes/LevelBase.unity
 --- !u!1 &522388731
 GameObject:
   m_ObjectHideFlags: 0
@@ -1629,17 +1582,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-<<<<<<< Updated upstream:Assets/Scenes/SampleScene.unity
-    - target: {fileID: 712593025, guid: 79e048c33a28f564984d1960b329261f, type: 3}
-      propertyPath: _deadZone
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 712593025, guid: 79e048c33a28f564984d1960b329261f, type: 3}
-      propertyPath: _strafeLimit
-      value: 200
-      objectReference: {fileID: 0}
-=======
->>>>>>> Stashed changes:Assets/Scenes/LevelBase.unity
     - target: {fileID: 800956203861353625, guid: 79e048c33a28f564984d1960b329261f, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1688,12 +1630,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-<<<<<<< Updated upstream:Assets/Scenes/SampleScene.unity
-    - target: {fileID: 7919280349479710711, guid: 79e048c33a28f564984d1960b329261f, type: 3}
-      propertyPath: _speed
-      value: 1
-      objectReference: {fileID: 0}
-=======
->>>>>>> Stashed changes:Assets/Scenes/LevelBase.unity
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79e048c33a28f564984d1960b329261f, type: 3}

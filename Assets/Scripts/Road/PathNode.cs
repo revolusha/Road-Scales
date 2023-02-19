@@ -16,12 +16,4 @@ public class PathNode: MonoBehaviour
         Gizmos.color = new(1, 0, 0, .3f);
         Gizmos.DrawSphere(transform.position, Radius);
     }
-<<<<<<< Updated upstream
-
-    private void SetNextNode(PathNode node)
-    {
-        Next = node;
-    }
-=======
->>>>>>> Stashed changes
 }

@@ -4,19 +4,12 @@ using UnityEngine;
 public class PlayerAlongTheRoadMovement : MonoBehaviour
 {
     [SerializeField] private float _speed = 0.2f;
-<<<<<<< Updated upstream
-    [SerializeField] private float _minimalDistanseToPathNode = 0.2f;
-=======
     [SerializeField] private float _alignmentSpeed = .1f;
->>>>>>> Stashed changes
 
     private const float MoveFactor = 3;
 
     private bool _canMove = false;
-<<<<<<< Updated upstream
-=======
     private bool _isOnNode = false;
->>>>>>> Stashed changes
     private PathNode _currentNode;
     private Queue<PathNode> _path;
 
@@ -40,7 +33,6 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
     {
         if (_canMove)
         {
-            ÀctualizeNode();
             CorrrectDirection();
             Move();
         }
@@ -57,6 +49,24 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
         Gizmos.DrawSphere(_currentNode.transform.position, Radius);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<PathNode>() == _currentNode)
+        {
+            SkipNode();
+        }
+    }
+
+    private void SkipNode()
+    {
+        if (_path.Count == 0)
+        {
+            _canMove = false;
+            return;
+        }
+        _currentNode = _path.Dequeue();
+    }
+
     private void StartMoving()
     {
         _path = GetPath(RoadStart.Segment);
@@ -67,35 +77,22 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
 
     private void CorrrectDirection()
     {
-<<<<<<< Updated upstream
-        const float AlignmentSpeed = .01f;
+        const float LerpFactor = .5f;
 
-        Vector3 targetDirection = (_currentNode.transform.position - transform.position).normalized;
-
-        if (transform.forward == targetDirection)
-            return;
-
-        if (CheckAlignment(targetDirection))
-=======
         if (_isOnNode == false && CheckAlignment())
         {
->>>>>>> Stashed changes
             transform.LookAt(_currentNode.transform.position);
+        }
         else
         {
-<<<<<<< Updated upstream
-            Vector3 oldLerpedDirection = transform.forward * _currentNode.transform.position.magnitude;
-            Vector3 lerpedDirection = Vector3.Lerp(oldLerpedDirection, _currentNode.transform.position, AlignmentSpeed * Time.deltaTime);
-=======
             float destinationDistance = Vector3.Distance(transform.position, _currentNode.transform.position);
             Vector3 transformGlobalForward = transform.position + transform.forward;
             Vector3 lerpedDestination = Vector3.Lerp(
-                transformGlobalForward, 
-                _currentNode.transform.position, 
-                _alignmentSpeed * Time.deltaTime / destinationDistance / 2);
->>>>>>> Stashed changes
+                transformGlobalForward,
+                _currentNode.transform.position,
+                _alignmentSpeed * Time.deltaTime / destinationDistance * LerpFactor);
 
-            transform.LookAt(lerpedDirection);
+            transform.LookAt(lerpedDestination);
         }
     }
 
@@ -109,7 +106,7 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
 
     private Queue<PathNode> GetPath(RoadSegment firstSegment)
     {
-        Queue<PathNode> path = new Queue<PathNode>();
+        Queue<PathNode> path = new();
 
         RoadSegment current = firstSegment;
 
@@ -126,43 +123,17 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
         return path;
     }
 
-    private void ÀctualizeNode()
+    private bool CheckAlignment()
     {
-<<<<<<< Updated upstream
-        if (Vector3.Distance(transform.position, _currentNode.transform.position)
-            < _minimalDistanseToPathNode)
-        {
-            _currentNode = _path.Dequeue();
-        }
-=======
-        if (_path.Count <= 0)
-        {
-            _canMove = false;
-            return;
-        }
-
-        _currentNode = _path.Dequeue();
->>>>>>> Stashed changes
-    }
-
-    private bool CheckAlignment(Vector3 targetDirection)
-    {
-<<<<<<< Updated upstream
-        const float AlighnmentThreshold = .01f;
-=======
         const float AlighnmentThresholdAngle = .25f;
->>>>>>> Stashed changes
 
-        Vector3 difference = new(
-            targetDirection.x - transform.forward.x,
-            targetDirection.y - transform.forward.y,
-            targetDirection.z - transform.forward.z);
+        float angle = Vector3.Angle(
+            transform.forward, 
+            _currentNode.transform.position - transform.position);
 
-        if (difference.x > AlighnmentThreshold 
-            || difference.y > AlighnmentThreshold 
-            || difference.z > AlighnmentThreshold)
-            return false;
+        if (angle < AlighnmentThresholdAngle)
+            return true;
 
-        return true;
+        return false;
     }
 }
