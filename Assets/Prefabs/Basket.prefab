@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1020205700450450245}
   - component: {fileID: 3011932763893632911}
   - component: {fileID: 7072278294420694111}
+  - component: {fileID: 8629758992524220856}
   - component: {fileID: 1941345295929054013}
   m_Layer: 0
   m_Name: Basket
@@ -98,6 +99,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.032, y: 0.022, z: 0.046}
   m_Center: {x: 0, y: -0.014, z: 0}
+--- !u!64 &8629758992524220856
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3660428777115233882}
+  m_Material: {fileID: 13400000, guid: 67aa3cbb967b1b54d808b14eb4d3e1fc, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5495902117074765545, guid: 0bd99e1267ea4b44fa15df74827c9948, type: 3}
 --- !u!114 &1941345295929054013
 MonoBehaviour:
   m_ObjectHideFlags: 0

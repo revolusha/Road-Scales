@@ -3,9 +3,6 @@ using UnityEngine;
 public class PlayerSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _playerTemplate;
-    [SerializeField] private GameObject _basketTemplate;
-    [SerializeField] private float _basketOffsetX;
-    [SerializeField] private float _basketOffsetZ;
 
     private Player _player;
 

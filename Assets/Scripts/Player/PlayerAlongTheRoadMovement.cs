@@ -4,16 +4,30 @@ using UnityEngine;
 public class PlayerAlongTheRoadMovement : MonoBehaviour
 {
     [SerializeField] private float _speed = 0.2f;
+<<<<<<< Updated upstream
     [SerializeField] private float _minimalDistanseToPathNode = 0.2f;
+=======
+    [SerializeField] private float _alignmentSpeed = .1f;
+>>>>>>> Stashed changes
 
     private const float MoveFactor = 3;
 
     private bool _canMove = false;
+<<<<<<< Updated upstream
+=======
+    private bool _isOnNode = false;
+>>>>>>> Stashed changes
     private PathNode _currentNode;
     private Queue<PathNode> _path;
 
     private void OnEnable()
     {
+        if (RoadBuilder.IsReady)
+        {
+            StartMoving();
+            return;
+        }
+        
         RoadBuilder.OnRoadReady += StartMoving;
     }
 
@@ -53,6 +67,7 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
 
     private void CorrrectDirection()
     {
+<<<<<<< Updated upstream
         const float AlignmentSpeed = .01f;
 
         Vector3 targetDirection = (_currentNode.transform.position - transform.position).normalized;
@@ -61,11 +76,24 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
             return;
 
         if (CheckAlignment(targetDirection))
+=======
+        if (_isOnNode == false && CheckAlignment())
+        {
+>>>>>>> Stashed changes
             transform.LookAt(_currentNode.transform.position);
         else
         {
+<<<<<<< Updated upstream
             Vector3 oldLerpedDirection = transform.forward * _currentNode.transform.position.magnitude;
             Vector3 lerpedDirection = Vector3.Lerp(oldLerpedDirection, _currentNode.transform.position, AlignmentSpeed * Time.deltaTime);
+=======
+            float destinationDistance = Vector3.Distance(transform.position, _currentNode.transform.position);
+            Vector3 transformGlobalForward = transform.position + transform.forward;
+            Vector3 lerpedDestination = Vector3.Lerp(
+                transformGlobalForward, 
+                _currentNode.transform.position, 
+                _alignmentSpeed * Time.deltaTime / destinationDistance / 2);
+>>>>>>> Stashed changes
 
             transform.LookAt(lerpedDirection);
         }
@@ -100,16 +128,30 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
 
     private void ÀctualizeNode()
     {
+<<<<<<< Updated upstream
         if (Vector3.Distance(transform.position, _currentNode.transform.position)
             < _minimalDistanseToPathNode)
         {
             _currentNode = _path.Dequeue();
         }
+=======
+        if (_path.Count <= 0)
+        {
+            _canMove = false;
+            return;
+        }
+
+        _currentNode = _path.Dequeue();
+>>>>>>> Stashed changes
     }
 
     private bool CheckAlignment(Vector3 targetDirection)
     {
+<<<<<<< Updated upstream
         const float AlighnmentThreshold = .01f;
+=======
+        const float AlighnmentThresholdAngle = .25f;
+>>>>>>> Stashed changes
 
         Vector3 difference = new(
             targetDirection.x - transform.forward.x,

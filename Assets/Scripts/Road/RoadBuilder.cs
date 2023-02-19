@@ -23,8 +23,11 @@ public class RoadBuilder : MonoBehaviour
 
     public static Action OnRoadReady;
 
+    public static bool IsReady { get; private set; }
+
     private void OnEnable()
     {
+        IsReady = false;
         _cargoSpawners = new List<CargoSpawner>();
         _startSegment = GetComponent<RoadSegment>();
         _currentSegment = _startSegment;
@@ -35,7 +38,9 @@ public class RoadBuilder : MonoBehaviour
         _startSegment.SetMaterial(_configuration.RoadMaterial);
         Build();
         SpawnAllCargo();
+        IsReady = true;
         OnRoadReady?.Invoke();
+
     }
 
     private void Build()

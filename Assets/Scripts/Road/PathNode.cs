@@ -4,8 +4,6 @@ public class PathNode: MonoBehaviour
 {
     [SerializeField] private Vector3 _localPosition;
 
-    public PathNode Next { get; private set; }
-
     private void OnEnable()
     {
         transform.localPosition = _localPosition;
@@ -13,14 +11,17 @@ public class PathNode: MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        const float Radius = .5f;
+        const float Radius = .2f;
 
         Gizmos.color = new(1, 0, 0, .3f);
         Gizmos.DrawSphere(transform.position, Radius);
     }
+<<<<<<< Updated upstream
 
     private void SetNextNode(PathNode node)
     {
         Next = node;
     }
+=======
+>>>>>>> Stashed changes
 }
