@@ -7,6 +7,7 @@ public class TESTDebuggingLabels : MonoBehaviour
 {
     private static TESTDebuggingLabels _debugging;
     private static Transform _template;
+    private bool _isReady = false;
 
     private static TextMeshProUGUI[] _labels;
 
@@ -14,22 +15,26 @@ public class TESTDebuggingLabels : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_debugging == null)
-            _debugging = this;
+        _debugging = this;
     }
 
     private void Start()
     {
         TextMeshProUGUI template = GetComponentInChildren<TextMeshProUGUI>();
 
+        _labels = new TextMeshProUGUI[] { template };
         _template = template.transform;
-        _labels = new TextMeshProUGUI[] { _template.GetComponent<TextMeshProUGUI>() };
+        _isReady = true;
     }
 
     public static void ShowMessage(int labelIndex, string message)
     {
+        if (Instance == null || Instance._isReady == false)
+            return;
+
         if (labelIndex < 0 || _labels == null)
         {
+            Debug.Log("labelIndex " + labelIndex + " - - _labels " + _labels);
             throw new System.ArgumentOutOfRangeException();
         }
 
@@ -43,6 +48,7 @@ public class TESTDebuggingLabels : MonoBehaviour
 
         _labels[labelIndex].text = message;
     }
+
     private void CreateNewLabel(int labelIndex)
     {
         float labelHeight = CalculateHeightFromAnchors(
@@ -63,8 +69,6 @@ public class TESTDebuggingLabels : MonoBehaviour
             .GetComponent<TextMeshProUGUI>();
 
         newLabel.rectTransform.anchoredPosition = newAnchoredPosition;
-
-        Debug.Log(_labels[0].rectTransform.sizeDelta.y.ToString());
 
         _labels[labelIndex] = newLabel;
         return ;

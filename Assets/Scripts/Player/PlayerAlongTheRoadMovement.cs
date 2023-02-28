@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,8 +14,12 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
     private PathNode _currentNode;
     private Queue<PathNode> _path;
 
+    public Action OnFinished;
+
     private void OnEnable()
     {
+        Scales.OnScalesBroke += StopMoving;
+
         if (RoadBuilder.IsReady)
         {
             StartMoving();
@@ -27,13 +32,14 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
     private void OnDisable()
     {
         RoadBuilder.OnRoadReady -= StartMoving;
+        Scales.OnScalesBroke -= StopMoving;
     }
 
     private void Update()
     {
         if (_canMove)
         {
-            CorrrectDirection();
+            CorrectDirection();
             Move();
         }
     }
@@ -53,17 +59,33 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
     {
         if (other.GetComponent<PathNode>() == _currentNode)
         {
+            _isOnNode = true;
             SkipNode();
+        }
+        else if (other.TryGetComponent(out Finish finish))
+        {
+            _canMove = false;
+            finish.TriggerFinishEvent();
+            Debug.Log("finish");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<PathNode>())
+        {
+            _isOnNode = false;
         }
     }
 
     private void SkipNode()
     {
-        if (_path.Count == 0)
+        if (_path == null || _path.Count == 0)
         {
             _canMove = false;
             return;
         }
+
         _currentNode = _path.Dequeue();
     }
 
@@ -75,10 +97,15 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
         RoadBuilder.OnRoadReady -= StartMoving;
     }
 
-    private void CorrrectDirection()
+    private void StopMoving()
     {
-        const float LerpFactor = .5f;
+        _canMove = false;
+        Scales.OnScalesBroke += StopMoving;
+    }
 
+
+    private void CorrectDirection()
+    {
         if (_isOnNode == false && CheckAlignment())
         {
             transform.LookAt(_currentNode.transform.position);
@@ -90,7 +117,7 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
             Vector3 lerpedDestination = Vector3.Lerp(
                 transformGlobalForward,
                 _currentNode.transform.position,
-                _alignmentSpeed * Time.deltaTime / destinationDistance * LerpFactor);
+                _alignmentSpeed * Time.deltaTime / destinationDistance);
 
             transform.LookAt(lerpedDestination);
         }
@@ -125,7 +152,7 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
 
     private bool CheckAlignment()
     {
-        const float AlighnmentThresholdAngle = .25f;
+        const float AlighnmentThresholdAngle = .1f;
 
         float angle = Vector3.Angle(
             transform.forward, 

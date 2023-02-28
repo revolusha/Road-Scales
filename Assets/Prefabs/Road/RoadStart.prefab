@@ -294,6 +294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8a6d026a9dc0b4aa27f1e9259d8f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _roadMeshRenderers:
+  - {fileID: 2207251716403635463}
+  - {fileID: 228247112523137092}
 --- !u!114 &2528303776272429790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,12 +309,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39c20dc585e6614fbd825c4779c823e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configuration: {fileID: 0}
-  _finishRoadSegmentTemplate: {fileID: 4222002128380076884, guid: 92fa89dbe457588409330c8894786393, type: 3}
+  _finishRoadSegmentOnScene: {fileID: 0}
   _straightRoadSegmentTemplate: {fileID: 4843827706054456421, guid: 1aefda92a48b73b4291fbf94b57c41a2, type: 3}
   _curveLeftRoadSegmentTemplate: {fileID: 5860564992136775726, guid: e8d8b85aa0164a842b52d7d7203d78b9, type: 3}
   _curveRightRoadSegmentTemplate: {fileID: 5534299373749303915, guid: 454921fbf83bd5a49a9e39ec12372e2e, type: 3}
-  _cargoTemplate: {fileID: 9070244927268621977, guid: 085e3f55cab71a24ba516c8f80ac6c7e, type: 3}
+  _cargoBaseTemplate: {fileID: 9070244927268621977, guid: 085e3f55cab71a24ba516c8f80ac6c7e, type: 3}
+  _obstacleBaseTemplate: {fileID: 1367194800650671347, guid: 731c37187c357e1478509fa558705b0b, type: 3}
 --- !u!114 &6054073839090670455
 MonoBehaviour:
   m_ObjectHideFlags: 0

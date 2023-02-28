@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class RoadSegment : MonoBehaviour
 {
+    [SerializeField] private MeshRenderer[] _roadMeshRenderers;
+
     private RoadJoint _nextJoint;
     
     public Path Path { get; private set; }
@@ -30,11 +32,7 @@ public class RoadSegment : MonoBehaviour
 
     public void SetMaterial(Material material)
     {
-       MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>();
-
-        for (int i = 0; i < meshRenderers.Length; i++)
-        {
-            meshRenderers[i].material = material;
-        }
+        for (int i = 0; i < _roadMeshRenderers.Length; i++)
+            _roadMeshRenderers[i].material = material;
     }
 }

@@ -6,17 +6,16 @@ using UnityEngine;
 
 public class RoadBuilder : MonoBehaviour
 {
-    [SerializeField] private LevelRoadConfiguration _configuration;
-    [SerializeField] private GameObject _finishRoadSegmentTemplate;
+    [SerializeField] private RoadSegment _finishRoadSegmentOnScene;
     [SerializeField] private GameObject _straightRoadSegmentTemplate;
     [SerializeField] private GameObject _curveLeftRoadSegmentTemplate;
     [SerializeField] private GameObject _curveRightRoadSegmentTemplate;
-    [SerializeField] private GameObject _cargoTemplate;
+    [SerializeField] private GameObject _cargoBaseTemplate;
+    [SerializeField] private GameObject _obstacleBaseTemplate;
 
-    private const int MaxRoadPartSegmentLength = 10;
-    private const int SpawnCargoSegmentPeriod = 2;
-    private const int FirstSpawnCargoSegmentIndex = 1;
+    private const int MaxRoadPartSegmentLength = 20;
 
+    private LevelRoadConfiguration _configuration;
     private RoadSegment _startSegment;
     private RoadSegment _currentSegment;
     private List<CargoSpawner> _cargoSpawners;
@@ -28,6 +27,7 @@ public class RoadBuilder : MonoBehaviour
     private void OnEnable()
     {
         IsReady = false;
+        _configuration = StaticInstances.TryGetCurrentLevelConfig();
         _cargoSpawners = new List<CargoSpawner>();
         _startSegment = GetComponent<RoadSegment>();
         _currentSegment = _startSegment;
@@ -56,45 +56,42 @@ public class RoadBuilder : MonoBehaviour
             }
         }
 
-        Instantiate(_finishRoadSegmentTemplate, transform).GetComponent<RoadSegment>()
+        _finishRoadSegmentOnScene
             .PutBehindSegment(_currentSegment)
             .SetMaterial(_configuration.RoadMaterial);
     }
 
     private RoadSegment[] CreateRoadPart(RoadConfigurationPart partConfiguration)
     {
-        switch (partConfiguration.RoadType)
+        return partConfiguration.RoadType switch
         {
-            case RoadType.Straight:
-                return CreateSegments(_straightRoadSegmentTemplate, partConfiguration.StraightLength);
-
-            case RoadType.CurveLeft:
-                return CreateSegments(_curveLeftRoadSegmentTemplate);
-
-            case RoadType.CurveRight:
-                return CreateSegments(_curveRightRoadSegmentTemplate);
-
-            default: 
-                throw new ArgumentOutOfRangeException(nameof(partConfiguration.RoadType), "Invalid type!");
-        }
+            RoadType.Straight => CreateSegments(_straightRoadSegmentTemplate, partConfiguration),
+            RoadType.CurveLeft => CreateSegments(_curveLeftRoadSegmentTemplate, partConfiguration),
+            RoadType.CurveRight => CreateSegments(_curveRightRoadSegmentTemplate, partConfiguration),
+            _ => throw new ArgumentOutOfRangeException(nameof(partConfiguration.RoadType), "Invalid type!"),
+        };
     }
 
-    private RoadSegment[] CreateSegments(GameObject template, int length = 1)
+    private RoadSegment[] CreateSegments(GameObject template, RoadConfigurationPart partConfiguration)
     {
-        length = Mathf.Clamp(length, 0, MaxRoadPartSegmentLength);
+        float length = Mathf.Clamp(partConfiguration.SegmentsCount, 0, MaxRoadPartSegmentLength);
 
-        RoadSegment[] newSegments = new RoadSegment[length];
+        RoadSegment[] newSegments = new RoadSegment[partConfiguration.SegmentsCount];
 
         for (int i = 0; i < length; i++)
         {
             newSegments[i] = Instantiate(template, transform).GetComponent<RoadSegment>();
 
-            if (i % SpawnCargoSegmentPeriod == FirstSpawnCargoSegmentIndex)
-            {
-                CargoSpawner spawner = newSegments[i].gameObject.AddComponent<CargoSpawner>();
+            if (partConfiguration.IsNeedCargoSpawning)
+                _cargoSpawners.Add(newSegments[i].gameObject.AddComponent<CargoSpawner>());
 
-                _cargoSpawners.Add(spawner);
-            }
+            if (partConfiguration.ObstacleSpawnSide != 0)
+                Instantiate(
+                    _obstacleBaseTemplate, 
+                    newSegments[i].transform.position, 
+                    newSegments[i].transform.rotation,
+                    newSegments[i].transform)
+                    .GetComponent<Obstacle>().SpawnObject(partConfiguration.ObstacleSpawnSide);
         }
 
         return newSegments;
@@ -103,6 +100,6 @@ public class RoadBuilder : MonoBehaviour
     private void SpawnAllCargo()
     {
         foreach (var spawner in _cargoSpawners)
-            spawner.SpawnCargo(_cargoTemplate, _configuration.CargoCountPerPoint);
+            spawner.SpawnCargo(_cargoBaseTemplate, _configuration.CargoCountPerPoint);
     }
 }

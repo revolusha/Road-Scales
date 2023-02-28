@@ -1,12 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CargoSpawner : MonoBehaviour
 {
-    [SerializeField] private float _spawnAreaRadius = 2.2f;
-    [SerializeField] private float _minimalCargoDistance = .3f;
-    [SerializeField] private float _cargoSpawnHeight = .16f;
+    private float _spawnAreaRadius = 2.2f;
+    private float _minimalCargoDistance = .3f;
+    private float _cargoSpawnHeight = .16f;
 
     private CargoSpawnPoint _cargoSpawnPoint;
 
@@ -71,7 +70,7 @@ public class CargoSpawner : MonoBehaviour
 
         bool isFound = false;
 
-        position = new Vector2( 0, 0 );
+        position = new Vector2(0, 0);
 
         for (int t = 0; t < MaxTryCount; t++)
         {
@@ -83,15 +82,12 @@ public class CargoSpawner : MonoBehaviour
                 if (Vector2.Distance(point, position) < _minimalCargoDistance)
                 {
                     isFound = false;
-                    continue;
+                    break;
                 }
             }
 
             if (isFound)
-            {
-                listToCheck.Add(position);
                 break;
-            }
         }
 
         return isFound;

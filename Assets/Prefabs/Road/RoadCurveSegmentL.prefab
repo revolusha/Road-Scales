@@ -150,7 +150,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5860564992136775727}
   - component: {fileID: -1077108545257708109}
-  - component: {fileID: 4434788382815943579}
   m_Layer: 0
   m_Name: RoadCurveSegmentL
   m_TagString: Untagged
@@ -189,20 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8a6d026a9dc0b4aa27f1e9259d8f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!64 &4434788382815943579
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5860564992136775726}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  _roadMeshRenderers:
+  - {fileID: 4418565461945262769}
 --- !u!1 &8348013524082825564
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,6 +201,8 @@ GameObject:
   - component: {fileID: 9177416782520658406}
   - component: {fileID: 3381745777180918449}
   - component: {fileID: 4418565461945262769}
+  - component: {fileID: 1235124961672297735}
+  - component: {fileID: 4843297789714366672}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -286,3 +275,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1235124961672297735
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8348013524082825564}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8691780276856062721, guid: 85b29e763449c9d4098e3d2f2a08f7cd, type: 3}
+--- !u!54 &4843297789714366672
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8348013524082825564}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

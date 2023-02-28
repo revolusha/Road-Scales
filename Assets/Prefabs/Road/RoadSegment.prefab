@@ -176,6 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8a6d026a9dc0b4aa27f1e9259d8f7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _roadMeshRenderers:
+  - {fileID: 1904621901052871197}
 --- !u!65 &3810953056971950678
 BoxCollider:
   m_ObjectHideFlags: 0

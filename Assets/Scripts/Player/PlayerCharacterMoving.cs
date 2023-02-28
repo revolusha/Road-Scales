@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerCharacterMoving : MonoBehaviour
 {
-    private const float TouchToStrafeValueFactor = 6;
-    private const float MaxMoveLimit = 2;
+    private const float TouchToStrafeValueFactor = 3;
+    private const float MaxMoveLimit = 1;
 
     private float _startXLocalPosition;
     private float _targetXLocalPosition;
@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
         PlayerTouchMovementInput.OnFingerMoved += AffectToTargetPosition;
         PlayerTouchMovementInput.OnFingerLost += ResetStartAffectValue;
         PlayerTouchMovementInput.OnFingerTouched += SetStartAffectValue;
+        PlayerMouseMovementInput.OnMouseDragged += AffectToTargetPosition;
+        PlayerMouseMovementInput.OnMouseReleased += ResetStartAffectValue;
+        PlayerMouseMovementInput.OnMouseClicked += SetStartAffectValue;
     }
 
     private void Update()
@@ -28,6 +31,9 @@ public class Player : MonoBehaviour
         PlayerTouchMovementInput.OnFingerMoved -= AffectToTargetPosition;
         PlayerTouchMovementInput.OnFingerLost -= ResetStartAffectValue;
         PlayerTouchMovementInput.OnFingerTouched -= SetStartAffectValue;
+        PlayerMouseMovementInput.OnMouseDragged -= AffectToTargetPosition;
+        PlayerMouseMovementInput.OnMouseReleased -= ResetStartAffectValue;
+        PlayerMouseMovementInput.OnMouseClicked -= SetStartAffectValue;
     }
 
     private void SetStartAffectValue()
@@ -51,12 +57,10 @@ public class Player : MonoBehaviour
     {
         const float Speed = 4;
 
-        Vector3 xLocalPosition = gameObject.transform.localPosition;
+        float xLocalPosition = gameObject.transform.localPosition.x;
 
         gameObject.transform.localPosition = new Vector3(
-            Mathf.Lerp(xLocalPosition.x, _targetXLocalPosition, Time.deltaTime * Speed), 
-            0, 
-            0 );
+            Mathf.Lerp(xLocalPosition, _targetXLocalPosition, Time.deltaTime * Speed), 0, 0 );
 
         TESTDebuggingLabels.ShowMessage(1, "Strafe: " + _targetXLocalPosition.ToString());
     }

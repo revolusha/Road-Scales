@@ -2,25 +2,40 @@ using UnityEngine;
 
 public class Cargo : MonoBehaviour
 {
+    private GameObject _cargoStyledObject;
+    private Transform _mainContainer;
     private Basket _containerBasket;
+
+    private void OnEnable()
+    {
+        _mainContainer = GetComponentInParent<Transform>();
+
+        if (_cargoStyledObject == null)
+            _cargoStyledObject = StaticInstances.TryGetCurrentLevelConfig().Cargo;
+
+        SpawnObject();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("+");
         if (other.TryGetComponent(out _containerBasket))
         {
             _containerBasket.IncreaseWeight();
-            Debug.Log("+++");
+            transform.parent = _containerBasket.transform;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("-");
         if (other.TryGetComponent(out _containerBasket))
         {
             _containerBasket.DecreaseWeight();
-            Debug.Log("---");
+            transform.parent = _mainContainer;
         }
+    }
+
+    private void SpawnObject()
+    {
+        Instantiate(_cargoStyledObject, transform.position, transform.rotation, transform);
     }
 }

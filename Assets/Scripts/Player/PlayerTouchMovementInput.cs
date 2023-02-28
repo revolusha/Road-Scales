@@ -9,7 +9,7 @@ public class PlayerTouchMovementInput : MonoBehaviour
 
     [SerializeField] private float _deadZone = .1f;
 
-    private float _strafeAmount;
+    private float _strafeAmount = 0;
     private Vector2 _touchOrigin;
     private Finger _finger;
 

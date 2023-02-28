@@ -1084,6 +1084,7 @@ GameObject:
   - component: {fileID: 4983937494611003129}
   - component: {fileID: 4983937494620629297}
   - component: {fileID: 9029670406428695037}
+  - component: {fileID: 8295457595803801967}
   m_Layer: 0
   m_Name: PlayerTemplate
   m_TagString: Untagged
@@ -1124,82 +1125,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: '
-
-    Transform ''index_02_l'' has been deleted
-
-    Transform
-    ''index_01_l'' has been deleted
-
-    Transform ''thumb_02_l'' has been deleted
-
-    Transform
-    ''thumb_01_l'' has been deleted
-
-    Transform ''hand_l'' has been deleted
-
-    Transform
-    ''lowerarm_l'' has been deleted
-
-    Transform ''upperarm_l'' has been deleted
-
-    Transform
-    ''clavicle_l'' has been deleted
-
-    Transform ''index_02_r'' has been deleted
-
-    Transform
-    ''index_01_r'' has been deleted
-
-    Transform ''thumb_02_r'' has been deleted
-
-    Transform
-    ''thumb_01_r'' has been deleted
-
-    Transform ''hand_r'' has been deleted
-
-    Transform
-    ''lowerarm_r'' has been deleted
-
-    Transform ''upperarm_r'' has been deleted
-
-    Transform
-    ''clavicle_r'' has been deleted
-
-    Transform ''head'' has been deleted
-
-    Transform
-    ''neck_01'' has been deleted
-
-    Transform ''spine_03'' has been deleted
-
-    Transform
-    ''spine_02'' has been deleted
-
-    Transform ''spine_01'' has been deleted
-
-    Transform
-    ''foot_l'' has been deleted
-
-    Transform ''calf_l'' has been deleted
-
-    Transform
-    ''thigh_l'' has been deleted
-
-    Transform ''foot_r'' has been deleted
-
-    Transform
-    ''calf_r'' has been deleted
-
-    Transform ''thigh_r'' has been deleted
-
-    Transform
-    ''pelvis'' has been deleted
-
-    Transform ''root'' has been deleted
-
-    Transform
-    ''Skelet.c'' has been deleted'
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -1212,6 +1138,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 4983937494611237529}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7790b13b34e10d41adf6b43c5283a11, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f52c899d13c065439b8ef41e8c26412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8295457595803801967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4983937494611237529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b678ae4fbe134a4abe165d3438fc31f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _directionRangeFrom: {x: -0.5, y: 0.5, z: -0.5}
+  _directionRangeTo: {x: 0.5, y: 1, z: 0.5}
+  _minimalForce: 8
+  _maximumForce: 10
+  _componentsToTurnOff:
+  - {fileID: 9029670406428695037}
+  - {fileID: 4983937494620629297}
+  _collidersToTurnOff: []
