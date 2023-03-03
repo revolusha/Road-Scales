@@ -6,6 +6,7 @@ public class Money
     public const int LevelReward = 300;
 
     private int _balance;
+    private int _lastCatchedCargo;
 
     public int Balance => _balance;
 
@@ -35,6 +36,7 @@ public class Money
     {
         int reward = cargoCount * CargoWorth + LevelReward;
 
+        _lastCatchedCargo = cargoCount;
         DepositMoney(reward);
         OnMoneyBalanceChanged?.Invoke(_balance);
         OnRewardGained?.Invoke(reward);
@@ -44,6 +46,9 @@ public class Money
     {
         const string Separator = ",";
         const int Devider = 1000;
+
+        if (value <= 0)
+            return "0";
 
         int integer = value;
         int remainder;

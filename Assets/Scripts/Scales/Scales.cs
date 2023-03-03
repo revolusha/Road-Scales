@@ -15,21 +15,25 @@ public class Scales : MonoBehaviour
 
     private Basket _basketLeft;
     private Basket _basketRight;
+    private ObstacleScaner _scanerLeft;
+    private ObstacleScaner _scanerRight;
     private Balancing _balancing;
 
     public static Action OnScalesBroke;
 
     public int AllCatchedCargo => _basketLeft.CargoCount + _basketRight.CargoCount;
+    public ObstacleScaner LeftScaner => _scanerLeft;
+    public ObstacleScaner RightScaner => _scanerRight;
 
     private void OnEnable()
     {
         _balancing = GetComponent<Balancing>();
-
         _basketLeft = Instantiate(_basketTemplate, transform.position, Quaternion.identity, transform)
             .GetComponent<Basket>();
         _basketRight = Instantiate(_basketTemplate, transform.position, Quaternion.identity, transform)
             .GetComponent<Basket>();
-
+        _scanerLeft = _basketLeft.GetComponentInChildren<ObstacleScaner>();
+        _scanerRight = _basketRight.GetComponentInChildren<ObstacleScaner>();
         SetBaskets();
     }
 
@@ -41,7 +45,7 @@ public class Scales : MonoBehaviour
     public void FinishBalancingAndSummarize()
     {
         UnsubscribeFromActions();
-        GameData.Money.GetReward(AllCatchedCargo);
+        Game.Money.GetReward(AllCatchedCargo);
     }
 
     private void SetBaskets()
@@ -91,5 +95,6 @@ public class Scales : MonoBehaviour
     {
         UnsubscribeFromActions();
         OnScalesBroke?.Invoke();
+        Game.SoundPlayer.PlayScalesBreakSound();
     }
 }

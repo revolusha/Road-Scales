@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eef2053dcaec5345908754f86e52206, type: 3}
   m_Name: Level4
   m_EditorClassIdentifier: 
-  _roadMaterial: {fileID: 0}
+  _roadMaterial: {fileID: 2100000, guid: b35ad1ab0e45cf343b3c00d91e78e045, type: 2}
   _cargoCountPerPoint: 15
-  _obstacleStyledTemplate: {fileID: 0}
-  _cargoStyledTemplate: {fileID: 0}
+  _obstacleStyledTemplate: {fileID: 147072, guid: 48333a5aa700be24c963813c82ef05d9, type: 3}
+  _cargoStyledTemplate: {fileID: 7203183337698612461, guid: d7b38164a9bc0f341baa7b5ab715e352, type: 3}
   _roadScheme:
   - _roadType: 0
     _isGotCargo: 1

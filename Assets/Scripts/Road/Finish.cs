@@ -8,10 +8,9 @@ public class Finish : MonoBehaviour
 {
     [SerializeField] private UnityEvent OnPlayerFinishedEvent;
 
-    private Action OnPlayerFinished;
-
     public void TriggerFinishEvent()
     {
         OnPlayerFinishedEvent?.Invoke();
+        Game.MusicPlayer.PlayWinSound();
     }
 }

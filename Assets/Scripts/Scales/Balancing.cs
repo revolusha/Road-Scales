@@ -26,7 +26,7 @@ public class Balancing : MonoBehaviour
     {
         _basketLeft = left;
         _basketRight = right;
-        SetBasketsPositions(0);
+        MoveBasketsByValue(0);
     }
 
     public void SetBasketsPositions(float scalesValue)
@@ -47,12 +47,21 @@ public class Balancing : MonoBehaviour
         _balancingJob = StartCoroutine(Balance());
     }
 
+    private void MoveBasketsByValue(float balanceValue)
+    {
+        _basketLeft.transform.localPosition = new Vector3(-_basketSpawnXOffset, _yOffset + balanceValue, 0);
+        _basketRight.transform.localPosition = new Vector3(_basketSpawnXOffset, _yOffset - balanceValue, 0);
+    }
+
     private IEnumerator Balance()
     {
-        _currentBalanceValue = Mathf.Lerp(_currentBalanceValue, _targetBalanceValue, Time.deltaTime * _balanceSpeed);
-        _basketLeft.transform.localPosition = new Vector3(-_basketSpawnXOffset, _yOffset + _currentBalanceValue, 0);
-        _basketRight.transform.localPosition = new Vector3(_basketSpawnXOffset, _yOffset - _currentBalanceValue, 0);
+        const float TimeInterval = 0.02f;
 
-        yield return null;
+        while (_currentBalanceValue != _targetBalanceValue)
+        {
+            _currentBalanceValue = Mathf.Lerp(_currentBalanceValue, _targetBalanceValue, Time.deltaTime * _balanceSpeed);
+            MoveBasketsByValue(_currentBalanceValue);
+            yield return new WaitForSeconds(TimeInterval);
+        }
     }
 }

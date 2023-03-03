@@ -40,7 +40,7 @@ public class RoadBuilder : MonoBehaviour
         SpawnAllCargo();
         IsReady = true;
         OnRoadReady?.Invoke();
-
+        Game.MusicPlayer.PlayMusic();
     }
 
     private void Build()

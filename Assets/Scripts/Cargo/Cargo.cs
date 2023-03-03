@@ -20,8 +20,9 @@ public class Cargo : MonoBehaviour
     {
         if (other.TryGetComponent(out _containerBasket))
         {
-            _containerBasket.IncreaseWeight();
+            _containerBasket.UpdateWeight();
             transform.parent = _containerBasket.transform;
+            Game.SoundPlayer.PlayCargoDropSound();
         }
     }
 
@@ -29,7 +30,7 @@ public class Cargo : MonoBehaviour
     {
         if (other.TryGetComponent(out _containerBasket))
         {
-            _containerBasket.DecreaseWeight();
+            _containerBasket.UpdateWeight();
             transform.parent = _mainContainer;
         }
     }

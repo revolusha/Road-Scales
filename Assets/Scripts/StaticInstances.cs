@@ -24,6 +24,10 @@ public static class StaticInstances
     public static LevelRoadConfiguration TryGetNextLevelConfig()
     {
         _currentLevelIndex++;
+
+        if (_currentLevelIndex >= _levels.Length)
+            _currentLevelIndex = 0;
+
         return TryGetCurrentLevelConfig();
     }
 

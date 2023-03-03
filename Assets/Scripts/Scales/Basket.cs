@@ -19,16 +19,9 @@ public class Basket : MonoBehaviour
         }
     }
 
-    public void IncreaseWeight()
+    public void UpdateWeight()
     {
-        _weight++;
-        OnWeightChanged?.Invoke();
-    }
-    public void DecreaseWeight()
-    {
-        if (--_weight < 0)
-            _weight = 0;
-
+        _weight = GetComponentsInChildren<Cargo>().Length;
         OnWeightChanged?.Invoke();
     }
 }
