@@ -13,6 +13,11 @@ public class Money
     public Action<int> OnRewardGained;
     public Action<int> OnMoneyBalanceChanged;
 
+    public Money()
+    {
+        _balance = 4700;
+    }
+
     public void DepositMoney(int amount)
     {
         if (amount < 0)

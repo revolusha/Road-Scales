@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec8be4cf4c5c8e41a3c4ff60d5e6c9a, type: 3}
+  m_Name: PlayerSkinItem6
+  m_EditorClassIdentifier: 
+  _objectForSell: {fileID: 4983937494611237529, guid: b901da7fffe21c44f885966dc19e08cc, type: 3}
+  _image: {fileID: 0}
+  _name: 6
+  _price: 3500

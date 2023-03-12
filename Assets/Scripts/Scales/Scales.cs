@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Balancing))]
@@ -7,7 +6,7 @@ using UnityEngine;
 public class Scales : MonoBehaviour
 {
     [SerializeField] private GameObject _basketTemplate;
-    [SerializeField] private float _weightDifferenceFactor = .1f;
+    [SerializeField] private float _weightDifferenceFactor = .8f;
 
     private const float MaxAmplitude = 2.5f;
 

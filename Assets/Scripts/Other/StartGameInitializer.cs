@@ -10,6 +10,10 @@ public class StartGameInitializer : MonoBehaviour
     private void OnEnable()
     {
         Initialize();
+    }
+
+    private void Start()
+    {
         GetComponent<LevelReloader>().ReloadLevel();
     }
 
