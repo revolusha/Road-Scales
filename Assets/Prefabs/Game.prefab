@@ -391,3 +391,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd6220bd5a64d04397b5f49f49df9cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerSkins:
+  - {fileID: 11400000, guid: 543a16c229be7a84780000215969ea87, type: 2}
+  - {fileID: 11400000, guid: dfc5befa41a8efc4fbf90c5a45086893, type: 2}
+  - {fileID: 11400000, guid: e5239b9c21e698b4889d89863f441f48, type: 2}
+  _cargoSkins:
+  - {fileID: 11400000, guid: ac6a7bf697a8ed34b84beb3bfe383db5, type: 2}
+  - {fileID: 11400000, guid: 0124e76308a789741b04cff62f4147f5, type: 2}
+  - {fileID: 11400000, guid: 20f258d2ec33cdb498002fb949ce886c, type: 2}
+  _basketSkins:
+  - {fileID: 11400000, guid: 450afebb201c8a74bab827e8e1a92499, type: 2}
+  - {fileID: 11400000, guid: 168bfe0defdeca24e8471b38e8d83cf1, type: 2}
+  - {fileID: 11400000, guid: 0674c3f9c4911f54495d08858059d1a0, type: 2}

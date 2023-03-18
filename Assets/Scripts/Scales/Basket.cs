@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Basket : MonoBehaviour
 {
+    [SerializeField] private GameObject _defaultBasketTemplate;
+
     private int _weight = 0;
 
     public Action OnWeightChanged;
@@ -17,6 +19,14 @@ public class Basket : MonoBehaviour
             
             return catchedCargo.Length;
         }
+    }
+
+    private void OnEnable()
+    {
+        if (Game.SkinHandler.ChoosenBasketSkin == null)
+            Instantiate(_defaultBasketTemplate, transform);
+        else
+            Instantiate(Game.SkinHandler.ChoosenBasketSkin.Object, transform);
     }
 
     public void UpdateWeight()

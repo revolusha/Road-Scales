@@ -39,9 +39,9 @@ public class Shop : MonoBehaviour
 
     private void CreateShopCells()
     {
-        CreateCategoryShopCells(Game.SkinLoader.PlayerSkins, _playerSkinsContainer.transform, _playerSkins);
-        CreateCategoryShopCells(Game.SkinLoader.CargoSkins, _cargoSkinsContainer.transform, _cargoSkins);
-        CreateCategoryShopCells(Game.SkinLoader.BasketSkins, _basketSkinsContainer.transform, _basketSkins);
+        CreateCategoryShopCells(Game.SkinHandler.PlayerSkins, _playerSkinsContainer.transform, _playerSkins);
+        CreateCategoryShopCells(Game.SkinHandler.CargoSkins, _cargoSkinsContainer.transform, _cargoSkins);
+        CreateCategoryShopCells(Game.SkinHandler.BasketSkins, _basketSkinsContainer.transform, _basketSkins);
         UpdateAllCells();
     }
 

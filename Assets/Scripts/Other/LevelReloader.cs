@@ -1,12 +1,9 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelReloader : MonoBehaviour
 {
     private const string _levelScene = "LevelBase";
-
-    private Action OnAllLevelsWon; 
 
     public void ReloadLevel()
     {
@@ -16,10 +13,7 @@ public class LevelReloader : MonoBehaviour
     public void LoadNextLevel()
     {
         if (StaticInstances.IsLastLevel)
-        {
-            OnAllLevelsWon?.Invoke();
             return;
-        }
 
         StaticInstances.SwitchToNextLevel();
         ReloadLevel();

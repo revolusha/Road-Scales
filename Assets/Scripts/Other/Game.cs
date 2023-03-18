@@ -3,7 +3,7 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     private Money _money;
-    private SkinHandler _skinLoader;
+    private SkinHandler _skinHandler;
     private MusicPlayer _musicPlayer;
     private SoundPlayer _soundPlayer;
 
@@ -11,14 +11,14 @@ public class Game : MonoBehaviour
     public static Money Money => Instance._money;
     public static MusicPlayer MusicPlayer => Instance._musicPlayer;
     public static SoundPlayer SoundPlayer => Instance._soundPlayer;
-    public static SkinHandler SkinLoader => Instance._skinLoader;
+    public static SkinHandler SkinHandler => Instance._skinHandler;
     public static bool IsReady { get; private set; }
 
     private void OnEnable()
     {
         _musicPlayer = GetComponentInChildren<MusicPlayer>();
         _soundPlayer = GetComponentInChildren<SoundPlayer>();
-        _skinLoader = GetComponentInChildren<SkinHandler>();
+        _skinHandler = GetComponentInChildren<SkinHandler>();
 
         if (Instance == null)
             Instance = this;

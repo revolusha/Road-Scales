@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopItem
+public abstract class ShopItem
 {
-    private GameObject _objectForSell;
-    private Sprite _image;
-    private string _name;
-    private int _price;
+    private readonly GameObject _object;
+    private readonly Sprite _image;
+    private readonly string _name;
+    private readonly int _price;
 
     private bool _isOwned = false;
     private bool _isSelected = false;
 
     public ShopItem(ShopSerializableItem item)
     {
-        _objectForSell = item.ObjectForSell;
+        _object = item.ObjectForSell;
         _image = item.Image;
         _name = item.Name;
         _price = item.Price;
@@ -22,7 +22,7 @@ public class ShopItem
         _isSelected = false;
     }
 
-    public GameObject ObjectForSell => _objectForSell;
+    public GameObject Object => _object;
     public Sprite Image => _image;
     public string Name => _name;
     public int Price => _price;
@@ -34,7 +34,7 @@ public class ShopItem
         _isSelected = false;
     }
 
-    public void Select()
+    public virtual void Select()
     {
         _isSelected = true;
     }

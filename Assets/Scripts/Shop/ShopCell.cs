@@ -65,7 +65,7 @@ public class ShopCell : MonoBehaviour
         if (_item.IsOwned)
         {
             _item.Select();
-            UpdateColor();
+            UpdateAll();
             return;
         }
 

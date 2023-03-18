@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 782ac85e75efe2a4eaebe2012cc8baee, type: 3}
-  m_Name: PlayerSkinItem3
+  m_Script: {fileID: 11500000, guid: c6a1a6837006d2041bc1134a6ba1bbac, type: 3}
+  m_Name: BasketSkinItem1
   m_EditorClassIdentifier: 
-  _objectForSell: {fileID: 3570389262090619291, guid: 8bc9c8f60bc1bf444ab101cfd69a67a4, type: 3}
+  _objectForSell: {fileID: 0}
   _image: {fileID: 0}
-  _name: SuitMan
-  _price: 3000
+  _name: 
+  _price: 1560
