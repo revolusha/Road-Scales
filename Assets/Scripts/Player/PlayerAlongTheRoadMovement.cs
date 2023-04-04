@@ -66,7 +66,6 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
         {
             _canMove = false;
             finish.TriggerFinishEvent();
-            Debug.Log("finish");
         }
     }
 
@@ -100,7 +99,7 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
     private void StopMoving()
     {
         _canMove = false;
-        Scales.OnScalesBroke += StopMoving;
+        Scales.OnScalesBroke -= StopMoving;
     }
 
 

@@ -7,6 +7,8 @@ public class SoundPlayer : AudioPlayer
     [SerializeField] private AudioClip _scalesBreakSound;
     [SerializeField] private AudioClip _dropSound;
     [SerializeField] private AudioClip _buttonClick;
+    [SerializeField] private AudioClip _error;
+    [SerializeField] private AudioClip _warningAlarm;
 
     private new void OnEnable()
     {
@@ -27,5 +29,15 @@ public class SoundPlayer : AudioPlayer
     public void PlayCargoDropSound()
     {
         _audio.PlayOneShot(_dropSound);
+    }
+
+    public void PlayErrorSound()
+    {
+        _audio.PlayOneShot(_error);
+    }
+
+    public void PlayWarningAlarmSound()
+    {
+        _audio.PlayOneShot(_warningAlarm);
     }
 }

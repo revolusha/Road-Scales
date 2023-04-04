@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a1a6837006d2041bc1134a6ba1bbac, type: 3}
+  m_Name: BasketSkinItem5
+  m_EditorClassIdentifier: 
+  _objectForSell: {fileID: 2840564144400511696, guid: 3379562da0a476a49acc9754823cc6da, type: 3}
+  _image: {fileID: 0}
+  _name: Diamond Minecart
+  _price: 2500

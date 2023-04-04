@@ -3,19 +3,32 @@ using UnityEngine.SceneManagement;
 
 public class LevelReloader : MonoBehaviour
 {
-    private const string _levelScene = "LevelBase";
+    private const string SceneName = "LevelBase";
 
-    public void ReloadLevel()
+    public static void ReloadLevel()
     {
-        SceneManager.LoadScene(_levelScene, LoadSceneMode.Single);
+        SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
+        Loading.OnLoadingFinished -= ReloadLevel;
     }
 
-    public void LoadNextLevel()
+    public static void LoadDefaultLevel()
     {
-        if (StaticInstances.IsLastLevel)
+        Game.LevelHandler.SwitchToLevel(0);
+        ReloadLevel();
+        Loading.OnLoadingFinished -= LoadDefaultLevel;
+    }
+
+    public static void SwitchToNextLevel()
+    {
+        Game.LevelHandler.SwitchToNextLevel();
+    }
+
+    public static void LoadNextLevel()
+    {
+        if (Game.LevelHandler.IsLastLevel)
             return;
 
-        StaticInstances.SwitchToNextLevel();
+        Game.LevelHandler.SwitchToNextLevel();
         ReloadLevel();
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OnFailBreaker : MonoBehaviour
@@ -28,15 +26,7 @@ public class OnFailBreaker : MonoBehaviour
 
         Rigidbody rigidbody = GetRigitBody();
 
-        try
-        {
         rigidbody.isKinematic = false;
-
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogException(e);
-        }
         rigidbody.useGravity = true;
         rigidbody.AddForce(GetForceVector(), ForceMode.Impulse);
     }

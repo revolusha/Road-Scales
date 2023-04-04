@@ -37,6 +37,7 @@ public abstract class ShopItem
     public virtual void Select()
     {
         _isSelected = true;
+        Saving.Save();
     }
 
     public void SetOwning(bool isOwnedByPlayer)

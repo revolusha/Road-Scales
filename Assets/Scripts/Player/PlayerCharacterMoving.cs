@@ -61,7 +61,5 @@ public class PlayerCharacterMoving : MonoBehaviour
 
         gameObject.transform.localPosition = new Vector3(
             Mathf.Lerp(xLocalPosition, _targetXLocalPosition, Time.deltaTime * Speed), 0, 0 );
-
-        TESTDebuggingLabels.ShowMessage(1, "Strafe: " + _targetXLocalPosition.ToString());
     }
 }

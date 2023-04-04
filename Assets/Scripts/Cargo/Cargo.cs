@@ -11,7 +11,7 @@ public class Cargo : MonoBehaviour
         _mainContainer = GetComponentInParent<Transform>();
 
         if (_cargoStyledObject == null)
-            _cargoStyledObject = StaticInstances.TryGetCurrentLevelConfig().Cargo;
+            _cargoStyledObject = Game.LevelHandler.TryGetCurrentLevelConfig().Cargo;
 
         SpawnObject();
     }

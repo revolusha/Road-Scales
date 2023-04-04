@@ -21,7 +21,7 @@ public class Obstacle : MonoBehaviour
 
     public void SpawnObject(int side)
     {
-        LevelRoadConfiguration config = StaticInstances.TryGetCurrentLevelConfig();
+        LevelRoadConfiguration config = Game.LevelHandler.TryGetCurrentLevelConfig();
         float xLocalPosition;
 
         if (side < 0)

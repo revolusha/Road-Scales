@@ -18,6 +18,9 @@ public class SkinHandler : MonoBehaviour
     public PlayerSkinItem ChoosenPlayerSkin => _choosenPlayerSkin;
     public CargoSkinItem ChoosenCargoSkin => _choosenCargoSkin;
     public BasketSkinItem ChoosenBasketSkin => _choosenBasketSkin;
+    public int ChoosenPlayerSkinIndex => GetIndexOfChoosenShopItem(_choosenPlayerSkin, _playerSkins);
+    public int ChoosenCargoSkinIndex => GetIndexOfChoosenShopItem(_choosenCargoSkin, _cargoSkins);
+    public int ChoosenBasketSkinIndex => GetIndexOfChoosenShopItem(_choosenBasketSkin, _basketSkins);
     public PlayerSkinItem[] PlayerSkins => _playerSkins;
     public CargoSkinItem[] CargoSkins => _cargoSkins;
     public BasketSkinItem[] BasketSkins => _basketSkins;
@@ -51,5 +54,14 @@ public class SkinHandler : MonoBehaviour
     {
         _choosenBasketSkin = item;
         OnBasketSkinChanged?.Invoke(item.Object);
+    }
+
+    private int GetIndexOfChoosenShopItem(ShopItem item, ShopItem[] shopItems)
+    {
+        for (int i = 0; i < shopItems.Length; i++)
+            if (shopItems[i] == item)
+                return i;
+
+        return 0;
     }
 }

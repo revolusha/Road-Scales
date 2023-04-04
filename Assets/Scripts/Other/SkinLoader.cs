@@ -29,22 +29,22 @@ public class SkinLoader : MonoBehaviour
         return shopItems;
     }
 
-    private CargoSkinItem[] CreateShopItemList(CargoSkinItemTemplate[] playerSkinTemplates)
+    private CargoSkinItem[] CreateShopItemList(CargoSkinItemTemplate[] cargoSkinTemplates)
     {
-        CargoSkinItem[] shopItems = new CargoSkinItem[playerSkinTemplates.Length];
+        CargoSkinItem[] shopItems = new CargoSkinItem[cargoSkinTemplates.Length];
 
         for (int i = 0; i < shopItems.Length; i++)
-            shopItems[i] = new CargoSkinItem(playerSkinTemplates[i]);
+            shopItems[i] = new CargoSkinItem(cargoSkinTemplates[i]);
 
         return shopItems;
     }
 
-    private BasketSkinItem[] CreateShopItemList(BasketSkinItemTemplate[] playerSkinTemplates)
+    private BasketSkinItem[] CreateShopItemList(BasketSkinItemTemplate[] basketSkinTemplates)
     {
-        BasketSkinItem[] shopItems = new BasketSkinItem[playerSkinTemplates.Length];
+        BasketSkinItem[] shopItems = new BasketSkinItem[basketSkinTemplates.Length];
 
         for (int i = 0; i < shopItems.Length; i++)
-            shopItems[i] = new BasketSkinItem(playerSkinTemplates[i]);
+            shopItems[i] = new BasketSkinItem(basketSkinTemplates[i]);
 
         return shopItems;
     }

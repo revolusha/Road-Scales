@@ -31,7 +31,6 @@ public class PlayerTouchMovementInput : MonoBehaviour
             return;
 
         MakeMove();
-        TESTUDATELABEL(0);
     }
 
     private void OnDisable()
@@ -84,10 +83,5 @@ public class PlayerTouchMovementInput : MonoBehaviour
         }
 
         OnFingerLost?.Invoke();
-    }
-
-    private void TESTUDATELABEL(int code)
-    {
-        TESTDebuggingLabels.ShowMessage(code, "Touch: " + _strafeAmount.ToString());
     }
 }

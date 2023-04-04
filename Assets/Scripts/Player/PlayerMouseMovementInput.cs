@@ -43,15 +43,12 @@ public class PlayerMouseMovementInput : MonoBehaviour
 
         if (Mathf.Abs(_strafeAmount) < _deadZone)
             _strafeAmount = 0;
-
-        TESTUDATELABEL(0);
     }
 
     private void HandleLeftMouseButtonRelease()
     {
         _strafeAmount = 0;
         OnMouseReleased?.Invoke();
-        TESTUDATELABEL(0);
     }
 
     private void HandleLeftMouseButtonClick()
@@ -63,10 +60,5 @@ public class PlayerMouseMovementInput : MonoBehaviour
     private void MakeMove()
     {
         OnMouseDragged?.Invoke(_strafeAmount);
-    }
-
-    private void TESTUDATELABEL(int code)
-    {
-        TESTDebuggingLabels.ShowMessage(code, "Touch: " + _strafeAmount.ToString());
     }
 }

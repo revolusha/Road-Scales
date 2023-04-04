@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Balancing : MonoBehaviour
 {
+    [SerializeField] private float _balanceFactor = 0.7f;
     [SerializeField] private float _balanceSpeed = 1;
     [SerializeField] private float _yOffset = -2f;
     [Range(3.5f, 5f)]
@@ -31,7 +32,7 @@ public class Balancing : MonoBehaviour
 
     public void SetBasketsPositions(float scalesValue)
     {
-        _targetBalanceValue = scalesValue;
+        _targetBalanceValue = scalesValue * _balanceFactor;
         StartBalancing();
     }
 

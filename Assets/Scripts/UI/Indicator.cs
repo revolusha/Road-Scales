@@ -3,20 +3,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-[RequireComponent(typeof(AudioSource))]
 
 
 public class Indicator : MonoBehaviour
 {
     private Coroutine _blinking;
     private Image _image;
-    private AudioSource _audio;
+    private SoundPlayer _audio;
 
     private void OnEnable()
     {
         _image = GetComponent<Image>();
         _image.enabled = false;
-        _audio = GetComponent<AudioSource>();
+        _audio = Game.SoundPlayer;
     }
 
     public void ShowWarning()
@@ -53,7 +52,7 @@ public class Indicator : MonoBehaviour
         for (int i = 0; i < LoopCount; i++)
         {
             _image.enabled = true;
-            _audio.Play();
+            _audio.PlayWarningAlarmSound();
             yield return new WaitForSeconds(TimeInterval);
             _image.enabled = false;
             yield return new WaitForSeconds(TimeInterval);

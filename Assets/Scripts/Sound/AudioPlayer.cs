@@ -10,6 +10,7 @@ public class AudioPlayer : MonoBehaviour
 
     public bool IsReady => _isReady;
     public float Volume => _audio.volume;
+    public AudioSource AudioSource => _audio;
 
     protected void OnEnable()
     {

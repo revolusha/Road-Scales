@@ -17,6 +17,7 @@ public class CargoSkinItem : ShopItem
     public override void Select()
     {
         OnAnotherItemSelect?.Invoke();
+        Game.SkinHandler.SelectItem(this);
         base.Select();
     }
 }

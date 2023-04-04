@@ -10,6 +10,6 @@ public class LevelCounter : MonoBehaviour
     private void OnEnable()
     {
         _textField = GetComponentInChildren<TextMeshProUGUI>();
-        _textField.text = LabelText + StaticInstances.CurrentLevelIndex.ToString();
+        _textField.text = LabelText + Game.LevelHandler.CurrentLevelIndex.ToString();
     }
 }

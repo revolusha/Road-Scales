@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a1a6837006d2041bc1134a6ba1bbac, type: 3}
   m_Name: BasketSkinItem1
   m_EditorClassIdentifier: 
-  _objectForSell: {fileID: 0}
+  _objectForSell: {fileID: 8301385733496081840, guid: fc37300a2bde5294ea22dc6cef249497, type: 3}
   _image: {fileID: 0}
-  _name: 
-  _price: 1560
+  _name: Default
+  _price: 0

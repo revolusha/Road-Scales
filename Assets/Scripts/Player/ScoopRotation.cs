@@ -67,7 +67,5 @@ public class ScoopRotation : MonoBehaviour
             Mathf.Lerp(yLocalRotation, _targetYLocalRotation, Time.deltaTime * Speed),
             oldLocalRotation.z,
             oldLocalRotation.w);
-
-        TESTDebuggingLabels.ShowMessage(2, "Scoop: " + _targetYLocalRotation.ToString());
     }
 }

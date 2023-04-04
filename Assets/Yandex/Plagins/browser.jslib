@@ -1,7 +1,5 @@
 mergeInto(LibraryManager.library, {
-
-  Hello: function () {
-    window.alert("Hello, world!");
-  },
-
+    ReloadPage: function () {
+        location.reload();
+    },
 });

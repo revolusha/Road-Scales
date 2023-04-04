@@ -7,6 +7,8 @@ public class PlayerSpawner : MonoBehaviour
 
     private GameObject _player;
 
+    public GameObject Player => _player;
+
     private void OnEnable()
     {
         SpawnModel(Game.SkinHandler.ChoosenPlayerSkin.Object);

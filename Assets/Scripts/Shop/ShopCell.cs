@@ -72,9 +72,7 @@ public class ShopCell : MonoBehaviour
         if (_item.Price <= Game.Money.Balance)
             CallPurchaseConfirmationPanel();
         else
-        {
-            //denied sound
-        }
+            Game.SoundPlayer.PlayErrorSound();
     }
 
     private void CallPurchaseConfirmationPanel()

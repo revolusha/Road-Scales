@@ -17,6 +17,7 @@ public class BasketSkinItem : ShopItem
     public override void Select()
     {
         OnAnotherItemSelect?.Invoke();
+        Game.SkinHandler.SelectItem(this);
         base.Select();
     }
 }

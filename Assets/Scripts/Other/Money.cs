@@ -15,7 +15,12 @@ public class Money
 
     public Money()
     {
-        _balance = 4700;
+        _balance = 500;
+    }
+
+    public void LoadMoney(int amount)
+    {
+        _balance = amount;
     }
 
     public void DepositMoney(int amount)

@@ -466,6 +466,7 @@ GameObject:
   - component: {fileID: 1546869290254780683}
   - component: {fileID: 4037408990665222922}
   - component: {fileID: 3732134753333791512}
+  - component: {fileID: 6172379532579702207}
   m_Layer: 0
   m_Name: PoliceMan
   m_TagString: Untagged
@@ -510,7 +511,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 75d3a58b3d7879f41926561701407a48, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -549,6 +550,20 @@ MonoBehaviour:
   - {fileID: 4037408990665222922}
   - {fileID: 1546869290254780683}
   _collidersToTurnOff: []
+--- !u!114 &6172379532579702207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546869290245405349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77fdc8f92cf90a147a91ee3802e2208a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentsToActivateOnStart:
+  - {fileID: 4037408990665222922}
 --- !u!1 &1546869290245405351
 GameObject:
   m_ObjectHideFlags: 0

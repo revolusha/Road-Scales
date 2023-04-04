@@ -27,7 +27,7 @@ public class RoadBuilder : MonoBehaviour
     private void OnEnable()
     {
         IsReady = false;
-        _configuration = StaticInstances.TryGetCurrentLevelConfig();
+        _configuration = Game.LevelHandler.TryGetCurrentLevelConfig();
         _cargoSpawners = new List<CargoSpawner>();
         _startSegment = GetComponent<RoadSegment>();
         _currentSegment = _startSegment;

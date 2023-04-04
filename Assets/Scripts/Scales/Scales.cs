@@ -5,32 +5,30 @@ using UnityEngine;
 
 public class Scales : MonoBehaviour
 {
-    [SerializeField] private GameObject _basketTemplate;
-    [SerializeField] private float _weightDifferenceFactor = .8f;
+    [SerializeField] private Basket _basketLeft;
+    [SerializeField] private Basket _basketRight;
+    [SerializeField] private float _weightDifferenceFactor = 0.09f;
 
-    private const float MaxAmplitude = 2.5f;
+    public const float MaxAmplitude = 1.8f;
 
     private float _scalesValue = 0;
 
-    private Basket _basketLeft;
-    private Basket _basketRight;
     private ObstacleScaner _scanerLeft;
     private ObstacleScaner _scanerRight;
     private Balancing _balancing;
 
     public static Action OnScalesBroke;
 
+    public float WeightDifferenceFactor => _weightDifferenceFactor;
     public int AllCatchedCargo => _basketLeft.CargoCount + _basketRight.CargoCount;
     public ObstacleScaner LeftScaner => _scanerLeft;
     public ObstacleScaner RightScaner => _scanerRight;
+    public Basket LeftBasket => _basketLeft;
+    public Basket RightBasket => _basketRight;
 
     private void OnEnable()
     {
         _balancing = GetComponent<Balancing>();
-        _basketLeft = Instantiate(_basketTemplate, transform.position, Quaternion.identity, transform)
-            .GetComponent<Basket>();
-        _basketRight = Instantiate(_basketTemplate, transform.position, Quaternion.identity, transform)
-            .GetComponent<Basket>();
         _scanerLeft = _basketLeft.GetComponentInChildren<ObstacleScaner>();
         _scanerRight = _basketRight.GetComponentInChildren<ObstacleScaner>();
         SetBaskets();
@@ -58,7 +56,7 @@ public class Scales : MonoBehaviour
 
     private void CheckBasketsWeights()
     {
-        _scalesValue = (_basketRight.Weight - _basketLeft.Weight) * _weightDifferenceFactor;
+        _scalesValue = (_basketRight.CargoCount - _basketLeft.CargoCount) * _weightDifferenceFactor;
 
         if (_scalesValue < -MaxAmplitude || _scalesValue > MaxAmplitude)
         {
@@ -66,7 +64,6 @@ public class Scales : MonoBehaviour
             return;
         }
 
-        TESTDebuggingLabels.ShowMessage(3, "scales " + _scalesValue.ToString());
         Balance();
     }
 

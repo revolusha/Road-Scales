@@ -13,20 +13,25 @@ public class MovingByScreenSizeCamera : MonoBehaviour
     [SerializeField] private Quaternion _PCLocalRotation;
     [SerializeField] private float _PCFOV;
 
+    private static MovingByScreenSizeCamera _instance;
+
     private Camera _camera;
+
+    public static MovingByScreenSizeCamera Instance => _instance;
 
     private void OnEnable()
     {
+        _instance = this;
         _camera = GetComponent<Camera>();
         SetCameraSettings();
     }
 
-    private void SetCameraSettings()
+    public static void SetCameraSettings()
     {
         if (Screen.height > Screen.width)
-            SetMobileCamera();
+            Instance.SetMobileCamera();
         else
-            SetPCCamera();
+            Instance.SetPCCamera();
     }
 
     private void SetPCCamera()

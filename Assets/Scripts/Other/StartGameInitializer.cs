@@ -1,6 +1,6 @@
+using Agava.YandexGames;
+using System.Collections;
 using UnityEngine;
-
-[RequireComponent(typeof(LevelReloader))]
 
 public class StartGameInitializer : MonoBehaviour
 {
@@ -9,30 +9,35 @@ public class StartGameInitializer : MonoBehaviour
 
     private void OnEnable()
     {
-        Initialize();
+        StartCoroutine(Initialize());
     }
 
     private void Start()
     {
-        GetComponent<LevelReloader>().ReloadLevel();
+        Loading.OnLoadingFinished += LoadLevel;
+        StartCoroutine(Loading.Load());
     }
 
-    private void Initialize()
+    private void OnDisable()
+    {
+        Loading.OnLoadingFinished -= LoadLevel;
+    }
+
+    private void LoadLevel()
+    {
+        LevelReloader.ReloadLevel();
+    }
+
+    private IEnumerator Initialize()
     {        
         GameObject gameData = Instantiate(_gameDataTemplate);
 
         DontDestroyOnLoad(gameData);
-        StaticInstances.SetLevelsPool(_levelsPool);
+        Game.LevelHandler.SetLevelsPool(_levelsPool);
+
+#if !UNITY_WEBGL || UNITY_EDITOR
+        yield break;
+#endif
+        yield return YandexGamesSdk.Initialize();
     }
-
-    //private void ResizeWindow()
-    //{
-    //    const float TargetResolutionHeightFactor = 16;
-    //    const float TargetResolutionWidthFactor = 9;
-
-    //    float oldResolutionFactor = Screen.width / Screen.height;
-    //    int newWidth = (int)(Screen.width * oldResolutionFactor * TargetResolutionWidthFactor / TargetResolutionHeightFactor);
-
-    //    Screen.SetResolution(newWidth, Screen.height, Screen.fullScreen);
-    //}
 }
