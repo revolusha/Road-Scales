@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Basket : MonoBehaviour
 {
-    [SerializeField] private GameObject _defaultBasketTemplate;
-
     private int _weight = 0;
     private GameObject _basketModel;
 
@@ -15,11 +13,7 @@ public class Basket : MonoBehaviour
 
     private void OnEnable()
     {
-        if (Game.SkinHandler.ChoosenBasketSkin == null)
-            SpawnBasketModel(_defaultBasketTemplate);
-        else
-            SpawnBasketModel(Game.SkinHandler.ChoosenBasketSkin.Object);
-
+        SpawnBasketModel();
         SkinHandler.OnBasketSkinChanged += SpawnBasketModel;
     }
 
@@ -34,11 +28,11 @@ public class Basket : MonoBehaviour
         OnWeightChanged?.Invoke();
     }
 
-    private void SpawnBasketModel(GameObject skinTemplate)
+    private void SpawnBasketModel()
     {
         if (_basketModel != null)
             Destroy(_basketModel);
 
-        _basketModel = Instantiate(skinTemplate, transform);
+        _basketModel = Instantiate(Game.SkinHandler.ChoosenBasketSkin.Object, transform);
     }
 }

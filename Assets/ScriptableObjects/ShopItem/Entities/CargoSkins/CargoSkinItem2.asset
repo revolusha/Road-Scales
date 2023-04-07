@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cdd01c31a3f3de4aadff3bf4a36941c, type: 3}
   m_Name: CargoSkinItem2
   m_EditorClassIdentifier: 
-  _objectForSell: {fileID: 7203183337698612461, guid: d7b38164a9bc0f341baa7b5ab715e352, type: 3}
-  _image: {fileID: 0}
+  _objectForSell: {fileID: 6671357123714008238, guid: b78922e301262e24c954957edccb7cc6, type: 3}
+  _image: {fileID: 21300000, guid: 7afb72e72a2c341428bfce22a701350e, type: 3}
   _name: 
   _price: 300

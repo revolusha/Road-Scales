@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BasketSkinItem1
   m_EditorClassIdentifier: 
   _objectForSell: {fileID: 8301385733496081840, guid: fc37300a2bde5294ea22dc6cef249497, type: 3}
-  _image: {fileID: 0}
+  _image: {fileID: 21300000, guid: c6491c364dc6a6648b7426ff4b1ee623, type: 3}
   _name: Default
   _price: 0

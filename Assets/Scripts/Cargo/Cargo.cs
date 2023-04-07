@@ -2,18 +2,21 @@ using UnityEngine;
 
 public class Cargo : MonoBehaviour
 {
-    private GameObject _cargoStyledObject;
     private Transform _mainContainer;
     private Basket _containerBasket;
+    private GameObject _model;
 
     private void OnEnable()
     {
         _mainContainer = GetComponentInParent<Transform>();
+        SpawnModel();
 
-        if (_cargoStyledObject == null)
-            _cargoStyledObject = Game.LevelHandler.TryGetCurrentLevelConfig().Cargo;
+        SkinHandler.OnCargoSkinChanged += SpawnModel;
+    }
 
-        SpawnObject();
+    private void OnDisable()
+    {
+        SkinHandler.OnCargoSkinChanged -= SpawnModel;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,8 +38,11 @@ public class Cargo : MonoBehaviour
         }
     }
 
-    private void SpawnObject()
+    private void SpawnModel()
     {
-        Instantiate(_cargoStyledObject, transform.position, transform.rotation, transform);
+        if (_model != null)
+            Destroy(_model);
+
+        _model = Instantiate(Game.SkinHandler.ChoosenCargoSkin.Object, transform.position, transform.rotation, transform);
     }
 }

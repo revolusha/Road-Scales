@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BasketSkinItem4
   m_EditorClassIdentifier: 
   _objectForSell: {fileID: 1474821562667362237, guid: a00f9510895aed544bdb8d9dcd56d137, type: 3}
-  _image: {fileID: 0}
+  _image: {fileID: 21300000, guid: 95841396f895f964f9a69636efb6756c, type: 3}
   _name: Gold Minecart
   _price: 1200

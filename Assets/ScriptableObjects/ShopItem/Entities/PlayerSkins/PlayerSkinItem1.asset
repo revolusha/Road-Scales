@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlayerSkinItem1
   m_EditorClassIdentifier: 
   _objectForSell: {fileID: 4983937494611237529, guid: b901da7fffe21c44f885966dc19e08cc, type: 3}
-  _image: {fileID: 0}
+  _image: {fileID: 21300000, guid: 642cce0d755f9354cb5ca5557135bd37, type: 3}
   _name: Default
   _price: 1000

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BasketSkinItem2
   m_EditorClassIdentifier: 
   _objectForSell: {fileID: 7880400857546837344, guid: 40e6c1a0c4e967347bb2a6b4f28c54af, type: 3}
-  _image: {fileID: 0}
+  _image: {fileID: 21300000, guid: dea9a79598265d344ab1114536d03462, type: 3}
   _name: Stone Minecart
   _price: 300

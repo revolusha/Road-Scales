@@ -3,15 +3,13 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _playerDefault;
-
     private GameObject _player;
 
     public GameObject Player => _player;
 
     private void OnEnable()
     {
-        SpawnModel(Game.SkinHandler.ChoosenPlayerSkin.Object);
+        SpawnModel();
         SkinHandler.OnPlayerSkinChanged += SpawnModel;
     }
 
@@ -20,11 +18,11 @@ public class PlayerSpawner : MonoBehaviour
         SkinHandler.OnPlayerSkinChanged -= SpawnModel;
     }
 
-    private void SpawnModel(GameObject skinTemplate)
+    private void SpawnModel()
     {
         if (_player != null)
             Destroy(_player);
 
-        _player = Instantiate(skinTemplate, transform);
+        _player = Instantiate(Game.SkinHandler.ChoosenPlayerSkin.Object, transform);
     }
 }

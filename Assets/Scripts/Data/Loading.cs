@@ -19,10 +19,8 @@ public static class Loading
     {
 #if !UNITY_WEBGL || UNITY_EDITOR
         OnLoadingFinished?.Invoke();
-        Debug.Log("4");
         yield break;
 #endif
-        Debug.Log("7");
         yield return YandexGamesSdk.Initialize();
 
         PlayerAccount.GetPlayerData(OnDataStringGot, OnDataStringFailed);

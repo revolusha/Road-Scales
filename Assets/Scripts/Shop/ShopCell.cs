@@ -10,8 +10,9 @@ public class ShopCell : MonoBehaviour
     [SerializeField] private Color _selectedItemColor;
     [SerializeField] private Color _notPurchasedAffordableColor;
     [SerializeField] private Color _notPurchasedColor;
+    [SerializeField] private Image _background;
+    [SerializeField] private Image _preview;
 
-    private Image _background;
     private ShopItem _item;
     private TextMeshProUGUI _textField;
 
@@ -21,7 +22,6 @@ public class ShopCell : MonoBehaviour
 
     private void OnEnable()
     {
-        _background = GetComponent<Image>();
         _textField = GetComponentInChildren<TextMeshProUGUI>();
         OnCalledUpdating += UpdateCell;
     }
@@ -39,6 +39,10 @@ public class ShopCell : MonoBehaviour
     public void AssignShopItem(ShopItem shopItem)
     {
         _item = shopItem;
+
+        if (_item.Image != null)
+            _preview.sprite = _item.Image;
+
         UpdateCell();
     }
 

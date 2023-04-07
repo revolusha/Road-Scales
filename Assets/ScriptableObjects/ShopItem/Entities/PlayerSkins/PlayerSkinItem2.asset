@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlayerSkinItem2
   m_EditorClassIdentifier: 
   _objectForSell: {fileID: 1546869290245405349, guid: 46287aa48de0c6f4d8e504a799804d8c, type: 3}
-  _image: {fileID: 0}
+  _image: {fileID: 21300000, guid: cbc3d4d6f9017e74e81b8af7a5695aef, type: 3}
   _name: PoliceMan
   _price: 2000

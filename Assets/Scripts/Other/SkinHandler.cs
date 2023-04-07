@@ -11,9 +11,9 @@ public class SkinHandler : MonoBehaviour
     private CargoSkinItem[] _cargoSkins;
     private BasketSkinItem[] _basketSkins;
 
-    public static Action<GameObject> OnPlayerSkinChanged;
-    public static Action<GameObject> OnCargoSkinChanged;
-    public static Action<GameObject> OnBasketSkinChanged;
+    public static Action OnPlayerSkinChanged;
+    public static Action OnCargoSkinChanged;
+    public static Action OnBasketSkinChanged;
 
     public PlayerSkinItem ChoosenPlayerSkin => _choosenPlayerSkin;
     public CargoSkinItem ChoosenCargoSkin => _choosenCargoSkin;
@@ -41,19 +41,19 @@ public class SkinHandler : MonoBehaviour
     public void SelectItem(PlayerSkinItem item)
     {
         _choosenPlayerSkin = item;
-        OnPlayerSkinChanged?.Invoke(item.Object);
+        OnPlayerSkinChanged?.Invoke();
     }
 
     public void SelectItem(CargoSkinItem item)
     {
         _choosenCargoSkin = item;
-        OnCargoSkinChanged?.Invoke(item.Object);
+        OnCargoSkinChanged?.Invoke();
     }
 
     public void SelectItem(BasketSkinItem item)
     {
         _choosenBasketSkin = item;
-        OnBasketSkinChanged?.Invoke(item.Object);
+        OnBasketSkinChanged?.Invoke();
     }
 
     private int GetIndexOfChoosenShopItem(ShopItem item, ShopItem[] shopItems)
