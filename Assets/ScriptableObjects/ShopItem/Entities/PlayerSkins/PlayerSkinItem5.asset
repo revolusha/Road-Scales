@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 782ac85e75efe2a4eaebe2012cc8baee, type: 3}
-  m_Name: PlayerSkinItem2
+  m_Name: PlayerSkinItem5
   m_EditorClassIdentifier: 
-  _objectForSell: {fileID: 1546869290245405349, guid: 46287aa48de0c6f4d8e504a799804d8c, type: 3}
-  _image: {fileID: 21300000, guid: cbc3d4d6f9017e74e81b8af7a5695aef, type: 3}
-  _name: PoliceMan
-  _price: 200
+  _objectForSell: {fileID: 9197213468074755166, guid: 8d95ea252857126449307b2928017282, type: 3}
+  _image: {fileID: 21300000, guid: 069de38d8e6f7e047b0a7e82161a5821, type: 3}
+  _name: 
+  _price: 20

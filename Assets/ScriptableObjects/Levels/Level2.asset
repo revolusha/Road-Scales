@@ -18,10 +18,6 @@ MonoBehaviour:
   _cargoStyledTemplate: {fileID: 7203183337698612461, guid: d7b38164a9bc0f341baa7b5ab715e352, type: 3}
   _roadScheme:
   - _roadType: 0
-    _isGotCargo: 0
-    _segmentsCount: 1
-    _obstacleSpawnSide: 0
-  - _roadType: 0
     _isGotCargo: 1
     _segmentsCount: 6
     _obstacleSpawnSide: 0

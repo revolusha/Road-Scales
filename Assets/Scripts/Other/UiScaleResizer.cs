@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class UiScaleResizer : MonoBehaviour
 {
+    [SerializeField] private float _defaultHeight = 800;
+    [SerializeField] private float _defaultWidth = 1200;
+    [SerializeField] private float _checkResolutionTimeInterval = 2f;
+
     private Vector2 _resolution;
     private CanvasScaler _canvasScaler;
     private Coroutine _coroutine;
@@ -20,17 +24,13 @@ public class UiScaleResizer : MonoBehaviour
 
     private void ResizeUI()
     {
-        const float DefaultHeight = 800;
-        const float DefaultWidth = 1200;
-
-        float heightFactor = DefaultHeight / Screen.height;
-        float widthFactor = DefaultWidth / Screen.width;
+        float heightFactor = _defaultHeight / Screen.height;
+        float widthFactor = _defaultWidth / Screen.width;
 
         if (heightFactor >= widthFactor)
             _canvasScaler.scaleFactor = 1 / heightFactor;
         else
             _canvasScaler.scaleFactor = 1 / widthFactor;
-
 
         _resolution.x = Screen.width;
         _resolution.y = Screen.height;
@@ -46,15 +46,13 @@ public class UiScaleResizer : MonoBehaviour
 
     private IEnumerator CheckScreenResolution()
     {
-        const float TimeInterval = 2f;
-
         if (_resolution.x != Screen.width || _resolution.y != Screen.height)
         {
             ResizeUI();
             MovingByScreenSizeCamera.SetCameraSettings();
         }
 
-        yield return new WaitForSeconds(TimeInterval);
+        yield return new WaitForSeconds(_checkResolutionTimeInterval);
 
         RestartCoroutine();
     }

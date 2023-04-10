@@ -5,15 +5,12 @@ using UnityEngine;
 
 public static class Loading
 {
-    private static bool _isDone;
     private static PlayerInfo _playerInfo;
 
     public static Action OnLoadingFinished;
 
     private static readonly Action<string> OnDataStringGot = HandleLoadedData;
     private static readonly Action<string> OnDataStringFailed = HandleFailedLoading;
-
-    public static bool Done => _isDone;
 
     public static IEnumerator Load()
     {

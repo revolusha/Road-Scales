@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cdd01c31a3f3de4aadff3bf4a36941c, type: 3}
-  m_Name: CargoSkinItem1
+  m_Name: CargoSkinItem5
   m_EditorClassIdentifier: 
-  _objectForSell: {fileID: 7203183337698612461, guid: d7b38164a9bc0f341baa7b5ab715e352, type: 3}
-  _image: {fileID: 21300000, guid: dee99608d29aa0c4ba39aa561e454d7b, type: 3}
-  _name: Default
-  _price: 0
+  _objectForSell: {fileID: 3285819214242812326, guid: 3a99c0a581380c048b6457fa87719719, type: 3}
+  _image: {fileID: 21300000, guid: 04a671c56cc56b04eb25a4ef2c5a5625, type: 3}
+  _name: 
+  _price: 333
