@@ -15,11 +15,11 @@ public class Shop : MonoBehaviour
     private readonly List<ShopCell> _cargoSkins = new();
     private readonly List<ShopCell> _basketSkins = new();
 
-    public static Action<ShopCell> OnItemClicked;
+    public static Action<ShopCell> OnRequestBuyPanel;
 
     private void OnEnable()
     {
-        OnItemClicked += ShowConfimationPanel;
+        OnRequestBuyPanel += ShowConfimationPanel;
     }
 
     private void Start()
@@ -29,7 +29,7 @@ public class Shop : MonoBehaviour
 
     private void OnDisable()
     {
-        OnItemClicked -= ShowConfimationPanel;
+        OnRequestBuyPanel -= ShowConfimationPanel;
     }
 
     private void ShowConfimationPanel(ShopCell cell)

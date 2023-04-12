@@ -3,6 +3,8 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerInfo
 {
+    public bool IsGotBadge;
+
     public int Level;
     public int Coins;
     public int ChoosenPlayerSkin;
@@ -18,6 +20,7 @@ public class PlayerInfo
 
     public PlayerInfo()
     {
+        IsGotBadge = Game.IsLastLevelFinished;
         Level = Game.LevelHandler.CurrentLevelIndex;
         Coins = Game.Money.Balance;
         ChoosenPlayerSkin = Game.SkinHandler.ChoosenPlayerSkinIndex;

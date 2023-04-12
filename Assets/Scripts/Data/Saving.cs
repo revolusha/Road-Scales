@@ -6,12 +6,12 @@ public class Saving : MonoBehaviour
 {
     private static Saving _instance;
 
-    private void Awake()
+    private void OnEnable()
     {
         _instance = this;
     }
 
-    public static void OnFinishSaveEvent()
+    public static void OnSaveEvent()
     {
         _instance.StartCoroutine(Save());
     }
@@ -34,5 +34,10 @@ public class Saving : MonoBehaviour
         const string EmptyJsonDataString = "{}";
 
         PlayerAccount.SetPlayerData(EmptyJsonDataString, onSuccessCallback: JavaScriptHandler.ReloadBrowserPage);
+    }
+
+    public void StartSaving()
+    {
+        _instance.StartCoroutine(Save());
     }
 }

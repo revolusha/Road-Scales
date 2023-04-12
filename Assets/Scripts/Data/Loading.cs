@@ -41,6 +41,7 @@ public static class Loading
             HandleFailedLoading("");
 
         _playerInfo = JsonUtility.FromJson<PlayerInfo>(data);
+        Game.Instance.SetLastLevelFlag(_playerInfo.IsGotBadge);
         LoadGeneralData();
         LoadSkinsData();
         OnLoadingFinished?.Invoke();

@@ -1,40 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioMuter : MonoBehaviour
 {
-    [SerializeField] private GameObject _muteButton;
-    [SerializeField] private GameObject _unmuteButton;
+    [SerializeField] private GameObject _muteSoundButton;
+    [SerializeField] private GameObject _unmuteSoundButton;
+    [SerializeField] private GameObject _muteMusicButton;
+    [SerializeField] private GameObject _unmuteMusicButton;
 
     private float _lastSoundVolume = .7f;
     private float _lastMusicVolume = .7f;
 
     private void Start()
     {
-        if (Game.SoundPlayer.Volume == 0 && Game.MusicPlayer.Volume == 0)
+        if (Game.SoundPlayer.Volume == 0)
         {
-            Mute();
+            MuteSound();
             _lastSoundVolume = .7f;
+        }
+
+        if (Game.MusicPlayer.Volume == 0)
+        {
+            MuteMusic();
             _lastMusicVolume = .7f;
         }
     }
 
-    public void Mute()
+    public void MuteMusic()
     {
-        _lastSoundVolume = Game.SoundPlayer.Volume;
         _lastMusicVolume = Game.MusicPlayer.Volume;
-        Game.SoundPlayer.SetVolume(0);
         Game.MusicPlayer.SetVolume(0);
-        _muteButton.SetActive(false);
-        _unmuteButton.SetActive(true);
+        _muteMusicButton.SetActive(false);
+        _unmuteMusicButton.SetActive(true);
     }
 
-    public void Unmute()
+    public void UnmuteMusic()
+    {
+        Game.MusicPlayer.SetVolume(_lastMusicVolume);
+        _unmuteMusicButton.SetActive(false);
+        _muteMusicButton.SetActive(true);
+    }
+
+    public void MuteSound()
+    {
+        _lastSoundVolume = Game.SoundPlayer.Volume;
+        Game.SoundPlayer.SetVolume(0);
+        _muteSoundButton.SetActive(false);
+        _unmuteSoundButton.SetActive(true);
+    }
+
+    public void UnmuteSound()
     {
         Game.SoundPlayer.SetVolume(_lastSoundVolume);
-        Game.MusicPlayer.SetVolume(_lastMusicVolume);
-        _unmuteButton.SetActive(false);
-        _muteButton.SetActive(true);
+        _unmuteSoundButton.SetActive(false);
+        _muteSoundButton.SetActive(true);
     }
 }

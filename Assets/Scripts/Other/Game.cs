@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    [SerializeField] private TESTMapLoader _TEST;
+    private bool _isLastLevelFinished;
 
     private Money _money;
     private LevelHandler _levelHandler;
@@ -10,15 +10,13 @@ public class Game : MonoBehaviour
     private MusicPlayer _musicPlayer;
     private SoundPlayer _soundPlayer;
 
-    public static bool ISTEST = false;
-
     public static Game Instance { get; private set; }
     public static Money Money => Instance._money;
     public static MusicPlayer MusicPlayer => Instance._musicPlayer;
     public static SoundPlayer SoundPlayer => Instance._soundPlayer;
     public static SkinHandler SkinHandler => Instance._skinHandler;
     public static LevelHandler LevelHandler => Instance._levelHandler;
-    public static TESTMapLoader TEST => Instance._TEST;
+    public static bool IsLastLevelFinished => Instance._isLastLevelFinished;
     public static bool IsReady { get; private set; }
 
     private void OnEnable()
@@ -32,6 +30,28 @@ public class Game : MonoBehaviour
 
         _money = new Money();
         _levelHandler = new LevelHandler();
+        _levelHandler.OnLastLevelFinished += OnLastLevelFinishedEvent;
+        Advertisement.ResetTimer();
         IsReady = true;
+    }
+
+    private void OnDisable()
+    {
+        _levelHandler.OnLastLevelFinished -= OnLastLevelFinishedEvent;
+    }
+
+    public void SetLastLevelFlag(bool isFinished)
+    {
+        _isLastLevelFinished = isFinished;
+
+        if (isFinished == true)
+            _levelHandler.OnLastLevelFinished -= OnLastLevelFinishedEvent;
+    }
+
+    private void OnLastLevelFinishedEvent()
+    {
+        SetLastLevelFlag(true);
+
+        _levelHandler.OnLastLevelFinished -= OnLastLevelFinishedEvent;
     }
 }

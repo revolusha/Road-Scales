@@ -1,7 +1,11 @@
+using System;
+
 public class LevelHandler
 {
     private int _currentLevelIndex;
     private LevelRoadConfiguration[] _levels;
+
+    public Action OnLastLevelFinished;
 
     public int CurrentLevelIndex => _currentLevelIndex;
     public int LevelCount => _levels.Length;
@@ -19,9 +23,6 @@ public class LevelHandler
 
     public LevelRoadConfiguration TryGetCurrentLevelConfig()
     {
-        if (Game.ISTEST == true)
-            return Game.TEST.Config;
-
         if (_levels == null)
             throw new System.Exception("Level configurations loading failed!");
 
@@ -43,7 +44,10 @@ public class LevelHandler
         _currentLevelIndex++;
 
         if (_currentLevelIndex >= _levels.Length)
+        {
+            OnLastLevelFinished?.Invoke();
             _currentLevelIndex = 0;
+        }
     }
 
     public void SwitchToLevel(int index)

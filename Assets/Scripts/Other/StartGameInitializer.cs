@@ -25,7 +25,7 @@ public class StartGameInitializer : MonoBehaviour
 
     private void LoadLevel()
     {
-        LevelReloader.ReloadLevel();
+        LevelReloader.ReloadBaseLevel();
     }
 
     private IEnumerator Initialize()

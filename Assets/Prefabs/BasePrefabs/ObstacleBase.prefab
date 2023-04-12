@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _xLocalOffset: 4
-  _yLocalOffset: -5
+  _yLocalOffset: -5.3
   _maximumRotationValue: 360
   _minimalRotationValue: 0
 --- !u!65 &3462894262813343006

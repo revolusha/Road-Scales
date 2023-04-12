@@ -9,6 +9,13 @@ public class ObstacleScaner : MonoBehaviour
     public Action OnObstacleFound;
     public Action OnNoObstacleFound;
 
+    private bool _isFound;
+
+    private void OnEnable()
+    {
+        _isFound = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Obstacle obstacle))
@@ -16,7 +23,11 @@ public class ObstacleScaner : MonoBehaviour
             if (_foundObstacles.Contains(obstacle) == false)
                 _foundObstacles.Add(obstacle);
 
-            OnObstacleFound?.Invoke();
+            if (_isFound == false)
+            {
+                _isFound = true;
+                OnObstacleFound?.Invoke();
+            }
         }
     }
 
@@ -28,7 +39,10 @@ public class ObstacleScaner : MonoBehaviour
                 _foundObstacles.Remove(obstacle);
 
             if (_foundObstacles.Count == 0)
+            {
+                _isFound = false;
                 OnNoObstacleFound?.Invoke();
+            }
         }
     }
 }

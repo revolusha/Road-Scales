@@ -2,13 +2,20 @@ using UnityEngine;
 
 public class Cargo : MonoBehaviour
 {
+    [SerializeField] private GameObject _defaultSkin;
+
     private Transform _mainContainer;
     private Basket _containerBasket;
-    private GameObject _model;
+    private GameObject _spawnedModel;
+    private GameObject _modelTemplate;
 
     private void OnEnable()
     {
         _mainContainer = GetComponentInParent<Transform>();
+    }
+
+    private void Start()
+    {
         SpawnModel();
 
         SkinHandler.OnCargoSkinChanged += SpawnModel;
@@ -40,9 +47,14 @@ public class Cargo : MonoBehaviour
 
     private void SpawnModel()
     {
-        if (_model != null)
-            Destroy(_model);
+        if (_spawnedModel != null)
+            Destroy(_spawnedModel);
 
-        _model = Instantiate(Game.SkinHandler.ChoosenCargoSkin.Object, transform.position, transform.rotation, transform);
+        if (Game.SkinHandler.ChoosenCargoSkin == null)
+            _modelTemplate = _defaultSkin;
+        else
+            _modelTemplate = Game.SkinHandler.ChoosenCargoSkin.Object;
+
+        _spawnedModel = Instantiate(_modelTemplate, transform.position, transform.rotation, transform);
     }
 }

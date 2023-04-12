@@ -69,6 +69,7 @@ public class ShopCell : MonoBehaviour
         if (_item.IsOwned)
         {
             _item.Select();
+            Game.Instance.GetComponent<Saving>().StartSaving();
             UpdateAll();
             return;
         }
@@ -81,7 +82,7 @@ public class ShopCell : MonoBehaviour
 
     private void CallPurchaseConfirmationPanel()
     {
-        Shop.OnItemClicked?.Invoke(this);
+        Shop.OnRequestBuyPanel?.Invoke(this);
     }
 
     private void ShowPriceLabel()

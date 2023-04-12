@@ -5,30 +5,48 @@ public class LevelReloader : MonoBehaviour
 {
     private const string SceneName = "LevelBase";
 
-    public static void ReloadLevel()
+    public static void ReloadBaseLevel()
     {
         SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
-        Loading.OnLoadingFinished -= ReloadLevel;
+        Loading.OnLoadingFinished -= ReloadBaseLevel;
     }
 
     public static void LoadDefaultLevel()
     {
         Game.LevelHandler.SwitchToLevel(0);
-        ReloadLevel();
+        ReloadBaseLevel();
         Loading.OnLoadingFinished -= LoadDefaultLevel;
     }
 
-    public static void SwitchToNextLevel()
+    public void SwitchToNextLevel()
     {
         Game.LevelHandler.SwitchToNextLevel();
+    }
+
+    public void SwitchToLevel(int index)
+    {
+        Game.LevelHandler.SwitchToLevel(index);
+        ReloadBaseLevel();
     }
 
     public static void LoadNextLevel()
     {
-        if (Game.LevelHandler.IsLastLevel)
-            return;
-
         Game.LevelHandler.SwitchToNextLevel();
-        ReloadLevel();
+
+        if (Advertisement.CheckIfCanShowAd())
+            ShowInterstitialAd();
+
+        ReloadBaseLevel();
+    }
+
+    private static void LoadNextLevelAfterAd<T>(T _)
+    {
+        ReloadBaseLevel();
+    }
+
+    private static void ShowInterstitialAd()
+    {
+        Agava.YandexGames.InterstitialAd.Show(onCloseCallback: LoadNextLevelAfterAd, 
+            onErrorCallback: LoadNextLevelAfterAd, onOfflineCallback: ReloadBaseLevel);
     }
 }
