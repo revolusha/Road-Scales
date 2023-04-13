@@ -15,4 +15,4 @@ MonoBehaviour:
   _objectForSell: {fileID: 7202310250185430265, guid: 60579390e20d2da419b3082c53bbf601, type: 3}
   _image: {fileID: 21300000, guid: e8a71c945e00968498c7bd91099ddb73, type: 3}
   _name: Steel Minecart
-  _price: 500
+  _price: 900

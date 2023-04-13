@@ -214,6 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2059862664342773376}
   - component: {fileID: 1852038291979931360}
+  - component: {fileID: 6699752640792963079}
   m_Layer: 0
   m_Name: Yandex
   m_TagString: Untagged
@@ -246,6 +247,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3d71255ac6a09e45a2f3298c2b32353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6699752640792963079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3121187708659582903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889e1033665fae94882e62835edb782b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5306043683031066670
@@ -453,10 +466,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerSkins:
   - {fileID: 11400000, guid: 543a16c229be7a84780000215969ea87, type: 2}
-  - {fileID: 11400000, guid: dfc5befa41a8efc4fbf90c5a45086893, type: 2}
-  - {fileID: 11400000, guid: e5239b9c21e698b4889d89863f441f48, type: 2}
   - {fileID: 11400000, guid: 32f446f9a12459b48831042f3a473609, type: 2}
   - {fileID: 11400000, guid: f81dda3588a963a4fa9b212d47f1d4fc, type: 2}
+  - {fileID: 11400000, guid: e5239b9c21e698b4889d89863f441f48, type: 2}
+  - {fileID: 11400000, guid: dfc5befa41a8efc4fbf90c5a45086893, type: 2}
   _cargoSkins:
   - {fileID: 11400000, guid: ac6a7bf697a8ed34b84beb3bfe383db5, type: 2}
   - {fileID: 11400000, guid: 0124e76308a789741b04cff62f4147f5, type: 2}

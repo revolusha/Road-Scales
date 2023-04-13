@@ -18,5 +18,17 @@ MonoBehaviour:
   _roadScheme:
   - _roadType: 0
     _isGotCargo: 1
-    _segmentsCount: 6
+    _segmentsCount: 3
+    _obstacleSpawnSide: 0
+  - _roadType: 1
+    _isGotCargo: 1
+    _segmentsCount: 1
+    _obstacleSpawnSide: 0
+  - _roadType: 0
+    _isGotCargo: 1
+    _segmentsCount: 2
+    _obstacleSpawnSide: 0
+  - _roadType: 0
+    _isGotCargo: 0
+    _segmentsCount: 1
     _obstacleSpawnSide: 0

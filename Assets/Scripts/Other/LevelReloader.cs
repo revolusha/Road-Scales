@@ -18,6 +18,17 @@ public class LevelReloader : MonoBehaviour
         Loading.OnLoadingFinished -= LoadDefaultLevel;
     }
 
+    public static void LoadNextLevelAfterAd<T>(T _)
+    {
+        ReloadBaseLevel();
+    }
+
+    public void LoadNextLevel()
+    {
+        Game.LevelHandler.SwitchToNextLevel();
+        Game.Advertisement.TryShowInterstitialAd();
+    }
+
     public void SwitchToNextLevel()
     {
         Game.LevelHandler.SwitchToNextLevel();
@@ -29,24 +40,8 @@ public class LevelReloader : MonoBehaviour
         ReloadBaseLevel();
     }
 
-    public static void LoadNextLevel()
+    public void ReloadLevelThroughAd()
     {
-        Game.LevelHandler.SwitchToNextLevel();
-
-        if (Advertisement.CheckIfCanShowAd())
-            ShowInterstitialAd();
-
-        ReloadBaseLevel();
-    }
-
-    private static void LoadNextLevelAfterAd<T>(T _)
-    {
-        ReloadBaseLevel();
-    }
-
-    private static void ShowInterstitialAd()
-    {
-        Agava.YandexGames.InterstitialAd.Show(onCloseCallback: LoadNextLevelAfterAd, 
-            onErrorCallback: LoadNextLevelAfterAd, onOfflineCallback: ReloadBaseLevel);
+        Game.Advertisement.TryShowInterstitialAd();
     }
 }

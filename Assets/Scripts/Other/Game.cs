@@ -9,6 +9,7 @@ public class Game : MonoBehaviour
     private SkinHandler _skinHandler;
     private MusicPlayer _musicPlayer;
     private SoundPlayer _soundPlayer;
+    private Advertisement _advertisement;
 
     public static Game Instance { get; private set; }
     public static Money Money => Instance._money;
@@ -16,6 +17,7 @@ public class Game : MonoBehaviour
     public static SoundPlayer SoundPlayer => Instance._soundPlayer;
     public static SkinHandler SkinHandler => Instance._skinHandler;
     public static LevelHandler LevelHandler => Instance._levelHandler;
+    public static Advertisement Advertisement => Instance._advertisement;
     public static bool IsLastLevelFinished => Instance._isLastLevelFinished;
     public static bool IsReady { get; private set; }
 
@@ -24,6 +26,7 @@ public class Game : MonoBehaviour
         _musicPlayer = GetComponentInChildren<MusicPlayer>();
         _soundPlayer = GetComponentInChildren<SoundPlayer>();
         _skinHandler = GetComponentInChildren<SkinHandler>();
+        _advertisement = GetComponentInChildren<Advertisement>();
 
         if (Instance == null)
             Instance = this;
@@ -31,7 +34,6 @@ public class Game : MonoBehaviour
         _money = new Money();
         _levelHandler = new LevelHandler();
         _levelHandler.OnLastLevelFinished += OnLastLevelFinishedEvent;
-        Advertisement.ResetTimer();
         IsReady = true;
     }
 

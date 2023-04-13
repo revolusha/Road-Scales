@@ -6,7 +6,6 @@ public class UIPanelsHandler : MonoBehaviour
     [SerializeField] private GameObject _finishPanel;
     [SerializeField] private GameObject _shopPanel;
     [SerializeField] private GameObject _settingsPanel;
-    [SerializeField] private GameObject _backButton;
 
     private const string Trigger = "Show";
 
@@ -41,14 +40,12 @@ public class UIPanelsHandler : MonoBehaviour
     {
         HideStartUI();
         _shopPanel.SetActive(true);
-        _backButton.SetActive(true);
     }
 
     public void ShowSettingsPanel()
     {
         HideStartUI();
         _settingsPanel.SetActive(true);
-        _backButton.SetActive(true);
     }
 
     public void ShowStartUI()
@@ -58,7 +55,6 @@ public class UIPanelsHandler : MonoBehaviour
 
         _shopPanel.SetActive(false);
         _settingsPanel.SetActive(false);
-        _backButton.SetActive(false);
     }
 
     private void HideStartUI()

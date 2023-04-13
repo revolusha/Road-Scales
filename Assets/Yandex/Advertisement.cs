@@ -1,21 +1,49 @@
+using Agava.YandexGames;
+using System.Collections;
 using UnityEngine;
 
-public class Advertisement
+public class Advertisement : MonoBehaviour
 {
-    private const float MinimalIntervalToShowAd = 240;
-    private static float _lastShowTime;
+    private const float MinimalIntervalToShowAd = 120;
 
-    public static bool CheckIfCanShowAd()
+    private bool _isAllowedShowingAd = false;
+
+    private bool IsAllowedShowingAd
     {
-        if (Time.time - _lastShowTime < MinimalIntervalToShowAd)
-            return false;
+        get 
+        { 
+            if (_isAllowedShowingAd)
+                return true;
 
-        ResetTimer();
-        return true;
+            _isAllowedShowingAd = CheckIfCanShowAd();
+            return _isAllowedShowingAd;
+        }
     }
 
-    public static void ResetTimer()
+    public void TryShowInterstitialAd()
     {
-        _lastShowTime = Time.time;
+        if (Game.Advertisement.IsAllowedShowingAd)
+            StartCoroutine(ShowAd());
+        else
+            LevelReloader.ReloadBaseLevel();
+    }
+
+    private bool CheckIfCanShowAd()
+    {
+        Debug.Log(Time.realtimeSinceStartup);
+        return Time.realtimeSinceStartup > MinimalIntervalToShowAd;
+    }
+
+    private IEnumerator ShowAd()
+    {
+#if !UNITY_WEBGL || UNITY_EDITOR
+        yield break;
+#endif
+        yield return YandexGamesSdk.Initialize();
+
+        InterstitialAd.Show(
+            onCloseCallback: LevelReloader.LoadNextLevelAfterAd,
+            onErrorCallback: LevelReloader.LoadNextLevelAfterAd, 
+            onOfflineCallback: LevelReloader.ReloadBaseLevel);
     }
 }

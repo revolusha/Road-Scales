@@ -5,6 +5,7 @@ public class Basket : MonoBehaviour
 {
     private int _weight = 0;
     private GameObject _basketModel;
+    private BasketPoping _poping;
 
     public Action OnWeightChanged;
     public Action OnTouchedByObstacle;
@@ -25,6 +26,7 @@ public class Basket : MonoBehaviour
     public void UpdateWeight()
     {
         _weight = GetComponentsInChildren<Cargo>().Length;
+        _poping.Pop();
         OnWeightChanged?.Invoke();
     }
 
@@ -34,5 +36,6 @@ public class Basket : MonoBehaviour
             Destroy(_basketModel);
 
         _basketModel = Instantiate(Game.SkinHandler.ChoosenBasketSkin.Object, transform);
+        _poping = _basketModel.GetComponentInChildren<BasketPoping>();
     }
 }

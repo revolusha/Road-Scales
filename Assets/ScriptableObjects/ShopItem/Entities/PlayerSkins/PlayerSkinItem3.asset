@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782ac85e75efe2a4eaebe2012cc8baee, type: 3}
   m_Name: PlayerSkinItem3
   m_EditorClassIdentifier: 
-  _objectForSell: {fileID: 3570389262090619291, guid: 8bc9c8f60bc1bf444ab101cfd69a67a4, type: 3}
-  _image: {fileID: 21300000, guid: 1f31db56233f63347b6eee74c33d0069, type: 3}
-  _name: SuitMan
-  _price: 300
+  _objectForSell: {fileID: 9197213468074755166, guid: 8d95ea252857126449307b2928017282, type: 3}
+  _image: {fileID: 21300000, guid: 069de38d8e6f7e047b0a7e82161a5821, type: 3}
+  _name: 
+  _price: 1240

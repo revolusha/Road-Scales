@@ -9,13 +9,14 @@ public class Money
     private int _lastCatchedCargo;
 
     public int Balance => _balance;
+    public int LastCatchedCargo => _lastCatchedCargo;
 
     public Action<int> OnRewardGained;
     public Action<int> OnMoneyBalanceChanged;
 
     public Money()
     {
-        _balance = 500;
+        _balance = 0;
     }
 
     public void LoadMoney(int amount)
@@ -56,6 +57,8 @@ public class Money
     {
         const string Separator = ",";
         const int Devider = 1000;
+        const int TwoDigit = 99;
+        const int OneDigit = 9;
 
         if (value <= 0)
             return "0";
@@ -72,7 +75,12 @@ public class Money
             if (result.Length > 0)
                 result = Separator + result;
 
-            result = remainder.ToString() + result;
+            if (remainder > TwoDigit || integer <= 0)
+                result = remainder.ToString() + result;
+            else if (remainder > OneDigit)
+                result = "0" + remainder.ToString() + result;
+            else if (remainder < OneDigit)
+                result = "00" + remainder.ToString() + result;
         }
 
         return result;

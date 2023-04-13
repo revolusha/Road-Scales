@@ -15,4 +15,4 @@ MonoBehaviour:
   _objectForSell: {fileID: 2840564144400511696, guid: 3379562da0a476a49acc9754823cc6da, type: 3}
   _image: {fileID: 21300000, guid: 7fd8153b830d38d41b01d5910cf89e26, type: 3}
   _name: Diamond Minecart
-  _price: 2500
+  _price: 1750
