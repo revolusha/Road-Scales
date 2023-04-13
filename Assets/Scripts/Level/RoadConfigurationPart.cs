@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
+
 public struct RoadConfigurationPart
 {
     [SerializeField] private RoadType _roadType;

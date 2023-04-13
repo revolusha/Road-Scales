@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class CargoSpawner : MonoBehaviour
 {
-    private float _spawnAreaRadius = 2.2f;
-    private float _minimalCargoDistance = .3f;
-    private float _cargoSpawnHeight = .16f;
+    private readonly float _spawnAreaRadius = 2.2f;
+    private readonly float _minimalCargoDistance = .3f;
+    private readonly float _cargoSpawnHeight = .16f;
 
     private CargoSpawnPoint _cargoSpawnPoint;
 
@@ -72,7 +72,7 @@ public class CargoSpawner : MonoBehaviour
 
         position = new Vector2(0, 0);
 
-        for (int t = 0; t < MaxTryCount; t++)
+        for (int i = 0; i < MaxTryCount; i++)
         {
             position = GenerateNewPosition();
             isFound = true;

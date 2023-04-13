@@ -24,7 +24,7 @@ public class LevelHandler
     public LevelRoadConfiguration TryGetCurrentLevelConfig()
     {
         if (_levels == null)
-            throw new System.Exception("Level configurations loading failed!");
+            throw new Exception("Level configurations loading failed!");
 
         return _levels[_currentLevelIndex];
     }

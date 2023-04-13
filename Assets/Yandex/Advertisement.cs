@@ -30,7 +30,6 @@ public class Advertisement : MonoBehaviour
 
     private bool CheckIfCanShowAd()
     {
-        Debug.Log(Time.realtimeSinceStartup);
         return Time.realtimeSinceStartup > MinimalIntervalToShowAd;
     }
 

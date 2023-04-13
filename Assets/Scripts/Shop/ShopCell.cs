@@ -69,7 +69,8 @@ public class ShopCell : MonoBehaviour
         if (_item.IsOwned)
         {
             _item.Select();
-            Game.Instance.GetComponent<Saving>().StartSaving();
+            Game.SoundPlayer.PlayButtonSound();
+            Saving.OnSaveEvent();
             UpdateAll();
             return;
         }

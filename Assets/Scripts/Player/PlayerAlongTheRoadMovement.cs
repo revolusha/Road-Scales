@@ -44,17 +44,6 @@ public class PlayerAlongTheRoadMovement : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        const float Radius = 0.4f;
-
-        if (_currentNode == null)
-            return;
-
-        Gizmos.color = new Color(0,0,1,0.2f);
-        Gizmos.DrawSphere(_currentNode.transform.position, Radius);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PathNode>() == _currentNode)

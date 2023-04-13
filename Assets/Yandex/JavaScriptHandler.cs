@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class JavaScriptHandler : MonoBehaviour
 {
-    [DllImport("__Internal")]
-    private static extern void ReloadPage();
+    [DllImport("__Internal")] private static extern void ReloadPage();
 
     public static void ReloadBrowserPage()
     {

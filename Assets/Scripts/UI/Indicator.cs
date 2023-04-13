@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
 
-
 public class Indicator : MonoBehaviour
 {
     private Coroutine _blinking;

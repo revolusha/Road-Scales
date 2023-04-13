@@ -16,19 +16,6 @@ public class Saving : MonoBehaviour
         _instance.StartCoroutine(Save());
     }
 
-    public static IEnumerator Save()
-    {
-#if !UNITY_WEBGL || UNITY_EDITOR
-        yield break;
-#endif
-        yield return YandexGamesSdk.Initialize();
-
-        PlayerInfo playerInfo = new PlayerInfo();
-        string jsonDataString = playerInfo.SaveToString();
-
-        PlayerAccount.SetPlayerData(jsonDataString);
-    }
-
     public static void ClearSavedData()
     {
         const string EmptyJsonDataString = "{}";
@@ -38,6 +25,19 @@ public class Saving : MonoBehaviour
 
     public void StartSaving()
     {
-        _instance.StartCoroutine(Save());
+        OnSaveEvent();
+    }
+
+    public static IEnumerator Save()
+    {
+#if !UNITY_WEBGL || UNITY_EDITOR
+        yield break;
+#endif
+        yield return YandexGamesSdk.Initialize();
+
+        PlayerInfo playerInfo = new();
+        string jsonDataString = playerInfo.SaveToString();
+
+        PlayerAccount.SetPlayerData(jsonDataString);
     }
 }

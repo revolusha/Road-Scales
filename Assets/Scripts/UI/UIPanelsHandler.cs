@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UIPanelsHandler : MonoBehaviour
+public class UiPanelsHandler : MonoBehaviour
 {
     [SerializeField] private GameObject _startPanel;
     [SerializeField] private GameObject _finishPanel;
