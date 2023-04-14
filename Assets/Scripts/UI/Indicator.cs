@@ -1,46 +1,51 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
-
-[RequireComponent(typeof(Image))]
 
 public class Indicator : MonoBehaviour
 {
+    [SerializeField] private MeshRenderer _sign;
+
+    private bool _isPlaying = false;
+    private bool _canPlay = true;
     private Coroutine _blinking;
-    private Image _image;
     private SoundPlayer _audio;
 
-    private void OnEnable()
+    public bool IsPlaying => _isPlaying;
+
+    private void Start()
     {
-        _image = GetComponent<Image>();
-        _image.enabled = false;
         _audio = Game.SoundPlayer;
+        Scales.OnScalesBroke += TurnOff;
     }
 
-    public void ShowWarning()
+    private void OnDisable()
     {
-        gameObject.SetActive(true);
-        RestartBlinking();
+        Scales.OnScalesBroke -= TurnOff;
     }
 
-    public void HideWarning()
-    {
-        gameObject.SetActive(false);
-        StopBlinking();
-    }
-
-    private void StopBlinking()
+    public void StopBlinking()
     {
         if (_blinking != null)
             StopCoroutine(_blinking);
 
-        _image.enabled = false;
+        _isPlaying = false;
+        _sign.enabled = true;
     }
 
-    private void RestartBlinking()
+    public void RestartBlinking()
     {
+        if (_canPlay == false)
+            return;
+
         StopBlinking();
+        _isPlaying = true;
         _blinking = StartCoroutine(Blink());
+    }
+
+    private void TurnOff()
+    {
+        _canPlay = false;
+        StopBlinking();
     }
 
     private IEnumerator Blink()
@@ -50,10 +55,10 @@ public class Indicator : MonoBehaviour
 
         for (int i = 0; i < LoopCount; i++)
         {
-            _image.enabled = true;
+            _sign.enabled = true;
             _audio.PlayWarningAlarmSound();
             yield return new WaitForSeconds(TimeInterval);
-            _image.enabled = false;
+            _sign.enabled = false;
             yield return new WaitForSeconds(TimeInterval);
         }
 

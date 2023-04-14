@@ -23,24 +23,24 @@ public class LevelReloader : MonoBehaviour
         ReloadBaseLevel();
     }
 
-    public void LoadNextLevel()
+    public static void LoadNextLevel()
     {
         Game.LevelHandler.SwitchToNextLevel();
         Game.Advertisement.TryShowInterstitialAd();
     }
 
-    public void SwitchToNextLevel()
+    public static void SwitchToNextLevel()
     {
         Game.LevelHandler.SwitchToNextLevel();
     }
 
-    public void SwitchToLevel(int index)
+    public static void SwitchToLevel(int index)
     {
         Game.LevelHandler.SwitchToLevel(index);
         ReloadBaseLevel();
     }
 
-    public void ReloadLevelThroughAd()
+    public static void ReloadLevelThroughAd()
     {
         Game.Advertisement.TryShowInterstitialAd();
     }

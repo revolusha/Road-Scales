@@ -3,16 +3,15 @@ using UnityEngine.UI;
 
 public class ObstacleSign : MonoBehaviour
 {
-    [SerializeField] private LineRenderer _lineRenderer;
-    [SerializeField] private Image _image;
+    [SerializeField] private MeshRenderer _sign;
 
-    private Color _defaultLineColor;
     private Color _defaultImageColor;
+    private Indicator _indicator;
 
     private void OnEnable()
     {
-        _defaultImageColor = _image.color;
-        _defaultLineColor = _lineRenderer.endColor;
+        _indicator = GetComponentInChildren<Indicator>();
+        _defaultImageColor = _sign.material.color;
         ColorUpdate(0);
     }
 
@@ -20,8 +19,17 @@ public class ObstacleSign : MonoBehaviour
     {
         transparencyFactor = Mathf.Clamp01(transparencyFactor);
 
-        _image.color = new(_defaultImageColor.r, _defaultImageColor.g, _defaultImageColor.b, transparencyFactor);
-        _lineRenderer.startColor = new(_defaultLineColor.r, _defaultLineColor.g, _defaultLineColor.b, transparencyFactor);
-        _lineRenderer.endColor = _lineRenderer.startColor;
+        _sign.material.color = new(_defaultImageColor.r, _defaultImageColor.g, _defaultImageColor.b, transparencyFactor);
+
+        if (transparencyFactor < 1 )
+        {
+            if (_indicator.IsPlaying)
+                _indicator.StopBlinking();
+
+            return;
+        }
+        
+        if (_indicator.IsPlaying == false)
+            _indicator.RestartBlinking();
     }
 }
