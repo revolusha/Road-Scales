@@ -1,44 +1,39 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem.EnhancedTouch;
-using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public class PlayerTouchMovementInput : MonoBehaviour
 {
-    public const float StrafeLimit = 300;
-
     [SerializeField] private float _deadZone = .1f;
+
+    public const float StrafeLimit = 300;
 
     private float _strafeAmount = 0;
     private Vector2 _touchOrigin;
-    private Finger _finger;
+    private int _currentFingerId;
+    private bool _isTouched;
 
     public static Action<float> OnFingerMoved;
     public static Action OnFingerLost;
     public static Action OnFingerTouched;
 
-    private void OnEnable()
-    {
-        EnhancedTouchSupport.Enable();
-        ETouch.Touch.onFingerDown += OnFingerDown;
-        ETouch.Touch.onFingerUp += OnFingerUp;
-        ETouch.Touch.onFingerMove += OnFingerMove;
-    }
-
     private void Update()
     {
-        if (_finger == null)
-            return;
+        HandleInput();
 
-        MakeMove();
+        if (_isTouched)
+            MakeMove();
     }
 
-    private void OnDisable()
+    private void HandleInput()
     {
-        ETouch.Touch.onFingerDown -= OnFingerDown;
-        ETouch.Touch.onFingerUp -= OnFingerUp;
-        ETouch.Touch.onFingerMove -= OnFingerMove;
-        EnhancedTouchSupport.Disable();
+        Debug.Log("true");
+        if (Input.touches.Length < 1)
+            return;
+
+        if (_isTouched)
+            OnFingerMove();
+        else
+            OnFingerDown();
     }
 
     private void MakeMove()
@@ -46,42 +41,44 @@ public class PlayerTouchMovementInput : MonoBehaviour
         OnFingerMoved?.Invoke(_strafeAmount);
     }
 
-    private void OnFingerDown(Finger touchedFinger)
+    private void OnFingerDown()
     {
         Debug.Log("Down");
-        if (_finger == null)
-        {
-            _finger = touchedFinger;
-            _strafeAmount = 0;
-            _touchOrigin = touchedFinger.screenPosition;
-        }
+        Touch touch = Input.GetTouch(0);
 
+        _currentFingerId = touch.fingerId;
+        _strafeAmount = 0;
+        _touchOrigin = touch.position;
+        _isTouched = true;
         OnFingerTouched?.Invoke();
     }
 
-    private void OnFingerMove(Finger movedFinger)
+    private void OnFingerMove()
     {
         Debug.Log("Move");
-        if (movedFinger == _finger)
+        foreach (Touch touch in Input.touches)
         {
-            float fingerMoveAmount = _touchOrigin.x - _finger.screenPosition.x;
+            if (touch.fingerId != _currentFingerId)
+                continue;
+
+            float fingerMoveAmount = _touchOrigin.x - touch.position.x;
 
             _strafeAmount = Mathf.Clamp(fingerMoveAmount, -StrafeLimit, StrafeLimit);
 
             if (Mathf.Abs(_strafeAmount) < _deadZone)
                 _strafeAmount = 0;
+
+            return;
         }
+
+        OnFingerUp();
     }
 
-    private void OnFingerUp(Finger touchedFinger)
+    private void OnFingerUp()
     {
         Debug.Log("Up");
-        if (touchedFinger == _finger)
-        {
-            _finger = null;
-            _strafeAmount = 0;
-        }
-
+        _strafeAmount = 0;
+        _isTouched = false;
         OnFingerLost?.Invoke();
     }
 }
