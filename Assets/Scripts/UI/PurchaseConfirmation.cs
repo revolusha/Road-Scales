@@ -1,17 +1,11 @@
 using TMPro;
 using UnityEngine;
 
-public class PurchaseConfirmation : MonoBehaviour
+public class PurchaseConfirmation : DialogWindowBase
 {
-    [SerializeField] private GameObject[] _elementsToHide;
-    [SerializeField] private TextMeshProUGUI _costText;
+    [SerializeField] protected TextMeshProUGUI _costText;
 
     private ShopCell _desiredItemCell;
-
-    private void OnEnable()
-    {
-        HidePanel();
-    }
 
     public void BuyItem()
     {
@@ -23,17 +17,9 @@ public class PurchaseConfirmation : MonoBehaviour
         }
     }
 
-    public void HidePanel()
-    {
-        foreach (GameObject element in _elementsToHide)
-            element.SetActive(false);
-    }
-
     public void ShowPanel(ShopCell cell)
     {
-        foreach (GameObject element in _elementsToHide)
-            element.SetActive(true);
-
+        ShowPanel();
         _desiredItemCell = cell;
         _costText.text = cell.Item.Price.ToString();
     }
