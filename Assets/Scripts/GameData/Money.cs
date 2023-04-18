@@ -7,9 +7,11 @@ public class Money
 
     private int _balance;
     private int _lastCatchedCargo;
+    private int _scores;
 
     public int Balance => _balance;
     public int LastCatchedCargo => _lastCatchedCargo;
+    public int Score => _scores;
 
     public Action<int> OnRewardGained;
     public Action<int> OnMoneyBalanceChanged;
@@ -19,9 +21,10 @@ public class Money
         _balance = 0;
     }
 
-    public void LoadMoney(int amount)
+    public void LoadMoney(int amount, int score)
     {
         _balance = amount;
+        _scores = score;
     }
 
     public void DepositMoney(int amount)
@@ -49,6 +52,7 @@ public class Money
 
         _lastCatchedCargo = cargoCount;
         DepositMoney(reward);
+        _scores += cargoCount;
         OnMoneyBalanceChanged?.Invoke(_balance);
         OnRewardGained?.Invoke(reward);
     }

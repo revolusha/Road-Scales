@@ -50,7 +50,7 @@ public static class Loading
     private static void LoadGeneralData()
     {
         Game.LevelHandler.SwitchToLevel(_playerInfo.Level);
-        Game.Money.LoadMoney(_playerInfo.Coins);
+        Game.Money.LoadMoney(_playerInfo.Coins, _playerInfo.Score);
         Game.SoundPlayer.SetVolume(_playerInfo.SoundVolume);
         Game.MusicPlayer.SetVolume(_playerInfo.MusicVolume);
     }

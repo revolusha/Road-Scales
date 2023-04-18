@@ -38,6 +38,7 @@ public class Saving : MonoBehaviour
         PlayerInfo playerInfo = new();
         string jsonDataString = playerInfo.SaveToString();
 
+        Ranking.SetLeaderboardScore();
         PlayerAccount.SetPlayerData(jsonDataString);
     }
 }

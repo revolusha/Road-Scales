@@ -6,6 +6,7 @@ public class UiPanelsHandler : MonoBehaviour
     [SerializeField] private GameObject _finishPanel;
     [SerializeField] private GameObject _shopPanel;
     [SerializeField] private GameObject _settingsPanel;
+    [SerializeField] private GameObject _leaderBoard;
 
     private const string Trigger = "Show";
 
@@ -48,6 +49,12 @@ public class UiPanelsHandler : MonoBehaviour
         _settingsPanel.SetActive(true);
     }
 
+    public void ShowLeaderBoard()
+    {
+        HideStartUI();
+        _leaderBoard.SetActive(true);
+    }
+
     public void ShowStartUI()
     {
         for (int i = 0; i < _startPanelElements.Length; i++)
@@ -55,6 +62,7 @@ public class UiPanelsHandler : MonoBehaviour
 
         _shopPanel.SetActive(false);
         _settingsPanel.SetActive(false);
+        _leaderBoard.SetActive(false);
     }
 
     private void HideStartUI()

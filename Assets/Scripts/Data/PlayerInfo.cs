@@ -12,6 +12,8 @@ public class PlayerInfo
     public int ChoosenCargoSkin;
     public int ChoosenBasketSkin;
 
+    public int Score;
+
     public float SoundVolume;
     public float MusicVolume;
 
@@ -21,6 +23,7 @@ public class PlayerInfo
 
     public PlayerInfo()
     {
+        Score = Game.Money.Score;
         IsGotBadge = Game.IsLastLevelFinished;
         Level = Game.LevelHandler.CurrentLevelIndex;
         Coins = Game.Money.Balance;
