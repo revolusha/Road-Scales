@@ -23,6 +23,5 @@ public class RankingLine : MonoBehaviour
         _name.text = name;
         _score.text = score;
         _rank.text = rank.ToString();
-        _badge.SetBadge(rank);
     }
 }

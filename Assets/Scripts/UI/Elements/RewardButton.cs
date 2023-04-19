@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 public class RewardButton : MonoBehaviour
-{
+{    
     private void OnEnable()
     {
         if (Game.Advertisement.IsReadyToShowRewardAd == false)

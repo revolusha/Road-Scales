@@ -1,4 +1,5 @@
 using Agava.YandexGames;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,18 +7,22 @@ public class Ranking : MonoBehaviour
 {
     [SerializeField] private GameObject _content;
     [SerializeField] private RankingLine _template;
-
-    private RankingLine[] rankingLines;
+    [SerializeField] private UiPanelsHandler _uiPanelsHandler;
 
     private const string LeaderboardName = "ranking";
 
+    private RankingLine[] rankingLines;
+
     private void OnEnable()
     {
-        StartCoroutine(Initialize());
+        ActualizeLeaderboard();
     }
 
-    public static void SetLeaderboardScore()
+    public void SaveLeaderboardScore()
     {
+        if (PlayerAccount.IsAuthorized == false)
+            return;
+
         if (YandexGamesSdk.IsInitialized)
         {
             Leaderboard.GetPlayerEntry(LeaderboardName, onSuccessCallback: (result) =>
@@ -28,50 +33,43 @@ public class Ranking : MonoBehaviour
         }
     }
 
-    public void Authorize()
+    public void LoadLeaderboard()
     {
-        PlayerAccount.RequestPersonalProfileDataPermission();
-
-        if (!PlayerAccount.IsAuthorized)
+        if (PlayerAccount.IsAuthorized == false)
             PlayerAccount.Authorize();
+
+        Leaderboard.GetEntries(LeaderboardName, onSuccessCallback: HandleResponse, onErrorCallback: HandleError);
     }
 
-    private void LoadLeaderboard()
+    public void ActualizeLeaderboard()
     {
-        Leaderboard.GetEntries(LeaderboardName, (result) =>
-        {
-            if (rankingLines == null)
-                rankingLines = new RankingLine[result.entries.Length];
+        const int DelayAfterSave = 100;
 
-            for (int i = 0; i < rankingLines.Length; i++)
-            {
-                if (rankingLines[i] == null)
-                    rankingLines[i] = Instantiate(_template);
-
-                rankingLines[i].SetTexts(
-                    result.entries[i].player.publicName, 
-                    result.entries[i].formattedScore, 
-                    result.entries[i].rank);
-
-                //string name = result.entries[i].player.publicName;
-                //if (string.IsNullOrEmpty(name))
-                //    name = "Anonimus";
-
-                //_leaderNames[i].text = name;
-                //_scoreList[i].text = result.entries[i].formattedScore;
-                //_ranks[i].text = result.entries[i].rank.ToString();
-            }
-        });
-    }
-
-    private IEnumerator Initialize()
-    {
-#if !UNITY_WEBGL || UNITY_EDITOR
-        yield break;
-#endif
-        yield return YandexGamesSdk.Initialize();
-
-        Authorize();
+        SaveLeaderboardScore();
+        System.Threading.Thread.Sleep(DelayAfterSave);
         LoadLeaderboard();
+    }
+
+    private void HandleError(string message)
+    {
+        Debug.Log(message);
+    }
+
+    private void HandleResponse(LeaderboardGetEntriesResponse result)
+    {
+        if (rankingLines == null)
+            rankingLines = new RankingLine[result.entries.Length];
+
+        for (int i = 0; i < rankingLines.Length; i++)
+        {
+            if (rankingLines[i] == null)
+                rankingLines[i] = Instantiate(_template, _content.transform);
+
+            string name = result.entries[i].player.publicName;
+            if (string.IsNullOrEmpty(name))
+                name = "Anonymous";
+
+            rankingLines[i].SetTexts(name, result.entries[i].formattedScore, result.entries[i].rank);
+        }
     }
 }

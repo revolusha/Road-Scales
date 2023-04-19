@@ -20,7 +20,7 @@ public class Saving : MonoBehaviour
     {
         const string EmptyJsonDataString = "{}";
 
-        PlayerAccount.SetPlayerData(EmptyJsonDataString, onSuccessCallback: JavaScriptHandler.ReloadBrowserPage);
+        PlayerAccount.SetPlayerData(EmptyJsonDataString, onSuccessCallback: SdkAndJavascriptHandler.ReloadBrowserPage);
     }
 
     public void StartSaving()
@@ -38,7 +38,6 @@ public class Saving : MonoBehaviour
         PlayerInfo playerInfo = new();
         string jsonDataString = playerInfo.SaveToString();
 
-        Ranking.SetLeaderboardScore();
         PlayerAccount.SetPlayerData(jsonDataString);
     }
 }

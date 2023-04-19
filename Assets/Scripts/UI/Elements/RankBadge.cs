@@ -33,7 +33,7 @@ public class RankBadge : MonoBehaviour
                 break;
 
             default:
-                _image.color = new (0, 0, 0, 0);
+                _image.color = new(0, 0, 0, 0);
                 break;
         }
     }

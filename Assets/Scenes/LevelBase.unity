@@ -1797,7 +1797,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1237402793}
         m_TargetAssemblyTypeName: UiPanelsHandler, Assembly-CSharp
-        m_MethodName: ShowLeaderBoard
+        m_MethodName: TryShowLeaderboard
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2692,18 +2692,6 @@ MonoBehaviour:
       - m_Target: {fileID: 114574900}
         m_TargetAssemblyTypeName: DialogWindowBase, Assembly-CSharp
         m_MethodName: ShowPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 844221102}
-        m_TargetAssemblyTypeName: RewardButton, Assembly-CSharp
-        m_MethodName: CheckShowPermission
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5453,6 +5441,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 615218036883311841, guid: b2ad18edd5ec946458825ca46daa6d55, type: 3}
+      propertyPath: _uiPanelsHandler
+      value: 
+      objectReference: {fileID: 1237402793}
     - target: {fileID: 678011904710389354, guid: b2ad18edd5ec946458825ca46daa6d55, type: 3}
       propertyPath: _childRectTransformFromTemplate
       value: 
@@ -5674,6 +5666,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 476457924}
     m_Modifications:
+    - target: {fileID: 3075709466879941862, guid: a9145c7d20294464782a3d2c0421f89c, type: 3}
+      propertyPath: _button
+      value: 
+      objectReference: {fileID: 844221102}
     - target: {fileID: 3139657580579820172, guid: a9145c7d20294464782a3d2c0421f89c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 3

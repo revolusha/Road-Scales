@@ -65,6 +65,11 @@ public class UiPanelsHandler : MonoBehaviour
         _leaderBoard.SetActive(false);
     }
 
+    public void TryShowLeaderboard()
+    {
+        SdkAndJavascriptHandler.TryAuthorize(ShowLeaderBoard);
+    }
+
     private void HideStartUI()
     {
         for (int i = 0; i < _startPanelElements.Length; i++)

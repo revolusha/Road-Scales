@@ -32,9 +32,6 @@ public class Advertisement : MonoBehaviour
     {
         get
         {
-            if (_isAllowedShowingAd)
-                return true;
-
             _isReadyToShowRewardAd = Time.realtimeSinceStartup - _lastRewardTimeFromStartUp > IntervalBetweenRewardAd;
 
             return _isReadyToShowRewardAd;

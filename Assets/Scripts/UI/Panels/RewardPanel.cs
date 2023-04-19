@@ -1,8 +1,14 @@
+using UnityEngine;
+
 public class RewardPanel : DialogWindowBase
 {
+    [SerializeField] private RewardButton _button;
+
     private const int Reward = 300;
 
-    private bool _isRewardGained;
+    private static bool _isRewardGained;
+
+    public static bool IsRewardGained => _isRewardGained;
 
     private new void OnEnable()
     {
@@ -34,6 +40,7 @@ public class RewardPanel : DialogWindowBase
     {
         Game.Advertisement.ResetRewardTimer();
         _isRewardGained = true;
+        _button.CheckShowPermission();
     }
 
     private void OnRewardedClosedEvent()
@@ -42,5 +49,6 @@ public class RewardPanel : DialogWindowBase
             Game.Money.DepositMoney(Reward);
 
         HidePanel();
+        _button.CheckShowPermission();
     }
 }
