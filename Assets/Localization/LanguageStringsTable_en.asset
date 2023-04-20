@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: LanguageStringsTable_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 9957cbab8e6830e4c86b2eba1ab2d488, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 3708508049584160824
+  m_TableData:
+  - m_Id: 51280863232
+    m_Localized: Level {0}
+    m_Metadata:
+      m_Items:
+      - rid: 3708508049584160824
+  - m_Id: 123368366080
+    m_Localized: Ranking
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166552920064
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 210999959552
+    m_Localized: Shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 241849065472
+    m_Localized: Do you want to watch video to earn reward?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292465926144
+    m_Localized: Are you sure you want to buy skin?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 469771739136
+    m_Localized: You lose
+    m_Metadata:
+      m_Items: []
+  - m_Id: 497395425280
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 608842276864
+    m_Localized: Sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 678245425152
+    m_Localized: Delete All Progress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 697853796352
+    m_Localized: Are you sure you want to reset all game data?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2398262386688
+    m_Localized: You have earned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61635810287616
+    m_Localized: Buy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61713639792640
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3708508049584160824
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00e093f00b000000

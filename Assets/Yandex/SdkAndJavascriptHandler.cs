@@ -4,6 +4,8 @@ using System.Collections;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 public class SdkAndJavascriptHandler : MonoBehaviour
 {
@@ -18,7 +20,14 @@ public class SdkAndJavascriptHandler : MonoBehaviour
     }
     public static void ReloadBrowserPage()
     {
-        ReloadPage();
+        ReloadPage(); 
+    }
+
+    public static void SetLanguage()
+    {
+        string lang = YandexGamesSdk.Environment.i18n.lang;
+
+        _instance.StartCoroutine(InitializeLocalization());
     }
 
     public static void TryAuthorize(Action onAuthorizedSuccessfulEvent = null)
@@ -45,6 +54,13 @@ public class SdkAndJavascriptHandler : MonoBehaviour
         yield return YandexGamesSdk.Initialize();
 
         Authorize(onAuthorizedSuccessfulEvent);
+    }
+
+    private static IEnumerator InitializeLocalization()
+    {
+        yield return LocalizationSettings.InitializationOperation;
+
+        Debug.Log(LocalizationSettings.AvailableLocales.Locales);
     }
 }
 

@@ -3,6 +3,7 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     private bool _isLastLevelFinished;
+    private string _language;
 
     private Money _money;
     private LevelHandler _levelHandler;

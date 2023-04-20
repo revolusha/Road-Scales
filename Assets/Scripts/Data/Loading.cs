@@ -44,6 +44,7 @@ public static class Loading
         Game.Instance.SetLastLevelFlag(_playerInfo.IsGotBadge);
         LoadGeneralData();
         LoadSkinsData();
+        SdkAndJavascriptHandler.SetLanguage();
         OnLoadingFinished?.Invoke();
     }
 

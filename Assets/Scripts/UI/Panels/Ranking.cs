@@ -1,6 +1,4 @@
 using Agava.YandexGames;
-using System;
-using System.Collections;
 using UnityEngine;
 
 public class Ranking : MonoBehaviour
@@ -15,22 +13,17 @@ public class Ranking : MonoBehaviour
 
     private void OnEnable()
     {
-        ActualizeLeaderboard();
+        if (YandexGamesSdk.IsInitialized)
+            ActualizeLeaderboard();
     }
 
     public void SaveLeaderboardScore()
     {
-        if (PlayerAccount.IsAuthorized == false)
-            return;
-
-        if (YandexGamesSdk.IsInitialized)
+        Leaderboard.GetPlayerEntry(LeaderboardName, onSuccessCallback: (result) =>
         {
-            Leaderboard.GetPlayerEntry(LeaderboardName, onSuccessCallback: (result) =>
-            {
-                if (result == null || Game.Money.Score > result.score)
-                    Leaderboard.SetScore(LeaderboardName, Game.Money.Score);
-            });
-        }
+            if (result == null || Game.Money.Score > result.score)
+                Leaderboard.SetScore(LeaderboardName, Game.Money.Score);
+        });
     }
 
     public void LoadLeaderboard()
@@ -44,6 +37,9 @@ public class Ranking : MonoBehaviour
     public void ActualizeLeaderboard()
     {
         const int DelayAfterSave = 100;
+
+        if (PlayerAccount.IsAuthorized == false || YandexGamesSdk.IsInitialized == false)
+            return;
 
         SaveLeaderboardScore();
         System.Threading.Thread.Sleep(DelayAfterSave);

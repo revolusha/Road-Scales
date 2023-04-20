@@ -98,8 +98,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterMode: 2
   disablePixelLights: 1
-  textureSize: 256
-  clipPlaneOffset: 0.07
+  textureSize: 128
+  clipPlaneOffset: 0.1
   reflectLayers:
     serializedVersion: 2
     m_Bits: 4294967295
