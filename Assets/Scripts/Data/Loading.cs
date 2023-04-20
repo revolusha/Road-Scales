@@ -5,32 +5,39 @@ using UnityEngine;
 
 public static class Loading
 {
+    private static bool _isLoadingDone = false;
+
     private static PlayerInfo _playerInfo;
 
-    public static Action OnLoadingFinished;
-
-    private static readonly Action<string> OnDataStringGot = HandleLoadedData;
-    private static readonly Action<string> OnDataStringFailed = HandleFailedLoading;
+    public static Action OnFullLoadingFinished;
 
     public static IEnumerator Load()
     {
 #if !UNITY_WEBGL || UNITY_EDITOR
-        OnLoadingFinished?.Invoke();
+        FinishLoading();
         yield break;
 #endif
         yield return YandexGamesSdk.Initialize();
 
-        PlayerAccount.GetPlayerData(OnDataStringGot, OnDataStringFailed);
+        PlayerAccount.GetPlayerData(HandleLoadedData, HandleFailedLoading);
     }
 
-    private static void HandleFailedLoading()
+    public static void FinishLoading()
     {
-        OnLoadingFinished?.Invoke();
+        _isLoadingDone = true;
+        TryCompleteLoading();
+    }
+
+    public static void TryCompleteLoading()
+    {
+        Debug.Log("loaded " + _isLoadingDone + " || localized " + SdkAndJavascriptHandler.IsLocalized);
+        if (_isLoadingDone && SdkAndJavascriptHandler.IsLocalized)
+            OnFullLoadingFinished?.Invoke();
     }
 
     private static void HandleFailedLoading(string _)
     {
-        HandleFailedLoading();
+        FinishLoading();
     }
 
     private static void HandleLoadedData(string data)
@@ -44,8 +51,7 @@ public static class Loading
         Game.Instance.SetLastLevelFlag(_playerInfo.IsGotBadge);
         LoadGeneralData();
         LoadSkinsData();
-        SdkAndJavascriptHandler.SetLanguage();
-        OnLoadingFinished?.Invoke();
+        FinishLoading();
     }
 
     private static void LoadGeneralData()

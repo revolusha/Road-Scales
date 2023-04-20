@@ -8,14 +8,14 @@ public class LevelReloader : MonoBehaviour
     public static void ReloadBaseLevel()
     {
         SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
-        Loading.OnLoadingFinished -= ReloadBaseLevel;
+        Loading.OnFullLoadingFinished -= ReloadBaseLevel;
     }
 
     public static void LoadDefaultLevel()
     {
         Game.LevelHandler.SwitchToLevel(0);
         ReloadBaseLevel();
-        Loading.OnLoadingFinished -= LoadDefaultLevel;
+        Loading.OnFullLoadingFinished -= LoadDefaultLevel;
     }
 
     public static void LoadNextLevelAfterAd<T>(T _)

@@ -11,10 +11,17 @@ public class SdkAndJavascriptHandler : MonoBehaviour
 {
     [DllImport("__Internal")] private static extern void ReloadPage();
 
+    private static bool _isLocalized;
+
     private static SdkAndJavascriptHandler _instance;
+
+    private readonly static string[] _languageIndexes = { "en", "ru", "tr" };
+
+    public static bool IsLocalized => _isLocalized;
 
     private void Awake()
     {
+        _isLocalized = false;
         YandexGamesSdk.CallbackLogging = true;
         _instance = this;
     }
@@ -25,8 +32,6 @@ public class SdkAndJavascriptHandler : MonoBehaviour
 
     public static void SetLanguage()
     {
-        string lang = YandexGamesSdk.Environment.i18n.lang;
-
         _instance.StartCoroutine(InitializeLocalization());
     }
 
@@ -36,6 +41,12 @@ public class SdkAndJavascriptHandler : MonoBehaviour
             onAuthorizedSuccessfulEvent?.Invoke();
 
         _instance.StartCoroutine(InitializeAuthorization(onAuthorizedSuccessfulEvent));
+    }
+
+    public static void FinishLocalization()
+    {
+        _isLocalized = true;
+        Loading.TryCompleteLoading();
     }
 
     private static void Authorize(Action onAuthorizedSuccessfulEvent)
@@ -60,7 +71,21 @@ public class SdkAndJavascriptHandler : MonoBehaviour
     {
         yield return LocalizationSettings.InitializationOperation;
 
-        Debug.Log(LocalizationSettings.AvailableLocales.Locales);
+#if !UNITY_WEBGL || UNITY_EDITOR
+        FinishLocalization();
+        yield break;
+#endif
+        yield return YandexGamesSdk.Initialize();
+
+        string locale = YandexGamesSdk.Environment.i18n.lang;
+
+        for (int i = 0; i < _languageIndexes.Length; i++)
+        {
+            if (_languageIndexes[i] == locale)
+                LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.GetLocale(locale);
+        }
+
+        FinishLocalization();
     }
 }
 

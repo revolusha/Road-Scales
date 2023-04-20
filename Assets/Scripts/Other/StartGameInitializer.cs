@@ -14,13 +14,13 @@ public class StartGameInitializer : MonoBehaviour
 
     private void Start()
     {
-        Loading.OnLoadingFinished += LoadLevel;
+        Loading.OnFullLoadingFinished += LoadLevel;
         StartCoroutine(Loading.Load());
     }
 
     private void OnDisable()
     {
-        Loading.OnLoadingFinished -= LoadLevel;
+        Loading.OnFullLoadingFinished -= LoadLevel;
     }
 
     private void LoadLevel()
@@ -36,8 +36,11 @@ public class StartGameInitializer : MonoBehaviour
         Game.LevelHandler.SetLevelsPool(_levelsPool);
 
 #if !UNITY_WEBGL || UNITY_EDITOR
+        SdkAndJavascriptHandler.SetLanguage();
         yield break;
 #endif
         yield return YandexGamesSdk.Initialize();
+
+        SdkAndJavascriptHandler.SetLanguage();
     }
 }
