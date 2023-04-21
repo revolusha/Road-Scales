@@ -18,6 +18,9 @@ public class PlayerCharacterMoving : MonoBehaviour
         PlayerMouseMovementInput.OnMouseDragged += AffectToTargetPosition;
         PlayerMouseMovementInput.OnMouseReleased += ResetStartAffectValue;
         PlayerMouseMovementInput.OnMouseClicked += SetStartAffectValue;
+        PlayerKeyboardMovementInput.OnButtonHold += AffectToTargetPosition;
+        PlayerKeyboardMovementInput.OnButtonReleased += ResetStartAffectValue;
+        PlayerKeyboardMovementInput.OnButtonDown += SetStartAffectValue;
     }
 
     private void Update()
@@ -34,6 +37,9 @@ public class PlayerCharacterMoving : MonoBehaviour
         PlayerMouseMovementInput.OnMouseDragged -= AffectToTargetPosition;
         PlayerMouseMovementInput.OnMouseReleased -= ResetStartAffectValue;
         PlayerMouseMovementInput.OnMouseClicked -= SetStartAffectValue;
+        PlayerKeyboardMovementInput.OnButtonHold -= AffectToTargetPosition;
+        PlayerKeyboardMovementInput.OnButtonReleased -= ResetStartAffectValue;
+        PlayerKeyboardMovementInput.OnButtonDown -= SetStartAffectValue;
     }
 
     private void SetStartAffectValue()

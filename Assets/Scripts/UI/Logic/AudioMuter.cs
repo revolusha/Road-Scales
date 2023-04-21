@@ -1,57 +1,76 @@
+using System;
 using UnityEngine;
 
 public class AudioMuter : MonoBehaviour
 {
-    [SerializeField] private GameObject _muteSoundButton;
-    [SerializeField] private GameObject _unmuteSoundButton;
-    [SerializeField] private GameObject _muteMusicButton;
-    [SerializeField] private GameObject _unmuteMusicButton;
+    private static float _lastSoundVolume = .7f;
+    private static float _lastMusicVolume = .7f;
+    private static bool _isSoundMuted;
+    private static bool _isMusicMuted;
 
-    private float _lastSoundVolume = .7f;
-    private float _lastMusicVolume = .7f;
+    public static Action OnVolumeChanged;
+
+    public static bool IsMusicMuted => _isMusicMuted;
+    public static bool IsSoundMuted => _isSoundMuted;
 
     private void Start()
     {
         if (Game.SoundPlayer.Volume == 0)
         {
             MuteSound();
-            _lastSoundVolume = .7f;
+        }
+        else
+        {
+            UnmuteSound();
+            _lastSoundVolume = Game.SoundPlayer.Volume;
         }
 
         if (Game.MusicPlayer.Volume == 0)
         {
             MuteMusic();
-            _lastMusicVolume = .7f;
+        }
+        else
+        {
+            UnmuteMusic();
+            _lastMusicVolume = Game.MusicPlayer.Volume;
         }
     }
 
-    public void MuteMusic()
+    public static void MuteMusic(bool isStayInFocus = true)
     {
+        if (isStayInFocus)
+            _isMusicMuted = true;
+
         _lastMusicVolume = Game.MusicPlayer.Volume;
         Game.MusicPlayer.SetVolume(0);
-        _muteMusicButton.SetActive(false);
-        _unmuteMusicButton.SetActive(true);
+        OnVolumeChanged?.Invoke();
     }
 
-    public void UnmuteMusic()
+    public static void UnmuteMusic(bool isStayInFocus = true)
     {
+        if (isStayInFocus)
+            _isMusicMuted = false;
+
         Game.MusicPlayer.SetVolume(_lastMusicVolume);
-        _unmuteMusicButton.SetActive(false);
-        _muteMusicButton.SetActive(true);
+        OnVolumeChanged?.Invoke();
     }
 
-    public void MuteSound()
+    public static void MuteSound(bool isStayInFocus = true)
     {
+        if (isStayInFocus)
+            _isSoundMuted = true;
+
         _lastSoundVolume = Game.SoundPlayer.Volume;
         Game.SoundPlayer.SetVolume(0);
-        _muteSoundButton.SetActive(false);
-        _unmuteSoundButton.SetActive(true);
+        OnVolumeChanged?.Invoke();
     }
 
-    public void UnmuteSound()
+    public static void UnmuteSound(bool isStayInFocus = true)
     {
+        if (isStayInFocus)
+            _isSoundMuted = false;
+
         Game.SoundPlayer.SetVolume(_lastSoundVolume);
-        _unmuteSoundButton.SetActive(false);
-        _muteSoundButton.SetActive(true);
+        OnVolumeChanged?.Invoke();
     }
 }

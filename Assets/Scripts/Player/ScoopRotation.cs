@@ -20,6 +20,9 @@ public class ScoopRotation : MonoBehaviour
         PlayerMouseMovementInput.OnMouseDragged += AffectRotation;
         PlayerMouseMovementInput.OnMouseReleased += ResetStartAffectValue;
         PlayerMouseMovementInput.OnMouseClicked += SetStartAffectValue;
+        PlayerKeyboardMovementInput.OnButtonHold += AffectRotation;
+        PlayerKeyboardMovementInput.OnButtonReleased += ResetStartAffectValue;
+        PlayerKeyboardMovementInput.OnButtonDown += SetStartAffectValue;
     }
 
     private void Update()
@@ -36,6 +39,9 @@ public class ScoopRotation : MonoBehaviour
         PlayerMouseMovementInput.OnMouseDragged -= AffectRotation;
         PlayerMouseMovementInput.OnMouseReleased -= ResetStartAffectValue;
         PlayerMouseMovementInput.OnMouseClicked -= SetStartAffectValue;
+        PlayerKeyboardMovementInput.OnButtonHold -= AffectRotation;
+        PlayerKeyboardMovementInput.OnButtonReleased -= ResetStartAffectValue;
+        PlayerKeyboardMovementInput.OnButtonDown -= SetStartAffectValue;
     }
 
     private void SetStartAffectValue()

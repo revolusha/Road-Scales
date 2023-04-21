@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1351827456788158120}
   - component: {fileID: 8047115227206284562}
   - component: {fileID: 2779308735322820192}
+  - component: {fileID: 8936417061109470898}
+  - component: {fileID: 4165753822080815517}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -61,6 +63,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a8d55f6b684c8748b89ffe9d00b6b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8936417061109470898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351827456788158121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7748dff956f349d479f0c722c2c88d7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4165753822080815517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351827456788158121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c9d347a4ff5c27458d85bd391153651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _muteSoundButton: {fileID: 0}
+  _unmuteSoundButton: {fileID: 0}
+  _muteMusicButton: {fileID: 0}
+  _unmuteMusicButton: {fileID: 0}
 --- !u!1 &1794310919120843958
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,7 +30,6 @@ public static class Loading
 
     public static void TryCompleteLoading()
     {
-        Debug.Log("loaded " + _isLoadingDone + " || localized " + SdkAndJavascriptHandler.IsLocalized);
         if (_isLoadingDone && SdkAndJavascriptHandler.IsLocalized)
             OnFullLoadingFinished?.Invoke();
     }
