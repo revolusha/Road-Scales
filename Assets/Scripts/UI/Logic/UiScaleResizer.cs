@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,13 +7,16 @@ using UnityEngine.UI;
 
 public class UiScaleResizer : MonoBehaviour
 {
-    [SerializeField] private float _defaultHeight = 800;
-    [SerializeField] private float _defaultWidth = 1200;
+    [SerializeField] private float _defaultHeight = 1000;
+    [SerializeField] private float _defaultWidth = 1000;
+    [SerializeField] private float _resolutionWideFactorThreshold = 2.1f;
     [SerializeField] private float _checkResolutionTimeInterval = 2f;
 
     private Vector2 _resolution;
     private CanvasScaler _canvasScaler;
     private Coroutine _coroutine;
+
+    public static Action OnScreenSizeChanged;
 
     private void Awake()
     {
@@ -22,15 +26,20 @@ public class UiScaleResizer : MonoBehaviour
         RestartCoroutine();
     }
 
+    private void Start()
+    {
+        OnScreenSizeChanged?.Invoke();
+    }
+
     private void ResizeUI()
     {
-        float heightFactor = _defaultHeight / Screen.height;
-        float widthFactor = _defaultWidth / Screen.width;
+        float heightFactor = Screen.height / _defaultHeight;
+        float widthFactor = Screen.width / _defaultWidth;
 
-        if (heightFactor >= widthFactor)
-            _canvasScaler.scaleFactor = 1 / heightFactor;
+        if (Screen.width > Screen.height)
+            _canvasScaler.scaleFactor = heightFactor;
         else
-            _canvasScaler.scaleFactor = 1 / widthFactor;
+            _canvasScaler.scaleFactor = widthFactor;
 
         _resolution.x = Screen.width;
         _resolution.y = Screen.height;
@@ -49,7 +58,7 @@ public class UiScaleResizer : MonoBehaviour
         if (_resolution.x != Screen.width || _resolution.y != Screen.height)
         {
             ResizeUI();
-            MovingByScreenSizeCamera.SetCameraSettings();
+            OnScreenSizeChanged?.Invoke();
         }
 
         yield return new WaitForSeconds(_checkResolutionTimeInterval);

@@ -7,19 +7,26 @@ public class AudioMuterButtons : MonoBehaviour
     [SerializeField] private GameObject _muteMusicButton;
     [SerializeField] private GameObject _unmuteMusicButton;
 
+    private static AudioMuterButtons _instance;
+
+    public static AudioMuterButtons Instance => _instance;
+
     private void OnEnable()
     {
-        AudioMuter.OnVolumeChanged += UpdateButtonVisibility;
-    }
-
-    private void Start()
-    {
+        _instance = this;
         UpdateButtonVisibility();
+        AudioMuter.OnVolumeChanged += UpdateButtonVisibility;
     }
 
     private void OnDisable()
     {
         AudioMuter.OnVolumeChanged -= UpdateButtonVisibility;
+    }
+
+    public static void UpdateButtonVisibility()
+    {
+        UpdateMusicButtonVisibility();
+        UpdateSoundButtonVisibility();
     }
 
     public void MuteMusic()
@@ -46,21 +53,15 @@ public class AudioMuterButtons : MonoBehaviour
         UpdateSoundButtonVisibility();
     }
 
-    private void UpdateButtonVisibility()
+    private static void UpdateSoundButtonVisibility()
     {
-        UpdateMusicButtonVisibility();
-        UpdateSoundButtonVisibility();
+        _instance._muteSoundButton.SetActive(AudioMuter.IsSoundMuted == false);
+        _instance._unmuteSoundButton.SetActive(AudioMuter.IsSoundMuted);
     }
 
-    private void UpdateSoundButtonVisibility()
+    private static void UpdateMusicButtonVisibility()
     {
-        _muteSoundButton.SetActive(AudioMuter.IsSoundMuted == false);
-        _unmuteSoundButton.SetActive(AudioMuter.IsSoundMuted);
-    }
-
-    private void UpdateMusicButtonVisibility()
-    {
-        _muteMusicButton.SetActive(AudioMuter.IsMusicMuted == false);
-        _unmuteMusicButton.SetActive(AudioMuter.IsMusicMuted);
+        _instance._muteMusicButton.SetActive(AudioMuter.IsMusicMuted == false);
+        _instance._unmuteMusicButton.SetActive(AudioMuter.IsMusicMuted);
     }
 }

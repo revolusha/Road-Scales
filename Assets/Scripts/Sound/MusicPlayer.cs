@@ -15,7 +15,6 @@ public class MusicPlayer : AudioPlayer
     {
         base.OnEnable();
         PlayMusic();
-        _isReady = true;
     }
 
     public void PlayMusic()

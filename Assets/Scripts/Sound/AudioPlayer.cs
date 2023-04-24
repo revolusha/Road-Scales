@@ -4,11 +4,10 @@ public class AudioPlayer : MonoBehaviour
 {
     private const float StartVolume = .7f;
 
+    private float _lastVolume = .7f;
+
     protected AudioSource _audio;
 
-    protected bool _isReady = false;
-
-    public bool IsReady => _isReady;
     public float Volume => _audio.volume;
     public AudioSource AudioSource => _audio;
 
@@ -16,11 +15,18 @@ public class AudioPlayer : MonoBehaviour
     {
         _audio = GetComponent<AudioSource>();
         _audio.volume = StartVolume;
-        _isReady = true;
     }
 
     public void SetVolume(float value)
     {
+        if (_audio.volume > 0)
+            _lastVolume = _audio.volume;
+
         _audio.volume = value;
+    }
+
+    public void SetLastVolume()
+    {
+        _audio.volume = _lastVolume;
     }
 }
