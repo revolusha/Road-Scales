@@ -1,6 +1,5 @@
 using Agava.YandexGames;
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class Advertisement : MonoBehaviour
@@ -13,8 +12,8 @@ public class Advertisement : MonoBehaviour
     private bool _isAllowedShowingAd = false;
     private bool _isReadyToShowRewardAd = false;
 
-    public static Action OnRewardAdShowedSuccessful;
-    public static Action OnRewardAdClosed;
+    public static Action OnRewardAdClosedSuccessful;
+    public static Action OnRewardAdClosedFailed;
 
     public bool IsAllowedShowingAd
     {
@@ -41,20 +40,18 @@ public class Advertisement : MonoBehaviour
     private void OnEnable()
     {
         _lastRewardTimeFromStartUp = 0;
-        OnRewardAdShowedSuccessful += ResetRewardTimer;
-        OnRewardAdClosed += UnpauseAfterReward;
+        OnRewardAdClosedSuccessful += ResetRewardTimer;
     }
 
     private void OnDisable()
     {
-        OnRewardAdShowedSuccessful -= ResetRewardTimer;
-        OnRewardAdClosed -= UnpauseAfterReward;
+        OnRewardAdClosedSuccessful -= ResetRewardTimer;
     }
 
     public void TryShowInterstitialAd()
     {
         if (Game.Advertisement.IsAllowedShowingAd)
-            StartCoroutine(ShowInterstitialAd());
+            SdkAndJavascriptHandler.CheckSdkConnection(ShowInterstitialAd, LevelReloader.ReloadBaseLevel);
         else
             LevelReloader.ReloadBaseLevel();
     }
@@ -66,9 +63,9 @@ public class Advertisement : MonoBehaviour
         DelayRewardAd(EndShowDelay);
 
         if (Game.Advertisement.IsAllowedShowingAd)
-            StartCoroutine(ShowRewardAd());
+            SdkAndJavascriptHandler.CheckSdkConnection(ShowRewardAd);
         else
-            OnRewardAdClosed?.Invoke();
+            OnRewardAdClosedFailed?.Invoke();
     }
 
     public void DelayRewardAd(float seconds)
@@ -81,35 +78,18 @@ public class Advertisement : MonoBehaviour
         _lastRewardTimeFromStartUp = Time.realtimeSinceStartup;
     }
 
-    private void UnpauseAfterReward()
+    private void ShowInterstitialAd()
     {
-        FocusHandler.Unpause();
-    }
-
-    private IEnumerator ShowInterstitialAd()
-    {
-#if !UNITY_WEBGL || UNITY_EDITOR
-        LevelReloader.ReloadBaseLevel();
-        yield break;
-#endif
-        yield return YandexGamesSdk.Initialize();
-
         InterstitialAd.Show(
             onCloseCallback: LevelReloader.LoadNextLevelAfterAd,
             onErrorCallback: LevelReloader.LoadNextLevelAfterAd,
             onOfflineCallback: LevelReloader.ReloadBaseLevel);
     }
 
-    private IEnumerator ShowRewardAd()
+    private void ShowRewardAd()
     {
-#if !UNITY_WEBGL || UNITY_EDITOR
-        yield break;
-#endif
-        yield return YandexGamesSdk.Initialize();
-
-        FocusHandler.Pause();
         VideoAd.Show(
-            onRewardedCallback: OnRewardAdShowedSuccessful,
-            onCloseCallback: OnRewardAdClosed);
+            onRewardedCallback: OnRewardAdClosedSuccessful,
+            onCloseCallback: OnRewardAdClosedFailed);
     }
 }

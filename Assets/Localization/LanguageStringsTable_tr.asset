@@ -77,6 +77,36 @@ MonoBehaviour:
     m_Localized: Almak
     m_Metadata:
       m_Items: []
+  - m_Id: 1843234117771264
+    m_Localized: "Seviyeyi ge\xE7mek i\xE7in biti\u015F \xE7izgisine ula\u015Fman\u0131z
+      gerekiyor.\nNe kadar \xE7ok k\xFCp, o kadar \xE7ok jeton al\u0131rs\u0131n\u0131z."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1843292531843072
+    m_Localized: "A, D tu\u015Flar\u0131, Sol, Sa\u011F oklar, parmak veya fareyi
+      kullanarak kontrol etti\u011Finiz bir kova ile k\xFCpleri sepetlere toplayabilirsiniz."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1843314862317568
+    m_Localized: "Terazilerin k\u0131r\u0131lmamas\u0131 i\xE7in sepetleri a\u015F\u0131r\u0131
+      y\xFCklememeye \xE7al\u0131\u015F\u0131n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1843329169088512
+    m_Localized: "Sepetin sudaki kayalara \xE7arpmas\u0131n\u0131 \xF6nlemek i\xE7in
+      teraziyi sepet kayan\u0131n \xFCzerinden ge\xE7ecek \u015Fekilde dengeleyin."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1843344386023424
+    m_Localized: "Madeni paralar kar\u015F\u0131l\u0131\u011F\u0131nda karakter,
+      sepetler veya k\xFCpler i\xE7in kaplamalar sat\u0131n alabilirsiniz.\n\n\u0130yi
+      oyunlar!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1814110577876992
+    m_Localized: Tamam
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

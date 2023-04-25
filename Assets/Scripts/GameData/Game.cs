@@ -3,7 +3,7 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     private bool _isLastLevelFinished;
-    private string _language;
+    private bool _isTutorialFinished;
 
     private Money _money;
     private LevelHandler _levelHandler;
@@ -20,6 +20,7 @@ public class Game : MonoBehaviour
     public static LevelHandler LevelHandler => Instance._levelHandler;
     public static Advertisement Advertisement => Instance._advertisement;
     public static bool IsLastLevelFinished => Instance._isLastLevelFinished;
+    public static bool IsTutorialFinished => Instance._isTutorialFinished;
     public static bool IsReady { get; private set; }
 
     private void OnEnable()
@@ -35,26 +36,36 @@ public class Game : MonoBehaviour
         _money = new Money();
         _levelHandler = new LevelHandler();
         _levelHandler.OnLastLevelFinished += OnLastLevelFinishedEvent;
+        TutorialComponentsHandler.OnTutorialFinished += OnTutorialFinishedEvent;
         IsReady = true;
     }
 
     private void OnDisable()
     {
         _levelHandler.OnLastLevelFinished -= OnLastLevelFinishedEvent;
+        TutorialComponentsHandler.OnTutorialFinished -= OnTutorialFinishedEvent;
     }
 
-    public void SetLastLevelFlag(bool isFinished)
+    public void SetFlags(bool isAllLevelsFinished, bool isTutorialFinished)
     {
-        _isLastLevelFinished = isFinished;
+        _isTutorialFinished = isTutorialFinished;
+        _isLastLevelFinished = isAllLevelsFinished;
 
-        if (isFinished == true)
+        if (isTutorialFinished == true)
+            TutorialComponentsHandler.OnTutorialFinished -= OnTutorialFinishedEvent;
+        if (isAllLevelsFinished == true)
             _levelHandler.OnLastLevelFinished -= OnLastLevelFinishedEvent;
     }
 
     private void OnLastLevelFinishedEvent()
     {
-        SetLastLevelFlag(true);
-
+        _isLastLevelFinished = true;
         _levelHandler.OnLastLevelFinished -= OnLastLevelFinishedEvent;
+    }
+
+    private void OnTutorialFinishedEvent()
+    {
+        _isTutorialFinished = true;
+        TutorialComponentsHandler.OnTutorialFinished -= OnTutorialFinishedEvent;
     }
 }

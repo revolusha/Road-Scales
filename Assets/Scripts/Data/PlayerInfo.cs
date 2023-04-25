@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInfo
 {
     public bool IsGotBadge;
+    public bool IsTutorialFinished;
 
     public int Level;
     public int Coins;
@@ -25,6 +26,7 @@ public class PlayerInfo
     {
         Score = Game.Money.Score;
         IsGotBadge = Game.IsLastLevelFinished;
+        IsTutorialFinished = Game.IsTutorialFinished;
         Level = Game.LevelHandler.CurrentLevelIndex;
         Coins = Game.Money.Balance;
         ChoosenPlayerSkin = Game.SkinHandler.ChoosenPlayerSkinIndex;

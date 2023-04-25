@@ -1,24 +1,17 @@
 using Agava.YandexGames;
 using System;
-using System.Collections;
 using UnityEngine;
 
 public static class Loading
 {
     private static bool _isLoadingDone = false;
-
+    
     private static PlayerInfo _playerInfo;
 
     public static Action OnFullLoadingFinished;
 
-    public static IEnumerator Load()
+    public static void Load()
     {
-#if !UNITY_WEBGL || UNITY_EDITOR
-        FinishLoading();
-        yield break;
-#endif
-        yield return YandexGamesSdk.Initialize();
-
         PlayerAccount.GetPlayerData(HandleLoadedData, HandleFailedLoading);
     }
 
@@ -47,7 +40,7 @@ public static class Loading
             HandleFailedLoading("");
 
         _playerInfo = JsonUtility.FromJson<PlayerInfo>(data);
-        Game.Instance.SetLastLevelFlag(_playerInfo.IsGotBadge);
+        Game.Instance.SetFlags(_playerInfo.IsGotBadge, _playerInfo.IsTutorialFinished);
         LoadGeneralData();
         LoadSkinsData();
         FinishLoading();

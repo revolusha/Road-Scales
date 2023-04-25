@@ -323,6 +323,7 @@ GameObject:
   - component: {fileID: 3139657580579820174}
   - component: {fileID: 3139657580579820173}
   - component: {fileID: 3139657580579820172}
+  - component: {fileID: 6204519993526142466}
   m_Layer: 5
   m_Name: CancelButton
   m_TagString: Untagged
@@ -469,6 +470,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6204519993526142466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3139657580579820170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1983c8c297b9db42b7f6982f186cac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3139657580736626706
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,6 +771,7 @@ GameObject:
   - component: {fileID: 3139657580948730758}
   - component: {fileID: 3139657580948730757}
   - component: {fileID: 8471386486127960227}
+  - component: {fileID: 3698173359725102539}
   m_Layer: 5
   m_Name: WatchButton
   m_TagString: Untagged
@@ -905,6 +919,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _keyCodesToInvokeButton: 0d0000000f010000
+--- !u!114 &3698173359725102539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3139657580948730755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1983c8c297b9db42b7f6982f186cac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3139657581040484509
 GameObject:
   m_ObjectHideFlags: 0

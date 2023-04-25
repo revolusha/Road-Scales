@@ -76,6 +76,39 @@ MonoBehaviour:
     m_Localized: Cancel
     m_Metadata:
       m_Items: []
+  - m_Id: 1814110577876992
+    m_Localized: Okay
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1843234117771264
+    m_Localized: 'To pass the level, you need to reach the finish line.
+
+      The
+      more cubes, the more coins you get.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1843292531843072
+    m_Localized: You can collect cubes into baskets with a bucket that you control
+      using the A, D keys, Left, Right arrows, finger or mouse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1843314862317568
+    m_Localized: Try not to overload the baskets so that the scales do not break.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1843329169088512
+    m_Localized: To prevent the basket from breaking on rocks in the water, balance
+      the scale so that the basket passes over the rock.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1843344386023424
+    m_Localized: 'For coins you can buy skins for the character, baskets or cubes
+
+
+      Have
+      a good game!'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

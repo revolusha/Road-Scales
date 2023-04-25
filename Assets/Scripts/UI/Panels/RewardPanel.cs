@@ -13,14 +13,14 @@ public class RewardPanel : DialogWindowBase
     private new void OnEnable()
     {
         base.OnEnable();
-        Advertisement.OnRewardAdClosed += OnRewardedClosedEvent;
-        Advertisement.OnRewardAdShowedSuccessful += OnRewardedSuccessEvent;
+        Advertisement.OnRewardAdClosedFailed += OnRewardedClosedEvent;
+        Advertisement.OnRewardAdClosedSuccessful += OnRewardedSuccessEvent;
     }
 
     private void OnDisable()
     {
-        Advertisement.OnRewardAdClosed -= OnRewardedClosedEvent;
-        Advertisement.OnRewardAdShowedSuccessful -= OnRewardedSuccessEvent;
+        Advertisement.OnRewardAdClosedFailed -= OnRewardedClosedEvent;
+        Advertisement.OnRewardAdClosedSuccessful -= OnRewardedSuccessEvent;
     }
 
     public void RequestReward()

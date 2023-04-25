@@ -1,5 +1,3 @@
-using Agava.YandexGames;
-using System.Collections;
 using UnityEngine;
 
 public class StartGameInitializer : MonoBehaviour
@@ -9,13 +7,13 @@ public class StartGameInitializer : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(Initialize());
+        Initialize();
     }
 
     private void Start()
     {
         Loading.OnFullLoadingFinished += LoadLevel;
-        StartCoroutine(Loading.Load());
+        SdkAndJavascriptHandler.CheckSdkConnection(Loading.Load, Loading.FinishLoading);
     }
 
     private void OnDisable()
@@ -28,19 +26,12 @@ public class StartGameInitializer : MonoBehaviour
         LevelReloader.ReloadBaseLevel();
     }
 
-    private IEnumerator Initialize()
+    private void Initialize()
     {        
         GameObject gameData = Instantiate(_gameDataTemplate);
 
         DontDestroyOnLoad(gameData);
         Game.LevelHandler.SetLevelsPool(_levelsPool);
-
-#if !UNITY_WEBGL || UNITY_EDITOR
-        SdkAndJavascriptHandler.SetLanguage();
-        yield break;
-#endif
-        yield return YandexGamesSdk.Initialize();
-
         SdkAndJavascriptHandler.SetLanguage();
     }
 }

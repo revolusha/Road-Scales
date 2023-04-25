@@ -3,8 +3,6 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
 public class SdkAndJavascriptHandler : MonoBehaviour
@@ -25,6 +23,7 @@ public class SdkAndJavascriptHandler : MonoBehaviour
         YandexGamesSdk.CallbackLogging = true;
         _instance = this;
     }
+
     public static void ReloadBrowserPage()
     {
         ReloadPage(); 
@@ -32,15 +31,17 @@ public class SdkAndJavascriptHandler : MonoBehaviour
 
     public static void SetLanguage()
     {
-        _instance.StartCoroutine(InitializeLocalization());
+        CheckSdkConnection(InitializeLocalization, FinishLocalization);
     }
 
     public static void TryAuthorize(Action onAuthorizedSuccessfulEvent = null)
     {
-        if (PlayerAccount.IsAuthorized)
-            onAuthorizedSuccessfulEvent?.Invoke();
+        bool isAuthorized = false;
 
-        _instance.StartCoroutine(InitializeAuthorization(onAuthorizedSuccessfulEvent));
+        CheckSdkConnection(() => { isAuthorized = true; });
+
+        if (isAuthorized)
+            Authorize(onAuthorizedSuccessfulEvent);
     }
 
     public static void FinishLocalization()
@@ -51,31 +52,39 @@ public class SdkAndJavascriptHandler : MonoBehaviour
 
     private static void Authorize(Action onAuthorizedSuccessfulEvent)
     {
-        PlayerAccount.RequestPersonalProfileDataPermission();
-
-        if (PlayerAccount.IsAuthorized == false)
+        if (PlayerAccount.IsAuthorized)
+            onAuthorizedSuccessfulEvent?.Invoke();
+        else
             PlayerAccount.Authorize(onSuccessCallback: onAuthorizedSuccessfulEvent);
+
+        PlayerAccount.RequestPersonalProfileDataPermission();
     }
 
-    private static IEnumerator InitializeAuthorization(Action onAuthorizedSuccessfulEvent)
+    private static void InitializeLocalization()
+    {
+        _instance.StartCoroutine(InitializeLocalizationJob());
+    }
+
+    public static void CheckSdkConnection(Action onlineMethod, Action offlineMethod = null)
+    {
+        _instance.StartCoroutine(CheckConnectionJob(onlineMethod, offlineMethod));
+    }
+
+    private static IEnumerator CheckConnectionJob(Action onlineMethod, Action offlineMethod)
     {
 #if !UNITY_WEBGL || UNITY_EDITOR
+        offlineMethod?.Invoke();
+
         yield break;
 #endif
         yield return YandexGamesSdk.Initialize();
 
-        Authorize(onAuthorizedSuccessfulEvent);
+        onlineMethod.Invoke();
     }
 
-    private static IEnumerator InitializeLocalization()
+    private static IEnumerator InitializeLocalizationJob()
     {
         yield return LocalizationSettings.InitializationOperation;
-
-#if !UNITY_WEBGL || UNITY_EDITOR
-        FinishLocalization();
-        yield break;
-#endif
-        yield return YandexGamesSdk.Initialize();
 
         string locale = YandexGamesSdk.Environment.i18n.lang;
 

@@ -1,5 +1,4 @@
 using Agava.YandexGames;
-using System.Collections;
 using UnityEngine;
 
 public class Ranking : MonoBehaviour
@@ -14,7 +13,7 @@ public class Ranking : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(TryCheckConnection());
+        SdkAndJavascriptHandler.CheckSdkConnection(ActualizeLeaderboard);
     }
 
     public void SaveLeaderboardScore()
@@ -53,6 +52,8 @@ public class Ranking : MonoBehaviour
 
     private void HandleResponse(LeaderboardGetEntriesResponse result)
     {
+        const string Anonymous = nameof(Anonymous);
+
         if (rankingLines == null)
             rankingLines = new RankingLine[result.entries.Length];
 
@@ -63,18 +64,9 @@ public class Ranking : MonoBehaviour
 
             string name = result.entries[i].player.publicName;
             if (string.IsNullOrEmpty(name))
-                name = "Anonymous";
+                name = Anonymous;
 
             rankingLines[i].SetTexts(name, result.entries[i].formattedScore, result.entries[i].rank);
         }
-    }
-
-    private IEnumerator TryCheckConnection()
-    {
-#if !UNITY_WEBGL || UNITY_EDITOR
-        yield break;
-#endif
-        yield return YandexGamesSdk.Initialize();
-            ActualizeLeaderboard();
     }
 }
