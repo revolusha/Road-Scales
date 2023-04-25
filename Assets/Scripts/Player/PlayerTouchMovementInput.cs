@@ -48,7 +48,6 @@ public class PlayerTouchMovementInput : MonoBehaviour
 
     private void OnFingerDown(Finger touchedFinger)
     {
-        Debug.Log("Down");
         if (_finger == null)
         {
             _finger = touchedFinger;
@@ -61,7 +60,6 @@ public class PlayerTouchMovementInput : MonoBehaviour
 
     private void OnFingerMove(Finger movedFinger)
     {
-        Debug.Log("Move");
         if (movedFinger == _finger)
         {
             float fingerMoveAmount = _touchOrigin.x - _finger.screenPosition.x;
@@ -75,7 +73,6 @@ public class PlayerTouchMovementInput : MonoBehaviour
 
     private void OnFingerUp(Finger touchedFinger)
     {
-        Debug.Log("Up");
         if (touchedFinger == _finger)
         {
             _finger = null;

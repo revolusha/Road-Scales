@@ -8,10 +8,11 @@ public class CargoSpawner : MonoBehaviour
     private readonly float _cargoSpawnHeight = .16f;
 
     private CargoSpawnPoint _cargoSpawnPoint;
+    private Color _gizmosColor = new(0, 0, 1, .2f);
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = new Color( 0, 0, 1, .2f );
+        Gizmos.color = _gizmosColor;
         Gizmos.DrawSphere(GetComponentInChildren<CargoSpawnPoint>().transform.position, _spawnAreaRadius);
     }
 
@@ -108,7 +109,8 @@ public class CargoSpawner : MonoBehaviour
     private Quaternion GetRandomRotation()
     {
         const float MaxRotation = 1;
+        const float Scalar = 1;
 
-        return new Quaternion(0, Random.Range(0, MaxRotation), 0, 1);
+        return new Quaternion(0, Random.Range(0, MaxRotation), 0, Scalar);
     }
 }

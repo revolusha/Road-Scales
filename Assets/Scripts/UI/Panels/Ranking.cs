@@ -1,4 +1,5 @@
 using Agava.YandexGames;
+using System.Collections;
 using UnityEngine;
 
 public class Ranking : MonoBehaviour
@@ -13,8 +14,7 @@ public class Ranking : MonoBehaviour
 
     private void OnEnable()
     {
-        if (YandexGamesSdk.IsInitialized)
-            ActualizeLeaderboard();
+        StartCoroutine(TryCheckConnection());
     }
 
     public void SaveLeaderboardScore()
@@ -67,5 +67,14 @@ public class Ranking : MonoBehaviour
 
             rankingLines[i].SetTexts(name, result.entries[i].formattedScore, result.entries[i].rank);
         }
+    }
+
+    private IEnumerator TryCheckConnection()
+    {
+#if !UNITY_WEBGL || UNITY_EDITOR
+        yield break;
+#endif
+        yield return YandexGamesSdk.Initialize();
+            ActualizeLeaderboard();
     }
 }

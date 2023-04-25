@@ -13,8 +13,8 @@ public class Advertisement : MonoBehaviour
     private bool _isAllowedShowingAd = false;
     private bool _isReadyToShowRewardAd = false;
 
-    public static Action OnRewardAdClosedSuccessful;
-    public static Action OnRewardAdClosedFailed;
+    public static Action OnRewardAdShowedSuccessful;
+    public static Action OnRewardAdClosed;
 
     public bool IsAllowedShowingAd
     {
@@ -41,12 +41,14 @@ public class Advertisement : MonoBehaviour
     private void OnEnable()
     {
         _lastRewardTimeFromStartUp = 0;
-        OnRewardAdClosedSuccessful += ResetRewardTimer;
+        OnRewardAdShowedSuccessful += ResetRewardTimer;
+        OnRewardAdClosed += UnpauseAfterReward;
     }
 
     private void OnDisable()
     {
-        OnRewardAdClosedSuccessful -= ResetRewardTimer;
+        OnRewardAdShowedSuccessful -= ResetRewardTimer;
+        OnRewardAdClosed -= UnpauseAfterReward;
     }
 
     public void TryShowInterstitialAd()
@@ -66,7 +68,7 @@ public class Advertisement : MonoBehaviour
         if (Game.Advertisement.IsAllowedShowingAd)
             StartCoroutine(ShowRewardAd());
         else
-            OnRewardAdClosedFailed?.Invoke();
+            OnRewardAdClosed?.Invoke();
     }
 
     public void DelayRewardAd(float seconds)
@@ -77,6 +79,11 @@ public class Advertisement : MonoBehaviour
     public void ResetRewardTimer()
     {
         _lastRewardTimeFromStartUp = Time.realtimeSinceStartup;
+    }
+
+    private void UnpauseAfterReward()
+    {
+        FocusHandler.Unpause();
     }
 
     private IEnumerator ShowInterstitialAd()
@@ -100,8 +107,9 @@ public class Advertisement : MonoBehaviour
 #endif
         yield return YandexGamesSdk.Initialize();
 
+        FocusHandler.Pause();
         VideoAd.Show(
-            onRewardedCallback: OnRewardAdClosedSuccessful,
-            onCloseCallback: OnRewardAdClosedFailed);
+            onRewardedCallback: OnRewardAdShowedSuccessful,
+            onCloseCallback: OnRewardAdClosed);
     }
 }

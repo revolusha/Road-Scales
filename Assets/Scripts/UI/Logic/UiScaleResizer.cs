@@ -9,7 +9,6 @@ public class UiScaleResizer : MonoBehaviour
 {
     [SerializeField] private float _defaultHeight = 1000;
     [SerializeField] private float _defaultWidth = 1000;
-    [SerializeField] private float _resolutionWideFactorThreshold = 2.1f;
     [SerializeField] private float _checkResolutionTimeInterval = 2f;
 
     private Vector2 _resolution;
