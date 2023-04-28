@@ -12,8 +12,9 @@ public class Advertisement : MonoBehaviour
     private bool _isAllowedShowingAd = false;
     private bool _isReadyToShowRewardAd = false;
 
-    public static Action OnRewardAdClosedSuccessful;
-    public static Action OnRewardAdClosedFailed;
+    public static Action OnRewardAdOpened;
+    public static Action OnRewardAdShownSuccessful;
+    public static Action OnRewardAdClosed;
 
     public bool IsAllowedShowingAd
     {
@@ -40,12 +41,12 @@ public class Advertisement : MonoBehaviour
     private void OnEnable()
     {
         _lastRewardTimeFromStartUp = 0;
-        OnRewardAdClosedSuccessful += ResetRewardTimer;
+        OnRewardAdShownSuccessful += ResetRewardTimer;
     }
 
     private void OnDisable()
     {
-        OnRewardAdClosedSuccessful -= ResetRewardTimer;
+        OnRewardAdShownSuccessful -= ResetRewardTimer;
     }
 
     public void TryShowInterstitialAd()
@@ -65,7 +66,7 @@ public class Advertisement : MonoBehaviour
         if (Game.Advertisement.IsAllowedShowingAd)
             SdkAndJavascriptHandler.CheckSdkConnection(ShowRewardAd);
         else
-            OnRewardAdClosedFailed?.Invoke();
+            OnRewardAdClosed?.Invoke();
     }
 
     public void DelayRewardAd(float seconds)
@@ -75,7 +76,9 @@ public class Advertisement : MonoBehaviour
 
     public void ResetRewardTimer()
     {
+        Debug.Log("ResetRewardTimer");
         _lastRewardTimeFromStartUp = Time.realtimeSinceStartup;
+        Debug.Log("ResetRewardTimer 2");
     }
 
     private void ShowInterstitialAd()
@@ -89,7 +92,8 @@ public class Advertisement : MonoBehaviour
     private void ShowRewardAd()
     {
         VideoAd.Show(
-            onRewardedCallback: OnRewardAdClosedSuccessful,
-            onCloseCallback: OnRewardAdClosedFailed);
+            onOpenCallback: OnRewardAdOpened,
+            onRewardedCallback: OnRewardAdShownSuccessful,
+            onCloseCallback: OnRewardAdClosed);
     }
 }

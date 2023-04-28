@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityEngine.Localization.Settings;
 
 public class SdkAndJavascriptHandler : MonoBehaviour
 {
@@ -13,14 +12,16 @@ public class SdkAndJavascriptHandler : MonoBehaviour
 
     private static SdkAndJavascriptHandler _instance;
 
-    private readonly static string[] _languageIndexes = { "en", "ru", "tr" };
+    public static Action OnAuthorizedAndPersonalProfileDataGot;
 
     public static bool IsLocalized => _isLocalized;
 
-    private void Awake()
+    private void OnEnable()
     {
         _isLocalized = false;
+        Debug.Log("CallbackLogging");
         YandexGamesSdk.CallbackLogging = true;
+        Debug.Log("CallbackLogging true");
         _instance = this;
     }
 
@@ -31,69 +32,107 @@ public class SdkAndJavascriptHandler : MonoBehaviour
 
     public static void SetLanguage()
     {
+        Debug.Log("SetLanguage");
         CheckSdkConnection(InitializeLocalization, FinishLocalization);
     }
 
-    public static void TryAuthorize(Action onAuthorizedSuccessfulEvent = null)
+    public static void TryAuthorize()
     {
-        bool isAuthorized = false;
-
-        CheckSdkConnection(() => { isAuthorized = true; });
-
-        if (isAuthorized)
-            Authorize(onAuthorizedSuccessfulEvent);
+        Debug.Log("TryAuthorize");
+        CheckSdkConnection(CheckAuthorization);
     }
 
-    public static void FinishLocalization()
+    private static void CheckPersonalProfileDataPermission()
     {
-        _isLocalized = true;
-        Loading.TryCompleteLoading();
-    }
-
-    private static void Authorize(Action onAuthorizedSuccessfulEvent)
-    {
-        if (PlayerAccount.IsAuthorized)
-            onAuthorizedSuccessfulEvent?.Invoke();
+        Debug.Log("CheckPersonalProfileDataPermission");
+        if (PlayerAccount.HasPersonalProfileDataPermission == false)
+            PlayerAccount.RequestPersonalProfileDataPermission(OnAuthorizedAndPersonalProfileDataGot);
         else
-            PlayerAccount.Authorize(onSuccessCallback: onAuthorizedSuccessfulEvent);
+            OnAuthorizedAndPersonalProfileDataGot?.Invoke();
+    }
 
-        PlayerAccount.RequestPersonalProfileDataPermission();
+    private static void CheckAuthorization()
+    {
+        Debug.Log("CheckAuthorization");
+        if (PlayerAccount.IsAuthorized)
+            CheckPersonalProfileDataPermission();
+        else
+            PlayerAccount.Authorize(CheckPersonalProfileDataPermission);
     }
 
     private static void InitializeLocalization()
     {
-        _instance.StartCoroutine(InitializeLocalizationJob());
+        Debug.Log("InitializeLocalization");
+        string locale = YandexGamesSdk.Environment.i18n.lang;
+
+        switch (locale)
+        {
+            case "ru":
+                Localization.ChangeLocalization(Localization.LanguageType.Russian);
+                break;
+
+            case "en":
+                Localization.ChangeLocalization(Localization.LanguageType.English);
+                break;
+
+            case "tr":
+                Localization.ChangeLocalization(Localization.LanguageType.Turkish);
+                break;
+
+            default:
+                Localization.ChangeLocalization(Localization.LanguageType.English);
+                break;
+        }
+
+        _isLocalized = true;
+        FinishLocalization();
+    }
+
+    private static void FinishLocalization()
+    {
+        if (_isLocalized)
+            StartGameInitializer.TryFinishInitialization();
+
+        switch (Application.systemLanguage)
+        {
+            case SystemLanguage.Russian:
+                Localization.ChangeLocalization(Localization.LanguageType.Russian);
+                break;
+
+            case SystemLanguage.English:
+                Localization.ChangeLocalization(Localization.LanguageType.English);
+                break;
+
+            case SystemLanguage.Turkish:
+                Localization.ChangeLocalization(Localization.LanguageType.Turkish);
+                break;
+
+            default:
+                Localization.ChangeLocalization(Localization.LanguageType.English);
+                break;
+        }
+
+        _isLocalized = true;
+        StartGameInitializer.TryFinishInitialization();
     }
 
     public static void CheckSdkConnection(Action onlineMethod, Action offlineMethod = null)
     {
+        Debug.Log("CheckSdkConnection");
         _instance.StartCoroutine(CheckConnectionJob(onlineMethod, offlineMethod));
     }
 
-    private static IEnumerator CheckConnectionJob(Action onlineMethod, Action offlineMethod)
+    private static IEnumerator CheckConnectionJob(Action onlineMethod, Action offlineMethod = null)
     {
+        Debug.Log("CheckConnectionJob");
 #if !UNITY_WEBGL || UNITY_EDITOR
-        offlineMethod?.Invoke();
+        if (offlineMethod != null)
+            offlineMethod?.Invoke();
 
         yield break;
 #endif
         yield return YandexGamesSdk.Initialize();
 
-        onlineMethod.Invoke();
-    }
-
-    private static IEnumerator InitializeLocalizationJob()
-    {
-        yield return LocalizationSettings.InitializationOperation;
-
-        string locale = YandexGamesSdk.Environment.i18n.lang;
-
-        for (int i = 0; i < _languageIndexes.Length; i++)
-        {
-            if (_languageIndexes[i] == locale)
-                LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.GetLocale(locale);
-        }
-
-        FinishLocalization();
+        onlineMethod?.Invoke();
     }
 }

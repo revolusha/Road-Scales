@@ -23,6 +23,7 @@ public class UiPanelsHandler : MonoBehaviour
     private void OnDestroy()
     {
         Scales.OnScalesBroke -= ShowLosePanel;
+        SdkAndJavascriptHandler.OnAuthorizedAndPersonalProfileDataGot -= ShowLeaderBoard;
     }
 
     public void ShowWinPanel()
@@ -51,6 +52,7 @@ public class UiPanelsHandler : MonoBehaviour
 
     public void ShowLeaderBoard()
     {
+        SdkAndJavascriptHandler.OnAuthorizedAndPersonalProfileDataGot -= ShowLeaderBoard;
         HideStartUI();
         _leaderBoard.SetActive(true);
     }
@@ -67,7 +69,8 @@ public class UiPanelsHandler : MonoBehaviour
 
     public void TryShowLeaderboard()
     {
-        SdkAndJavascriptHandler.TryAuthorize(ShowLeaderBoard);
+        SdkAndJavascriptHandler.OnAuthorizedAndPersonalProfileDataGot += ShowLeaderBoard;
+        SdkAndJavascriptHandler.TryAuthorize();
     }
 
     private void HideStartUI()

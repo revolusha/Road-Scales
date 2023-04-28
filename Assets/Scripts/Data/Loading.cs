@@ -10,19 +10,24 @@ public static class Loading
 
     public static Action OnFullLoadingFinished;
 
+    public static bool IsLoadingDone => _isLoadingDone;
+
     public static void Load()
     {
+        Debug.Log("Load");
         PlayerAccount.GetPlayerData(HandleLoadedData, HandleFailedLoading);
     }
 
     public static void FinishLoading()
     {
+        Debug.Log("FinishLoading");
         _isLoadingDone = true;
-        TryCompleteLoading();
+        StartGameInitializer.TryFinishInitialization();
     }
 
     public static void TryCompleteLoading()
     {
+        Debug.Log("TryCompleteLoading " + _isLoadingDone + SdkAndJavascriptHandler.IsLocalized);
         if (_isLoadingDone && SdkAndJavascriptHandler.IsLocalized)
             OnFullLoadingFinished?.Invoke();
     }
@@ -34,6 +39,8 @@ public static class Loading
 
     private static void HandleLoadedData(string data)
     {
+
+        Debug.Log("HandleLoadedData");
         const string EmptyReturnedString = "{}";
 
         if (data == EmptyReturnedString)

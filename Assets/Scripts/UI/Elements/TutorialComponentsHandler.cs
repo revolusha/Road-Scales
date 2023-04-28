@@ -1,16 +1,14 @@
 using UnityEngine;
-using UnityEngine.Localization.Components;
-using UnityEngine.Localization;
 using TMPro;
 using System;
 
 public class TutorialComponentsHandler : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _tutorialsCounter;
-    [SerializeField] private LocalizeStringEvent _localizedStringComponent;
+    [SerializeField] private LocalizationString _localizedStringComponent;
     [SerializeField] private TutorialButton _button;
     [SerializeField] private GameObject _shopArrow;
-    [SerializeField] private LocalizedString[] _localizedStrings;
+    [SerializeField] private LocalizationStringValue[] _localizedStrings;
 
     private int _currentIndex;
 
@@ -42,6 +40,7 @@ public class TutorialComponentsHandler : MonoBehaviour
         _currentIndex = index;
         _tutorialsCounter.text = (index + IndexOffset).ToString() + Separator + _localizedStrings.Length.ToString();
         _localizedStringComponent.StringReference = _localizedStrings[index];
+        _localizedStringComponent.UpdateText();
         _button.HideButton();
 
         if (index == _localizedStrings.Length - 1)

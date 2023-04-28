@@ -2,36 +2,49 @@ using UnityEngine;
 
 public class StartGameInitializer : MonoBehaviour
 {
-    [SerializeField] private GameObject _gameDataTemplate;
+    [SerializeField] private GameObject _gameData;
     [SerializeField] private LevelRoadConfiguration[] _levelsPool;
+
+    private static bool _isInitialized;
+    private static bool _gameInitialized;
 
     private void OnEnable()
     {
+        DontDestroyOnLoad(_gameData);
         Initialize();
     }
 
     private void Start()
     {
-        Loading.OnFullLoadingFinished += LoadLevel;
+        Debug.Log("Start StartGameInitializer");
+        Game.OnGotReady += SetGameReadyFlag;
         SdkAndJavascriptHandler.CheckSdkConnection(Loading.Load, Loading.FinishLoading);
     }
 
     private void OnDisable()
     {
-        Loading.OnFullLoadingFinished -= LoadLevel;
+        Game.OnGotReady -= SetGameReadyFlag;
     }
 
-    private void LoadLevel()
+    public static void TryFinishInitialization()
     {
-        LevelReloader.ReloadBaseLevel();
+        if (SdkAndJavascriptHandler.IsLocalized || Loading.IsLoadingDone ||
+            _isInitialized || _gameInitialized)
+            LevelReloader.ReloadBaseLevel();
+    }
+
+    private void SetGameReadyFlag()
+    {
+        _gameInitialized = true;
+        TryFinishInitialization();
     }
 
     private void Initialize()
-    {        
-        GameObject gameData = Instantiate(_gameDataTemplate);
-
-        DontDestroyOnLoad(gameData);
-        Game.LevelHandler.SetLevelsPool(_levelsPool);
+    {
+        Debug.Log("Initialize");
         SdkAndJavascriptHandler.SetLanguage();
+        Game.LevelHandler.SetLevelsPool(_levelsPool);
+        _isInitialized = true;
+        TryFinishInitialization();
     }
 }

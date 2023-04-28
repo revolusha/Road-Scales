@@ -8,12 +8,12 @@ public class SkinLoader : MonoBehaviour
     [SerializeField] private CargoSkinItemTemplate[] _cargoSkins;
     [SerializeField] private BasketSkinItemTemplate[] _basketSkins;
 
-    private SkinHandler handler;
+    private SkinHandler _handler;
 
-    private void OnEnable()
+    private void Start()
     {
-        handler = GetComponent<SkinHandler>();
-        handler.LoadShopItems(
+        _handler = GetComponent<SkinHandler>();
+        _handler.LoadShopItems(
             CreateShopItemList(_playerSkins),
             CreateShopItemList(_cargoSkins),
             CreateShopItemList(_basketSkins));

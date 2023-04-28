@@ -13,14 +13,14 @@ public class RewardPanel : DialogWindowBase
     private new void OnEnable()
     {
         base.OnEnable();
-        Advertisement.OnRewardAdClosedFailed += OnRewardedClosedEvent;
-        Advertisement.OnRewardAdClosedSuccessful += OnRewardedSuccessEvent;
+        Advertisement.OnRewardAdClosed += OnRewardedClosedEvent;
+        Advertisement.OnRewardAdShownSuccessful += OnRewardedSuccessEvent;
     }
 
     private void OnDisable()
     {
-        Advertisement.OnRewardAdClosedFailed -= OnRewardedClosedEvent;
-        Advertisement.OnRewardAdClosedSuccessful -= OnRewardedSuccessEvent;
+        Advertisement.OnRewardAdClosed -= OnRewardedClosedEvent;
+        Advertisement.OnRewardAdShownSuccessful -= OnRewardedSuccessEvent;
     }
 
     public void RequestReward()
@@ -49,6 +49,7 @@ public class RewardPanel : DialogWindowBase
             Game.Money.DepositMoney(Reward);
 
         HidePanel();
-        _button.CheckShowPermission();
+        if (Game.Advertisement.IsReadyToShowRewardAd == false)
+            _button.CheckShowPermission();
     }
 }

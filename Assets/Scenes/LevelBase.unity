@@ -922,37 +922,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 313613058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Script: {fileID: 11500000, guid: dddc419ce000d92468fa19ca70cd5677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StringReference:
-    m_TableReference:
-      m_TableCollectionName: GUID:9957cbab8e6830e4c86b2eba1ab2d488
-    m_TableEntryReference:
-      m_KeyId: 2398262386688
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  m_FormatArguments: []
-  m_UpdateString:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 313613060}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  references:
-    version: 2
-    RefIds: []
+  _textComponent: {fileID: 313613060}
+  StringReference: {fileID: 11400000, guid: 45565725033438e48925b322da01f612, type: 2}
 --- !u!1 &367529603
 GameObject:
   m_ObjectHideFlags: 0
@@ -2859,6 +2833,7 @@ GameObject:
   - component: {fileID: 1160278146}
   - component: {fileID: 1160278148}
   - component: {fileID: 1160278147}
+  - component: {fileID: 1160278149}
   m_Layer: 5
   m_Name: LevelCounterText
   m_TagString: Untagged
@@ -2983,6 +2958,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160278145}
   m_CullTransparentMesh: 1
+--- !u!114 &1160278149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160278145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2b2d5b92c9c2a946b582cfbf1e8dfdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textComponent: {fileID: 1160278147}
+  StringReference: {fileID: 11400000, guid: 6649cd389d1624041a2a105f9a7455e8, type: 2}
 --- !u!1 &1237402788
 GameObject:
   m_ObjectHideFlags: 0
@@ -3257,18 +3246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bd90eb9b6b245c42a3c03bd2771ff12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _localeLevelKeyString:
-    m_TableReference:
-      m_TableCollectionName: GUID:9957cbab8e6830e4c86b2eba1ab2d488
-    m_TableEntryReference:
-      m_KeyId: 51280863232
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  references:
-    version: 2
-    RefIds: []
+  _dynamicLocalizationString: {fileID: 1160278149}
 --- !u!1 &1383140380
 GameObject:
   m_ObjectHideFlags: 0
@@ -4486,37 +4464,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1676923509}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Script: {fileID: 11500000, guid: dddc419ce000d92468fa19ca70cd5677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StringReference:
-    m_TableReference:
-      m_TableCollectionName: GUID:9957cbab8e6830e4c86b2eba1ab2d488
-    m_TableEntryReference:
-      m_KeyId: 469771739136
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  m_FormatArguments: []
-  m_UpdateString:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1676923511}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  references:
-    version: 2
-    RefIds: []
+  _textComponent: {fileID: 1676923511}
+  StringReference: {fileID: 11400000, guid: f86a2ad2b1c75844c9683d1c9deebf3b, type: 2}
 --- !u!1 &1714932735
 GameObject:
   m_ObjectHideFlags: 0

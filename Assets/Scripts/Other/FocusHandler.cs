@@ -6,6 +6,18 @@ public class FocusHandler : MonoBehaviour
 {
     private const float DefaultTimeScale = 1;
 
+    private void OnEnable()
+    {
+        Advertisement.OnRewardAdOpened += Pause;
+        Advertisement.OnRewardAdClosed += Unpause;
+    }
+
+    private void OnDisable()
+    {
+        Advertisement.OnRewardAdOpened -= Pause;
+        Advertisement.OnRewardAdClosed -= Unpause;
+    }
+
     private void OnApplicationFocus(bool focus)
     {
         if (focus)

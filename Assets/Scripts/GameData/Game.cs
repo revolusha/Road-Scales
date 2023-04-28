@@ -1,4 +1,7 @@
+using System;
 using UnityEngine;
+
+[RequireComponent(typeof(Advertisement))]
 
 public class Game : MonoBehaviour
 {
@@ -12,6 +15,8 @@ public class Game : MonoBehaviour
     private SoundPlayer _soundPlayer;
     private Advertisement _advertisement;
 
+    public static Action OnGotReady;
+
     public static Game Instance { get; private set; }
     public static Money Money => Instance._money;
     public static MusicPlayer MusicPlayer => Instance._musicPlayer;
@@ -21,14 +26,14 @@ public class Game : MonoBehaviour
     public static Advertisement Advertisement => Instance._advertisement;
     public static bool IsLastLevelFinished => Instance._isLastLevelFinished;
     public static bool IsTutorialFinished => Instance._isTutorialFinished;
-    public static bool IsReady { get; private set; }
 
     private void OnEnable()
     {
+        Debug.Log("OnEnable Game");
         _musicPlayer = GetComponentInChildren<MusicPlayer>();
         _soundPlayer = GetComponentInChildren<SoundPlayer>();
         _skinHandler = GetComponentInChildren<SkinHandler>();
-        _advertisement = GetComponentInChildren<Advertisement>();
+        _advertisement = GetComponent<Advertisement>();
 
         if (Instance == null)
             Instance = this;
@@ -37,7 +42,7 @@ public class Game : MonoBehaviour
         _levelHandler = new LevelHandler();
         _levelHandler.OnLastLevelFinished += OnLastLevelFinishedEvent;
         TutorialComponentsHandler.OnTutorialFinished += OnTutorialFinishedEvent;
-        IsReady = true;
+        OnGotReady?.Invoke();
     }
 
     private void OnDisable()
@@ -48,6 +53,7 @@ public class Game : MonoBehaviour
 
     public void SetFlags(bool isAllLevelsFinished, bool isTutorialFinished)
     {
+        Debug.Log("SetFlags Game");
         _isTutorialFinished = isTutorialFinished;
         _isLastLevelFinished = isAllLevelsFinished;
 
