@@ -1,8 +1,11 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class SkinHandler : MonoBehaviour
 {
+    private static bool _isLoaded = false;
+
     private PlayerSkinItem _choosenPlayerSkin;
     private CargoSkinItem _choosenCargoSkin;
     private BasketSkinItem _choosenBasketSkin;
@@ -36,6 +39,7 @@ public class SkinHandler : MonoBehaviour
         _playerSkins[0].Select();
         _cargoSkins[0].Select();
         _basketSkins[0].Select();
+        _isLoaded = true;
     }
 
     public void SelectItem(PlayerSkinItem item)
@@ -63,5 +67,11 @@ public class SkinHandler : MonoBehaviour
                 return i;
 
         return 0;
+    }
+
+    public static IEnumerator Initialize()
+    {
+        while (_isLoaded == false)
+            yield return null;
     }
 }

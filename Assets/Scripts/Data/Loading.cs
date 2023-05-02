@@ -14,33 +14,23 @@ public static class Loading
 
     public static void Load()
     {
-        Debug.Log("Load");
         PlayerAccount.GetPlayerData(HandleLoadedData, HandleFailedLoading);
     }
 
     public static void FinishLoading()
     {
-        Debug.Log("FinishLoading");
         _isLoadingDone = true;
         StartGameInitializer.TryFinishInitialization();
     }
 
-    public static void TryCompleteLoading()
-    {
-        Debug.Log("TryCompleteLoading " + _isLoadingDone + SdkAndJavascriptHandler.IsLocalized);
-        if (_isLoadingDone && SdkAndJavascriptHandler.IsLocalized)
-            OnFullLoadingFinished?.Invoke();
-    }
-
     private static void HandleFailedLoading(string _)
     {
+        LoadDefaultData();
         FinishLoading();
     }
 
     private static void HandleLoadedData(string data)
     {
-
-        Debug.Log("HandleLoadedData");
         const string EmptyReturnedString = "{}";
 
         if (data == EmptyReturnedString)
@@ -66,6 +56,13 @@ public static class Loading
         LoadSkinsInfo(Game.SkinHandler.PlayerSkins, _playerInfo.PlayerSkins, _playerInfo.ChoosenPlayerSkin);
         LoadSkinsInfo(Game.SkinHandler.CargoSkins, _playerInfo.CargoSkins, _playerInfo.ChoosenCargoSkin);
         LoadSkinsInfo(Game.SkinHandler.BasketSkins, _playerInfo.BasketSkins, _playerInfo.ChoosenBasketSkin);
+    }
+
+    private static void LoadDefaultData()
+    {
+        Game.SkinHandler.PlayerSkins[0].Select();
+        Game.SkinHandler.CargoSkins[0].Select();
+        Game.SkinHandler.BasketSkins[0].Select();
     }
 
     private static void LoadSkinsInfo(ShopItem[] shopItems, bool[] skinsFlags, int selectedIndex)

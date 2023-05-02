@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(SkinHandler))]
@@ -8,6 +9,8 @@ public class SkinLoader : MonoBehaviour
     [SerializeField] private CargoSkinItemTemplate[] _cargoSkins;
     [SerializeField] private BasketSkinItemTemplate[] _basketSkins;
 
+    private static bool _isInitialized = false;
+
     private SkinHandler _handler;
 
     private void Start()
@@ -17,6 +20,7 @@ public class SkinLoader : MonoBehaviour
             CreateShopItemList(_playerSkins),
             CreateShopItemList(_cargoSkins),
             CreateShopItemList(_basketSkins));
+        _isInitialized = true;
     }
 
     private PlayerSkinItem[] CreateShopItemList(PlayerSkinItemTemplate[] playerSkinTemplates)
@@ -47,5 +51,11 @@ public class SkinLoader : MonoBehaviour
             shopItems[i] = new BasketSkinItem(basketSkinTemplates[i]);
 
         return shopItems;
+    }
+
+    public static IEnumerator Initialize()
+    {
+        while (_isInitialized == false)
+            yield return null;
     }
 }

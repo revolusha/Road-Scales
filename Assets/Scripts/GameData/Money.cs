@@ -19,13 +19,11 @@ public class Money
 
     public Money()
     {
-        Debug.Log("Money");
         _balance = 0;
     }
 
     public void LoadMoney(int amount, int score)
     {
-        Debug.Log("LoadMoney");
         _balance = amount;
         _scores = score;
     }
@@ -62,7 +60,6 @@ public class Money
 
     public static string ConvertBalanceIntegerToString(int value)
     {
-        Debug.Log("ConvertBalanceIntegerToString");
         const string Separator = ",";
         const int Devider = 1000;
         const int TwoDigit = 99;

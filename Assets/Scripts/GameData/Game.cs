@@ -1,10 +1,13 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Advertisement))]
 
 public class Game : MonoBehaviour
 {
+    private static bool _isReady = false;
+
     private bool _isLastLevelFinished;
     private bool _isTutorialFinished;
 
@@ -14,8 +17,6 @@ public class Game : MonoBehaviour
     private MusicPlayer _musicPlayer;
     private SoundPlayer _soundPlayer;
     private Advertisement _advertisement;
-
-    public static Action OnGotReady;
 
     public static Game Instance { get; private set; }
     public static Money Money => Instance._money;
@@ -27,9 +28,8 @@ public class Game : MonoBehaviour
     public static bool IsLastLevelFinished => Instance._isLastLevelFinished;
     public static bool IsTutorialFinished => Instance._isTutorialFinished;
 
-    private void OnEnable()
+    private void Awake()
     {
-        Debug.Log("OnEnable Game");
         _musicPlayer = GetComponentInChildren<MusicPlayer>();
         _soundPlayer = GetComponentInChildren<SoundPlayer>();
         _skinHandler = GetComponentInChildren<SkinHandler>();
@@ -42,7 +42,7 @@ public class Game : MonoBehaviour
         _levelHandler = new LevelHandler();
         _levelHandler.OnLastLevelFinished += OnLastLevelFinishedEvent;
         TutorialComponentsHandler.OnTutorialFinished += OnTutorialFinishedEvent;
-        OnGotReady?.Invoke();
+        _isReady = true;
     }
 
     private void OnDisable()
@@ -53,7 +53,6 @@ public class Game : MonoBehaviour
 
     public void SetFlags(bool isAllLevelsFinished, bool isTutorialFinished)
     {
-        Debug.Log("SetFlags Game");
         _isTutorialFinished = isTutorialFinished;
         _isLastLevelFinished = isAllLevelsFinished;
 
@@ -73,5 +72,11 @@ public class Game : MonoBehaviour
     {
         _isTutorialFinished = true;
         TutorialComponentsHandler.OnTutorialFinished -= OnTutorialFinishedEvent;
+    }
+
+    public static IEnumerator Initialize()
+    {
+        while (_isReady == false) 
+            yield return null;
     }
 }

@@ -76,9 +76,7 @@ public class Advertisement : MonoBehaviour
 
     public void ResetRewardTimer()
     {
-        Debug.Log("ResetRewardTimer");
         _lastRewardTimeFromStartUp = Time.realtimeSinceStartup;
-        Debug.Log("ResetRewardTimer 2");
     }
 
     private void ShowInterstitialAd()

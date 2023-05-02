@@ -7,7 +7,6 @@ public class LevelReloader : MonoBehaviour
 
     public static void ReloadBaseLevel()
     {
-        Debug.Log("ReloadBaseLevel");
         SceneManager.LoadScene(SceneName, LoadSceneMode.Single);
     }
 

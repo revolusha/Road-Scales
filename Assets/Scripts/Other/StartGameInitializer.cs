@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class StartGameInitializer : MonoBehaviour
@@ -6,45 +7,29 @@ public class StartGameInitializer : MonoBehaviour
     [SerializeField] private LevelRoadConfiguration[] _levelsPool;
 
     private static bool _isInitialized;
-    private static bool _gameInitialized;
 
     private void OnEnable()
     {
         DontDestroyOnLoad(_gameData);
-        Initialize();
-    }
-
-    private void Start()
-    {
-        Debug.Log("Start StartGameInitializer");
-        Game.OnGotReady += SetGameReadyFlag;
-        SdkAndJavascriptHandler.CheckSdkConnection(Loading.Load, Loading.FinishLoading);
-    }
-
-    private void OnDisable()
-    {
-        Game.OnGotReady -= SetGameReadyFlag;
+        StartCoroutine(Initialize());
     }
 
     public static void TryFinishInitialization()
     {
-        if (SdkAndJavascriptHandler.IsLocalized || Loading.IsLoadingDone ||
-            _isInitialized || _gameInitialized)
+        if (SdkAndJavascriptHandler.IsLocalized && Loading.IsLoadingDone && _isInitialized)
             LevelReloader.ReloadBaseLevel();
     }
 
-    private void SetGameReadyFlag()
+    private IEnumerator Initialize()
     {
-        _gameInitialized = true;
-        TryFinishInitialization();
-    }
-
-    private void Initialize()
-    {
-        Debug.Log("Initialize");
         SdkAndJavascriptHandler.SetLanguage();
         Game.LevelHandler.SetLevelsPool(_levelsPool);
         _isInitialized = true;
-        TryFinishInitialization();
+
+        yield return Game.Initialize();
+        yield return SkinHandler.Initialize();
+        yield return SkinLoader.Initialize();
+
+        SdkAndJavascriptHandler.CheckSdkConnection(Loading.Load, Loading.FinishLoading);
     }
 }

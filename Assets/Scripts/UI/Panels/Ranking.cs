@@ -30,7 +30,7 @@ public class Ranking : MonoBehaviour
         if (PlayerAccount.IsAuthorized == false)
             PlayerAccount.Authorize();
 
-        Leaderboard.GetEntries(LeaderboardName, onSuccessCallback: HandleResponse, onErrorCallback: HandleError);
+        Leaderboard.GetEntries(LeaderboardName, onSuccessCallback: HandleResponse);
     }
 
     public void ActualizeLeaderboard()
@@ -43,11 +43,6 @@ public class Ranking : MonoBehaviour
         SaveLeaderboardScore();
         System.Threading.Thread.Sleep(DelayAfterSave);
         LoadLeaderboard();
-    }
-
-    private void HandleError(string message)
-    {
-        Debug.Log(message);
     }
 
     private void HandleResponse(LeaderboardGetEntriesResponse result)

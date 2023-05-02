@@ -19,9 +19,7 @@ public class SdkAndJavascriptHandler : MonoBehaviour
     private void OnEnable()
     {
         _isLocalized = false;
-        Debug.Log("CallbackLogging");
         YandexGamesSdk.CallbackLogging = true;
-        Debug.Log("CallbackLogging true");
         _instance = this;
     }
 
@@ -32,19 +30,16 @@ public class SdkAndJavascriptHandler : MonoBehaviour
 
     public static void SetLanguage()
     {
-        Debug.Log("SetLanguage");
         CheckSdkConnection(InitializeLocalization, FinishLocalization);
     }
 
     public static void TryAuthorize()
     {
-        Debug.Log("TryAuthorize");
         CheckSdkConnection(CheckAuthorization);
     }
 
     private static void CheckPersonalProfileDataPermission()
     {
-        Debug.Log("CheckPersonalProfileDataPermission");
         if (PlayerAccount.HasPersonalProfileDataPermission == false)
             PlayerAccount.RequestPersonalProfileDataPermission(OnAuthorizedAndPersonalProfileDataGot);
         else
@@ -53,7 +48,6 @@ public class SdkAndJavascriptHandler : MonoBehaviour
 
     private static void CheckAuthorization()
     {
-        Debug.Log("CheckAuthorization");
         if (PlayerAccount.IsAuthorized)
             CheckPersonalProfileDataPermission();
         else
@@ -62,7 +56,6 @@ public class SdkAndJavascriptHandler : MonoBehaviour
 
     private static void InitializeLocalization()
     {
-        Debug.Log("InitializeLocalization");
         string locale = YandexGamesSdk.Environment.i18n.lang;
 
         switch (locale)
@@ -91,7 +84,10 @@ public class SdkAndJavascriptHandler : MonoBehaviour
     private static void FinishLocalization()
     {
         if (_isLocalized)
+        {
             StartGameInitializer.TryFinishInitialization();
+            return;
+        }
 
         switch (Application.systemLanguage)
         {
@@ -118,13 +114,11 @@ public class SdkAndJavascriptHandler : MonoBehaviour
 
     public static void CheckSdkConnection(Action onlineMethod, Action offlineMethod = null)
     {
-        Debug.Log("CheckSdkConnection");
         _instance.StartCoroutine(CheckConnectionJob(onlineMethod, offlineMethod));
     }
 
     private static IEnumerator CheckConnectionJob(Action onlineMethod, Action offlineMethod = null)
     {
-        Debug.Log("CheckConnectionJob");
 #if !UNITY_WEBGL || UNITY_EDITOR
         if (offlineMethod != null)
             offlineMethod?.Invoke();

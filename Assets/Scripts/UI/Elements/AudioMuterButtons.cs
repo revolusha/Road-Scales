@@ -25,6 +25,9 @@ public class AudioMuterButtons : MonoBehaviour
 
     public static void UpdateButtonVisibility()
     {
+        if (_instance == null)
+            return;
+
         UpdateMusicButtonVisibility();
         UpdateSoundButtonVisibility();
     }

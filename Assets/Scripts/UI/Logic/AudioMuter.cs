@@ -8,8 +8,31 @@ public class AudioMuter : MonoBehaviour
 
     public static Action OnVolumeChanged;
 
-    public static bool IsMusicMuted => _isMusicMuted;
-    public static bool IsSoundMuted => _isSoundMuted;
+    public static bool IsMusicMuted 
+    { 
+        get 
+        {
+            if (Game.MusicPlayer.Volume == 0)
+                _isMusicMuted = true;
+            else
+                _isMusicMuted = false;
+
+            return _isMusicMuted;
+        }
+    }
+
+    public static bool IsSoundMuted
+    {
+        get
+        {
+            if (Game.SoundPlayer.Volume == 0)
+                _isSoundMuted = true;
+            else
+                _isSoundMuted = false;
+
+            return _isSoundMuted;
+        }
+    }
 
     private void Start()
     {

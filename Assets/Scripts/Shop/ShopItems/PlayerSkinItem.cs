@@ -4,19 +4,19 @@ public class PlayerSkinItem : ShopItem
 {
     public PlayerSkinItem(ShopSerializableItem item) : base(item)
     {
-        OnAnotherItemSelect += Deselect;
+        OnSkinSelected += Deselect;
     }
 
     ~PlayerSkinItem()
     {
-        OnAnotherItemSelect -= Deselect;
+        OnSkinSelected -= Deselect;
     }
 
-    private static Action OnAnotherItemSelect;
+    private static Action OnSkinSelected;
 
     public override void Select()
     {
-        OnAnotherItemSelect?.Invoke();
+        OnSkinSelected?.Invoke();
         Game.SkinHandler.SelectItem(this);
         base.Select();
     }
