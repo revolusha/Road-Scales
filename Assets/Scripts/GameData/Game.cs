@@ -71,6 +71,7 @@ public class Game : MonoBehaviour
     private void OnTutorialFinishedEvent()
     {
         _isTutorialFinished = true;
+        Saving.Save();
         TutorialComponentsHandler.OnTutorialFinished -= OnTutorialFinishedEvent;
     }
 
