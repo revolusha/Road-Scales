@@ -33,12 +33,12 @@ public class SkinHandler : MonoBehaviour
         _playerSkins = playerSkins;
         _cargoSkins = cargoSkins;
         _basketSkins = basketSkins;
-        _playerSkins[0].SetOwning(true);
-        _cargoSkins[0].SetOwning(true);
-        _basketSkins[0].SetOwning(true);
-        _playerSkins[0].Select();
-        _cargoSkins[0].Select();
-        _basketSkins[0].Select();
+        _playerSkins[3].SetOwning(true);
+        _cargoSkins[1].SetOwning(true);
+        _basketSkins[3].SetOwning(true);
+        _playerSkins[3].Select();
+        _cargoSkins[1].Select();
+        _basketSkins[3].Select();
         _isLoaded = true;
     }
 

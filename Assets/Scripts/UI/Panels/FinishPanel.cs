@@ -8,13 +8,13 @@ public class FinishPanel : MonoBehaviour
     public void ShowWinControls()
     {
         HideGameObjects(_controlsForLose);
-        ShowGameObjects(_controlsForWin);
+        //ShowGameObjects(_controlsForWin);
     }
 
     public void ShowLoseControls()
     {
         HideGameObjects(_controlsForWin);
-        ShowGameObjects(_controlsForLose);
+        //ShowGameObjects(_controlsForLose);
     }
 
     private void HideGameObjects(GameObject[] array)
