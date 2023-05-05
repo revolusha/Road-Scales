@@ -36,10 +36,10 @@ public class FocusHandler : MonoBehaviour
     public static void Unpause()
     {
         if (AudioMuter.IsMusicMuted == false)
-            AudioMuter.UnmuteMusic();
+            AudioMuter.UnmuteMusic(false);
 
         if (AudioMuter.IsSoundMuted == false)
-            AudioMuter.UnmuteSound();
+            AudioMuter.UnmuteSound(false);
 
         Time.timeScale = DefaultTimeScale;
     }
