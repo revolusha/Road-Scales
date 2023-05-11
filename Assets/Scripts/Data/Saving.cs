@@ -19,6 +19,7 @@ public class Saving : MonoBehaviour
     {
         const string EmptyJsonDataString = "{}";
 
+        PlayerPrefs.DeleteKey(PrefsKey);
         SdkAndJavascriptHandler.CheckSdkConnection(() =>
         {
             PlayerAccount.SetPlayerData(

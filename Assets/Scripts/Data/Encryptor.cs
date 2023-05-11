@@ -7,7 +7,6 @@ public static class Encryptor
         for (int i = 0; i < value.Length; i++)
             encryptedValue += (char)((int)value[i] + i);
 
-        UnityEngine.Debug.Log("Encrypt " + encryptedValue);
         return encryptedValue;
     }
 
@@ -18,7 +17,6 @@ public static class Encryptor
         for (int i = 0; i < encryptedValue.Length; i++)
             result += (char)((int)encryptedValue[i] - i);
 
-        UnityEngine.Debug.Log("Decrypt " + result);
         return result;
     }
 }

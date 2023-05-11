@@ -35,36 +35,44 @@ public class AudioMuterButtons : MonoBehaviour
     public void MuteMusic()
     {
         AudioMuter.MuteMusic();
-        UpdateMusicButtonVisibility();
     }
 
     public void UnmuteMusic()
     {
         AudioMuter.UnmuteMusic();
-        UpdateMusicButtonVisibility();
     }
 
     public void MuteSound()
     {
         AudioMuter.MuteSound();
-        UpdateSoundButtonVisibility();
     }
 
     public void UnmuteSound()
     {
         AudioMuter.UnmuteSound();
-        UpdateSoundButtonVisibility();
     }
 
     private static void UpdateSoundButtonVisibility()
     {
-        _instance._muteSoundButton.SetActive(AudioMuter.IsSoundMuted == false);
-        _instance._unmuteSoundButton.SetActive(AudioMuter.IsSoundMuted);
+        bool isTurnedOn = CheckAudioLevel(Game.SoundPlayer);
+
+        _instance._muteSoundButton.SetActive(isTurnedOn);
+        _instance._unmuteSoundButton.SetActive(isTurnedOn == false);
     }
 
     private static void UpdateMusicButtonVisibility()
     {
-        _instance._muteMusicButton.SetActive(AudioMuter.IsMusicMuted == false);
-        _instance._unmuteMusicButton.SetActive(AudioMuter.IsMusicMuted);
+        bool isTurnedOn = CheckAudioLevel(Game.MusicPlayer);
+
+        _instance._muteMusicButton.SetActive(isTurnedOn);
+        _instance._unmuteMusicButton.SetActive(isTurnedOn == false);
+    }
+
+    private static bool CheckAudioLevel(AudioPlayer player) 
+    {
+        if (player.Volume > 0)
+            return true;
+        else
+            return false;
     }
 }
