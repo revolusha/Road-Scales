@@ -30,6 +30,6 @@ public class StartGameInitializer : MonoBehaviour
         yield return SkinHandler.Initialize();
         yield return SkinLoader.Initialize();
 
-        SdkAndJavascriptHandler.CheckSdkConnection(Loading.Load, Loading.FinishLoading);
+        SdkAndJavascriptHandler.CheckSdkConnection(Loading.Load, Loading.LoadLocalPlayerData);
     }
 }

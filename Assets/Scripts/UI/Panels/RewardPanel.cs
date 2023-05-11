@@ -46,9 +46,13 @@ public class RewardPanel : DialogWindowBase
     private void OnRewardedClosedEvent()
     {
         if (_isRewardGained)
+        {
             Game.Money.DepositMoney(Reward);
+            Saving.OnSaveEvent();
+        }
 
         HidePanel();
+
         if (Game.Advertisement.IsReadyToShowRewardAd == false)
             _button.CheckShowPermission();
     }

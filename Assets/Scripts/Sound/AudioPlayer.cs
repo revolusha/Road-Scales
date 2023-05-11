@@ -19,14 +19,15 @@ public class AudioPlayer : MonoBehaviour
 
     public void SetVolume(float value)
     {
-        if (_audio.volume > 0)
-            _lastVolume = _audio.volume;
-
+        _lastVolume = _audio.volume;
         _audio.volume = value;
     }
 
     public void SetLastVolume()
     {
+        if (_lastVolume == 0)
+            _lastVolume = StartVolume;
+
         _audio.volume = _lastVolume;
     }
 }

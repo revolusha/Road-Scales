@@ -1,5 +1,6 @@
 using Agava.YandexGames;
 using System;
+using System.Collections;
 using UnityEngine;
 
 public static class Loading
@@ -17,16 +18,19 @@ public static class Loading
         PlayerAccount.GetPlayerData(HandleLoadedData, HandleFailedLoading);
     }
 
-    public static void FinishLoading()
+    public static void LoadLocalPlayerData()
+    {
+        if (PlayerPrefs.HasKey(Saving.PrefsKey))
+            LoadData(JsonUtility.FromJson<PlayerInfo>(
+                Encryptor.Decrypt(PlayerPrefs.GetString(Saving.PrefsKey))));
+        else
+            LoadDefaultData();
+    }
+
+    private static void FinishLoading()
     {
         _isLoadingDone = true;
         StartGameInitializer.TryFinishInitialization();
-    }
-
-    private static void HandleFailedLoading(string _)
-    {
-        LoadDefaultData();
-        FinishLoading();
     }
 
     private static void HandleLoadedData(string data)
@@ -34,10 +38,40 @@ public static class Loading
         const string EmptyReturnedString = "{}";
 
         if (data == EmptyReturnedString)
-            HandleFailedLoading("");
+            LoadLocalPlayerData();
+        else
+            LoadNewestPlayerInfo(data);
+    }
 
-        _playerInfo = JsonUtility.FromJson<PlayerInfo>(data);
+    private static void HandleFailedLoading(string _)
+    {
+        LoadLocalPlayerData();
+    }
+
+    private static void LoadNewestPlayerInfo(string cloudData)
+    {
+        PlayerInfo cloudPlayerInfo = JsonUtility.FromJson<PlayerInfo>(cloudData);
+
+        if (PlayerPrefs.HasKey(Saving.PrefsKey) == false)
+        {
+            LoadData(cloudPlayerInfo);
+            return;
+        }
+
+       PlayerInfo localPlayerInfo = JsonUtility.FromJson<PlayerInfo>(
+            PlayerPrefs.GetString(Encryptor.Decrypt(Saving.PrefsKey)));
+
+        if (localPlayerInfo.SavedTime < cloudPlayerInfo.SavedTime)
+            LoadData(cloudPlayerInfo);
+        else
+            LoadData(localPlayerInfo);
+    }
+
+    private static void LoadData(PlayerInfo data)
+    {
+        _playerInfo = data;
         Game.Instance.SetFlags(_playerInfo.IsGotBadge, _playerInfo.IsTutorialFinished);
+        
         LoadGeneralData();
         LoadSkinsData();
         FinishLoading();
@@ -63,6 +97,7 @@ public static class Loading
         Game.SkinHandler.PlayerSkins[0].Select();
         Game.SkinHandler.CargoSkins[0].Select();
         Game.SkinHandler.BasketSkins[0].Select();
+        FinishLoading();
     }
 
     private static void LoadSkinsInfo(ShopItem[] shopItems, bool[] skinsFlags, int selectedIndex)

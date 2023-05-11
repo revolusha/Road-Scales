@@ -3,8 +3,15 @@ using UnityEngine;
 
 public class Saving : MonoBehaviour
 {
+    public const string PrefsKey = "GameSave";
+
+    private static string _jsonDataString;
+
     public static void OnSaveEvent()
     {
+        _jsonDataString = CreateSaveDataString();
+
+        SaveLocal();
         SdkAndJavascriptHandler.CheckSdkConnection(Save);
     }
 
@@ -22,10 +29,18 @@ public class Saving : MonoBehaviour
 
     public static void Save()
     {
-        PlayerInfo playerInfo = new();
-        string jsonDataString = playerInfo.SaveToString();
+        PlayerAccount.SetPlayerData(_jsonDataString);
+    }
 
-        PlayerAccount.SetPlayerData(jsonDataString);
+    public static void SaveLocal()
+    {
+        PlayerPrefs.SetString(PrefsKey, _jsonDataString);
+    }
+
+    private static string CreateSaveDataString()
+    {
+        PlayerInfo playerInfo = new();
+        return playerInfo.SaveToString();
     }
 
     public void StartSaving()

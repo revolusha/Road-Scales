@@ -30,12 +30,16 @@ public class SdkAndJavascriptHandler : MonoBehaviour
 
     public static void SetLanguage()
     {
-        CheckSdkConnection(InitializeLocalization, FinishLocalization);
+        CheckSdkConnection(InitializeLocalization, InitializeSystemLocalization);
     }
 
     public static void TryAuthorize()
     {
         CheckSdkConnection(CheckAuthorization);
+    }
+    public static void CheckSdkConnection(Action onlineMethod, Action offlineMethod = null)
+    {
+        _instance.StartCoroutine(CheckConnectionJob(onlineMethod, offlineMethod));
     }
 
     private static void CheckPersonalProfileDataPermission()
@@ -77,18 +81,11 @@ public class SdkAndJavascriptHandler : MonoBehaviour
                 break;
         }
 
-        _isLocalized = true;
         FinishLocalization();
     }
 
-    private static void FinishLocalization()
+    private static void InitializeSystemLocalization()
     {
-        if (_isLocalized)
-        {
-            StartGameInitializer.TryFinishInitialization();
-            return;
-        }
-
         switch (Application.systemLanguage)
         {
             case SystemLanguage.Russian:
@@ -108,13 +105,13 @@ public class SdkAndJavascriptHandler : MonoBehaviour
                 break;
         }
 
-        _isLocalized = true;
-        StartGameInitializer.TryFinishInitialization();
+        FinishLocalization();
     }
 
-    public static void CheckSdkConnection(Action onlineMethod, Action offlineMethod = null)
+    private static void FinishLocalization()
     {
-        _instance.StartCoroutine(CheckConnectionJob(onlineMethod, offlineMethod));
+        _isLocalized = true;
+        StartGameInitializer.TryFinishInitialization();
     }
 
     private static IEnumerator CheckConnectionJob(Action onlineMethod, Action offlineMethod = null)

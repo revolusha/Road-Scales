@@ -30,8 +30,8 @@ public class BasketCounters : MonoBehaviour
         _difference = 0;
         _basketOverloadLimitValue = Scales.MaxAmplitude / _scales.WeightDifferenceFactor;
         _leftBasket = _scales.LeftBasket;
-        _rightBasket = _scales.RightBasket;
         _leftBasket.OnWeightChanged += UpdateCounts;
+        _rightBasket = _scales.RightBasket;
         _rightBasket.OnWeightChanged += UpdateCounts;
         _scales.LeftScaner.OnObstacleFound += OnObstacleFoundEvent;
         _scales.RightScaner.OnObstacleFound += OnObstacleFoundEvent;

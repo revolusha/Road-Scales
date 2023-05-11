@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 [System.Serializable]
 
@@ -22,8 +23,11 @@ public class PlayerInfo
     public bool[] CargoSkins;
     public bool[] BasketSkins;
 
+    public DateTime SavedTime;
+
     public PlayerInfo()
     {
+        SavedTime = DateTime.Now;
         Score = Game.Money.Score;
         IsGotBadge = Game.IsLastLevelFinished;
         IsTutorialFinished = Game.IsTutorialFinished;
@@ -41,7 +45,7 @@ public class PlayerInfo
 
     public string SaveToString()
     {
-        return JsonUtility.ToJson(this);
+        return Encryptor.Encrypt(JsonUtility.ToJson(this));
     }
 
     private bool[] GetOwningFlags(ShopItem[] shopItems)
