@@ -10,6 +10,7 @@ public class AudioPlayer : MonoBehaviour
 
     public float Volume => _audio.volume;
     public AudioSource AudioSource => _audio;
+    public bool IsVolumesZero => _lastVolume == 0 && Volume == 0;
 
     protected void OnEnable()
     {
@@ -17,17 +18,31 @@ public class AudioPlayer : MonoBehaviour
         _audio.volume = StartVolume;
     }
 
-    public void SetVolume(float value)
+    public void SetVolume(float value, bool isFocused = true)
     {
-        _lastVolume = _audio.volume;
+        if (isFocused)
+            _lastVolume = _audio.volume;
+
         _audio.volume = value;
     }
 
     public void SetLastVolume()
     {
-        if (_lastVolume == 0 && _audio.volume == 0)
-            _lastVolume = StartVolume;
-
         _audio.volume = _lastVolume;
+    }
+
+    public void SetDefaultVolume()
+    {
+        SetVolume(StartVolume);
+    }
+
+    public void Pause()
+    {
+        SetVolume(0);
+    }
+
+    public void Unpause()
+    {
+        SetLastVolume();
     }
 }

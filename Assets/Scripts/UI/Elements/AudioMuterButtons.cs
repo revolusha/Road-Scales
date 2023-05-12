@@ -39,7 +39,7 @@ public class AudioMuterButtons : MonoBehaviour
 
     public void UnmuteMusic()
     {
-        AudioMuter.UnmuteMusic();
+        AudioMuter.UnmuteAudio(Game.MusicPlayer);
     }
 
     public void MuteSound()
@@ -49,7 +49,7 @@ public class AudioMuterButtons : MonoBehaviour
 
     public void UnmuteSound()
     {
-        AudioMuter.UnmuteSound();
+        AudioMuter.UnmuteAudio(Game.SoundPlayer);
     }
 
     private static void UpdateSoundButtonVisibility()

@@ -6,6 +6,8 @@ public class AudioVolumeChanger : MonoBehaviour
     [SerializeField] private Slider _musicSlider;
     [SerializeField] private Slider _soundSlider;
 
+    private const float volumeZeroThreshold = 0.05f;
+
     private void OnEnable()
     {
         UpdateSlidersValue();
@@ -23,13 +25,23 @@ public class AudioVolumeChanger : MonoBehaviour
 
     private void ChangeMusicVolume(float value)
     {
-        Game.MusicPlayer.SetVolume(value);
-        AudioMuter.OnVolumeChanged?.Invoke();
+        if (value < volumeZeroThreshold)
+            AudioMuter.MuteMusic();
+        else
+            ChangeAudioVolume(Game.MusicPlayer, value);
     }
 
     private void ChangeSoundVolume(float value)
     {
-        Game.SoundPlayer.SetVolume(value);
+        if (value < volumeZeroThreshold)
+            AudioMuter.MuteSound();
+        else
+            ChangeAudioVolume(Game.SoundPlayer, value);
+    }
+
+    private void ChangeAudioVolume(AudioPlayer player, float value)
+    {
+        player.SetVolume(value);
         AudioMuter.OnVolumeChanged?.Invoke();
     }
 
