@@ -45,7 +45,7 @@ public class PlayerInfo
 
     public string SaveToString()
     {
-        return Encryptor.Encrypt(JsonUtility.ToJson(this));
+        return JsonUtility.ToJson(this);
     }
 
     private bool[] GetOwningFlags(ShopItem[] shopItems)

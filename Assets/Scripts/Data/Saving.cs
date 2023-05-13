@@ -35,7 +35,7 @@ public class Saving : MonoBehaviour
 
     public static void SaveLocal()
     {
-        PlayerPrefs.SetString(PrefsKey, _jsonDataString);
+        PlayerPrefs.SetString(PrefsKey, Encryptor.Encrypt(_jsonDataString));
     }
 
     private static string CreateSaveDataString()
